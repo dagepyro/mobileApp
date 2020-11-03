@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/Main_Menu_Nav">
+
+    <fragment
+        android:id="@+id/Main_Menu_Nav"
+        android:name="com.example.groupproject_2020.MainMenu"
+        android:label="@string/Main_menu"
+        tools:layout="@layout/mainmenu">
+
+        <action
+            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            app:destination="@id/Char_Creator_Nav" />
+        <action
+            android:id="@+id/action_Main_Menu_Nav_to_Mon_Creator_Nav"
+            app:destination="@id/Mon_Creator_Nav" />
+        <action
+            android:id="@+id/action_Main_Menu_Nav_to_Weap_Stats_Nav"
+            app:destination="@id/Weap_Stats_Nav" />
+    </fragment>
+    <fragment
+        android:id="@+id/Char_Creator_Nav"
+        android:name="com.example.groupproject_2020.CharCreator"
+        android:label="@string/Char_Creator"
+        tools:layout="@layout/charcreator">
+
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/Main_Menu_Nav" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/Mon_Creator_Nav"
+        android:name="com.example.groupproject_2020.MonCreator"
+        android:label="@string/Mon_Creator"
+        tools:layout="@layout/moncreator">
+
+        <action
+            android:id="@+id/action_Mon_Creator_Nav_to_Main_Menu_Nav"
+            app:destination="@id/Main_Menu_Nav" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/Weap_Stats_Nav"
+        android:name="com.example.groupproject_2020.WeapStats"
+        android:label="@string/Weap_Stats"
+        tools:layout="@layout/weapstats">
+
+        <action
+            android:id="@+id/action_Weap_Stats_Nav_to_Main_Menu_Nav"
+            app:destination="@id/Main_Menu_Nav" />
+    </fragment>
+</navigation>
