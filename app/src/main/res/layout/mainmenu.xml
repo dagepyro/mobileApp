@@ -8,7 +8,7 @@
 
 
     <Button
-        android:id="@+id/Char_Creator"
+        android:id="@+id/BackButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="460dp"
@@ -26,7 +26,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.049"
-        app:layout_constraintStart_toStartOf="@id/Char_Creator" />
+        app:layout_constraintStart_toStartOf="@id/BackButton" />
 
     <Button
         android:id="@+id/Weap_Stats"

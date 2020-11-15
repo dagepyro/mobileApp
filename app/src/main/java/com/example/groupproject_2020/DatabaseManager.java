@@ -20,14 +20,26 @@ public class DatabaseManager extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
+    public void onCreate(SQLiteDatabase db) {
         String sqlcreate = "create table "  + TABLE_CHAR + "( " + NAME;
         sqlcreate += " text primary key, " + RACE + " text, " + CLASS + "text, ";
-        sqlcreate += ALIGNMENT + " text, ";
+        sqlcreate += ALIGNMENT + " text )";
+
+        db.execSQL(sqlcreate);
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
+        db.execSQL( "drop table if exists " + TABLE_CHAR );
+        onCreate( db );
+    }
 
+    public void insertChar(character newChar){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sqlInsert = "insert into " + TABLE_CHAR + " values ('" + newChar.getName() + "', '"
+                + newChar.getRace() + "', '" + newChar.getCharclass() + "', '" + newChar.getAlignment() + "')";
+
+        db.execSQL(sqlInsert);
+        db.close();
     }
 }
