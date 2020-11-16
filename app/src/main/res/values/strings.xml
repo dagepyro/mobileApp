@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GroupProject-2020</string>
+    <string name="app_name">Loud Mouth\s Pocket RPGenerator</string>
     <string name="action_settings">Settings</string>
     <string name="action_add">Add</string>
     <string name="action_update">Update</string>
@@ -10,7 +10,7 @@
     <string name="Main_menu">First Fragment</string>
     <string name="Char_Creator">Character Creator</string>
     <string name="Mon_Creator">Monster Creator</string>
-    <string name="Weap_Stats">Weapons Smith</string>
+    <string name="Weap_Stats">Smithy</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
