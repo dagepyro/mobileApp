@@ -8,10 +8,12 @@
 
 
     <Button
-        android:id="@+id/BackButton"
-        android:layout_width="match_parent"
+        android:id="@+id/Char_Creator"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="460dp"
+        android:layout_marginBottom="452dp"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:drawableTop="@drawable/character"
         android:text="@string/Char_Creator"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,23 +21,27 @@
 
     <Button
         android:id="@+id/Mon_Creator"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="412dp"
+        android:layout_marginTop="244dp"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:drawableTop="@drawable/monster"
         android:text="@string/Mon_Creator"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
-        app:layout_constraintStart_toStartOf="@id/BackButton" />
+        app:layout_constraintHorizontal_bias="0.072"
+        app:layout_constraintStart_toStartOf="@id/Char_Creator"
+        app:layout_constraintTop_toTopOf="@+id/Weap_Stats" />
 
     <Button
         android:id="@+id/Weap_Stats"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="364dp"
+        android:layout_marginBottom="224dp"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:drawableTop="@drawable/smithy"
         android:text="@string/Weap_Stats"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
-        app:layout_constraintStart_toStartOf="@id/Weap_Stats" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/Mon_Creator" />
 </androidx.constraintlayout.widget.ConstraintLayout>
