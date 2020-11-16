@@ -25,33 +25,37 @@
             android:text="@string/char_align"
             android:padding="10dp"
             />
-        <EditText
-            android:id="@+id/char_align"
-            android:layout_width="140dp"
+        <Spinner
+            android:id="@+id/align_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
 
-            android:autofillHints="Name" />
+
     </TableRow>
     <TableRow>
         <TextView
             android:text="@string/char_race"
             android:padding="10dp"
             />
-        <EditText
-            android:id="@+id/char_race"
-            android:layout_width="140dp"
+        <Spinner
+            android:id="@+id/race_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
 
-            android:autofillHints="Name" />
     </TableRow>
     <TableRow>
         <TextView
             android:text="@string/char_class"
             android:padding="10dp"
             />
-        <EditText
-            android:id="@+id/char_class"
-            android:layout_width="140dp"
+        <Spinner
+            android:id="@+id/class_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
 
-            android:autofillHints="Name" />
     </TableRow>
     <Button
         android:id="@+id/save_char"
