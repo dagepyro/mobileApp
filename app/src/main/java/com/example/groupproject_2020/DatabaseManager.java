@@ -14,6 +14,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     private static final String RACE = "race";
     private static final String CLASS = "class";
     private static final String ALIGNMENT = "alignment";
+    private static final String CREATE_CHARACTER_TABLE = "create table" + TABLE_CHAR "( "+ NAME +
 
     public DatabaseManager(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -24,7 +25,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
         String sqlcreate = "create table "  + TABLE_CHAR + "( " + NAME;
         sqlcreate += " text primary key, " + RACE + " text, " + CLASS + "text, ";
         sqlcreate += ALIGNMENT + " text )";
-
         db.execSQL(sqlcreate);
     }
 
@@ -38,8 +38,11 @@ public class DatabaseManager extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String sqlInsert = "insert into " + TABLE_CHAR + " values ('" + newChar.getName() + "', '"
                 + newChar.getRace() + "', '" + newChar.getCharclass() + "', '" + newChar.getAlignment() + "')";
-
         db.execSQL(sqlInsert);
         db.close();
+    }
+
+    public String  createCharacterTable(){
+    return "create table" + TABLE_CHAR +"( " + NAME + " text primary key, " +
     }
 }
