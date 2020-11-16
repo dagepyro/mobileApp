@@ -46,7 +46,7 @@ public class MonCreator extends Fragment {
             String exp = expET.getText().toString();
 
             monster newmon = new monster(name,armorclass,hp,exp);
-            dbManager.insertMon(newmon);
+            dbManager.insertmon(newmon);
             Toast.makeText(getActivity(), name + " was saved to the db", Toast.LENGTH_SHORT).show();
 
             monnameET.setText("");
