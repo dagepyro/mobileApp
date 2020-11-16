@@ -1,9 +1,10 @@
 package com.example.groupproject_2020;
 
 public class monster {
-    private String name, armorclass, hitpoints, exp;
+    private String name;
+    int armorclass, hitpoints, exp;
 
-    public monster(String newName, String armorclass, String hitpoints, String exp){
+    public monster(String newName, int armorclass, int hitpoints, int exp) {
         setName(newName);
         setArmorclass(armorclass);
         setHitpoints(hitpoints);
@@ -18,26 +19,27 @@ public class monster {
         this.name = name;
     }
 
-    public String getArmorclass() {
+    public int getArmorclass() {
         return armorclass;
     }
 
-    public void setArmorclass(String armorclass) {
+    public void setArmorclass(int armorclass) {
         this.armorclass = armorclass;
     }
 
-    public String getHitpoints() {
+    public int getHitpoints() {
         return hitpoints;
     }
 
-    public void setHitpoints(String hitpoints) {
+    public void setHitpoints(int hitpoints) {
         this.hitpoints = hitpoints;
     }
 
-    public String getExp() {
+    public int getExp() {
         return exp;
     }
 
-    public void setExp(String race) { this.exp= exp;
+    public void setExp(int exp) {
+        this.exp = exp;
     }
 }

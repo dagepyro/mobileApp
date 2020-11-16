@@ -37,16 +37,19 @@ public class MonCreator extends Fragment {
             String name = monnameET.getText().toString();
 
             EditText armorclassET = view.findViewById(R.id.armor_class);
-            String armorclass = armorclassET.getText().toString();
+            String armorclassString = armorclassET.getText().toString();
+            int armorclass = Integer.parseInt(armorclassString);
 
             EditText hpET = view.findViewById(R.id.hp);
-            String hp = hpET.getText().toString();
+            String hpString = hpET.getText().toString();
+            int hp = Integer.parseInt(hpString);
 
             EditText expET = view.findViewById(R.id.exp);
-            String exp = expET.getText().toString();
+            String expString = expET.getText().toString();
+            int exp = Integer.parseInt(expString);
 
             monster newmon = new monster(name,armorclass,hp,exp);
-            dbManager.insertmon(newmon);
+            dbManager.insertmonster(newmon);
             Toast.makeText(getActivity(), name + " was saved to the db", Toast.LENGTH_SHORT).show();
 
             monnameET.setText("");
