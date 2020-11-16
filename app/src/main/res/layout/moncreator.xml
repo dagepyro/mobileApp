@@ -18,6 +18,7 @@
         />
 
     <Button
+        android:backgroundTint="@android:color/holo_red_dark"
         android:id="@+id/Mon_Creator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
