@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".CharCreator"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CharCreator">
+
     <TableRow>
 
         <TextView
-            android:text="@string/char_name"
             android:padding="10dp"
-            />
+            android:text="@string/char_name" />
+
         <EditText
             android:id="@+id/char_name"
             android:layout_width="140dp"
@@ -21,6 +20,7 @@
     </TableRow>
 
     <TableRow>
+
         <TextView
             android:text="@string/char_align"
             android:padding="10dp"
@@ -31,9 +31,11 @@
             android:layout_height="match_parent"
             />
 
-
+            android:autofillHints="Name" />
     </TableRow>
+
     <TableRow>
+
         <TextView
             android:text="@string/char_race"
             android:padding="10dp"
@@ -43,9 +45,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             />
-
     </TableRow>
+
     <TableRow>
+
         <TextView
             android:text="@string/char_class"
             android:padding="10dp"
@@ -55,17 +58,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             />
-
     </TableRow>
-    <Button
-        android:id="@+id/save_char"
-        android:layout_gravity="center"
-        android:text="@string/save_char"
-        />
-    <Button
-        android:id="@+id/BackButton"
-        android:layout_gravity="center"
-        android:text="@string/previous"
-        />
 
+    <TableRow android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/save_char"
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:text="@string/save_char" />
+    </TableRow>
+
+    <TableRow android:gravity="center_horizontal">
+
+        <Button
+
+            android:id="@+id/BackButton"
+            android:backgroundTint="@android:color/holo_red_dark"
+
+            android:text="@string/previous" />
+    </TableRow>
 </TableLayout>

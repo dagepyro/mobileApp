@@ -1,31 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CharCreator">
+    tools:context=".MonCreator">
 
-    <TextView
-        android:id="@+id/textview_second"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/Mon_Creator"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/Mon_Creator"
-        />
+    <TableRow>
 
-    <Button
-        android:backgroundTint="@android:color/holo_red_dark"
-        android:id="@+id/Mon_Creator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/previous"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_second" />
+        <TextView
+            android:padding="10dp"
+            android:text="@string/mon_name" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <EditText
+            android:id="@+id/mon_name"
+            android:layout_width="140dp"
+
+            android:autofillHints="Name" />
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:padding="10dp"
+            android:text="@string/armor_class" />
+
+        <EditText
+            android:id="@+id/armor_class"
+            android:layout_width="140dp"
+
+            android:autofillHints="AC" />
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:padding="10dp"
+            android:text="@string/hp" />
+
+        <EditText
+            android:id="@+id/hp"
+            android:layout_width="140dp"
+
+            android:autofillHints="hit points" />
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:padding="10dp"
+            android:text="@string/exp" />
+
+        <EditText
+            android:id="@+id/exp"
+            android:layout_width="140dp"
+
+            android:autofillHints="Experience" />
+    </TableRow>
+
+    <TableRow android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/save_mon"
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:text="@string/save_mon" />
+    </TableRow>
+
+    <TableRow android:gravity="center_horizontal">
+
+        <Button
+
+            android:id="@+id/BackButton"
+            android:backgroundTint="@android:color/holo_red_dark"
+
+            android:text="@string/previous" />
+    </TableRow>
+</TableLayout>

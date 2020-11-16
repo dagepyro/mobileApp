@@ -22,5 +22,11 @@
     <string name="char_race">Race</string>
     <string name="char_class">Class</string>
 
+    <string name="mon_name">Name</string>
+    <string name="armor_class">Armor Class</string>
+    <string name="hp">Hit Points</string>
+    <string name="exp">Experience</string>
+
     <string name="save_char">Save Character</string>
+    <string name="save_mon">Save Monster</string>
 </resources>
