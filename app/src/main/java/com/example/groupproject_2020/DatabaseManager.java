@@ -1,10 +1,13 @@
 package com.example.groupproject_2020;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
 
 public class DatabaseManager extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "RPGenerator";
@@ -14,7 +17,9 @@ public class DatabaseManager extends SQLiteOpenHelper {
     private static final String RACE = "race";
     private static final String CLASS = "class";
     private static final String ALIGNMENT = "alignment";
-    private static final String CREATE_CHARACTER_TABLE = "create table" + TABLE_CHAR "( "+ NAME +
+    private static final String ID = "ID";
+    private static final String CREATE_CHARACTER_TABLE = "create table" + TABLE_CHAR +"( "+ID+" text primary key, "+ NAME +" text, " + RACE+" text, "+ CLASS +" text, "+ ALIGNMENT  + " text)";
+
 
     public DatabaseManager(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -34,6 +39,22 @@ public class DatabaseManager extends SQLiteOpenHelper {
         onCreate( db );
     }
 
+    public ArrayList<character> selectAllCharacters(){
+        String sqlQuery = "select * from " + TABLE_CHAR;
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery(sqlQuery, null);
+
+        ArrayList<character> characters = new ArrayList<>();
+
+        while (cursor.moveToNext()){
+            character currentCharacter = new character(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3));
+            characters.add(currentCharacter);
+        }
+        db.close();
+        return characters;
+    }
+
     public void insertChar(character newChar){
         SQLiteDatabase db = this.getWritableDatabase();
         String sqlInsert = "insert into " + TABLE_CHAR + " values ('" + newChar.getName() + "', '"
@@ -42,7 +63,20 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.close();
     }
 
-    public String  createCharacterTable(){
-    return "create table" + TABLE_CHAR +"( " + NAME + " text primary key, " +
+    public void deleteCharacterByName(String name){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sqlDelete = "delete from "+TABLE_CHAR+" where "+ NAME +" = "+ name;
+
+        db.execSQL(sqlDelete);
+        db.close();
     }
+
+    public void updateCharacterByName(String name, String alignment, String charclass, String race){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sqUpdate = "update "+TABLE_CHAR+" set "+NAME+" = '"+ name + "' , " + ALIGNMENT +" = '"+alignment+"', "+CLASS+" = '"+charclass+"' , "+RACE+" = '"+race;
+
+        db.execSQL(sqUpdate);
+        db.close();
+    }
+
 }
