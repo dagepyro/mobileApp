@@ -1,4 +1,5 @@
 package com.example.groupproject_2020;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,14 +49,9 @@ public class MonCreator extends Fragment {
             String expString = expET.getText().toString();
             int exp = Integer.parseInt(expString);
 
-            monster newmon = new monster(name,armorclass,hp,exp);
-<<<<<<< HEAD
-           // dbManager.insertmonster(newmon);
-=======
+            monster newmon = new monster(name, armorclass, hp, exp);
             dbManager.insertMonster(newmon);
->>>>>>> origin
             Toast.makeText(getActivity(), name + " was saved to the db", Toast.LENGTH_SHORT).show();
-
             monnameET.setText("");
             armorclassET.setText("");
             hpET.setText("");
