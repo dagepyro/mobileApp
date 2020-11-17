@@ -49,11 +49,8 @@ public class MonCreator extends Fragment {
             int exp = Integer.parseInt(expString);
 
             monster newmon = new monster(name,armorclass,hp,exp);
-<<<<<<< HEAD
-           // dbManager.insertmonster(newmon);
-=======
+
             dbManager.insertMonster(newmon);
->>>>>>> origin
             Toast.makeText(getActivity(), name + " was saved to the db", Toast.LENGTH_SHORT).show();
 
             monnameET.setText("");
