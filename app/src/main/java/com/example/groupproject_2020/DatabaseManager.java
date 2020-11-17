@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -38,9 +39,9 @@ public class DatabaseManager extends SQLiteOpenHelper {
     private static final String TRAITS = "traits";
     private static final String PROPERTY = "property";
     private static final String STRENGTH_REQUIREMENT = "strengthRequirement";
-    private static final String CREATE_CHARACTER_TABLE = "create table " + TABLE_CHAR +"( "+ NAME +" text PRIMARY KEY, " + RACE+" text, "+ CLASS +" text, "+ ALIGNMENT  + " text)";
+    private static final String CREATE_CHARACTER_TABLE = "create table " + TABLE_CHAR +"("+ID+" text primary key, "+ NAME +" text, " + RACE+" text, "+ CLASS +" text, "+ ALIGNMENT  + " text)";
     private static final String CREATE_MONSTER_TABLE = "create table " +TABLE_MONSTER+"("+NAME+" TEXT PRIMARY KEY, "+ ARMOR_CLASS+" TEXT, "+ HIT_POINTS+" TEXT, "+EXPERIENCE+" TEXT)";
-    private static final String CREATE_STATS_TABLE = "CREATE TABLE "+TABLE_STATS+"("+NAME+" TEXT PRIMARY KEY, "+STRENGTH+" TEXT, "+ DEXTERITY+" TEXT, "+ CONSTITUTION+" TEXT, "+INTELLIGENCE+" TEXT, "+ WISDOM+" TEXT, "+CHARISMA+" TEXT)";
+    private static final String CREATE_STATS_TABLE = "CREATE TABLE "+TABLE_STATS+"("+ID+" TEXT, "+NAME+" TEXT, "+STRENGTH+" TEXT, "+ DEXTERITY+" TEXT, "+ CONSTITUTION+" TEXT, "+INTELLIGENCE+" TEXT, "+ WISDOM+" TEXT, "+CHARISMA+" TEXT)";
     private static final String CREATE_WEAPONS_TABLE = "CREATE TABLE "+TABLE_WEAPONS+"("+NAME+" TEXT PRIMARY KEY, "+DAMAGE+" TEXT, "+DAMAGE_TYPE+" TEXT,"+ TRAITS+" TEXT, "+PROPERTY+" TEXT)";
     private static final String CREATE_ARMOR_TABLE = "CREATE TABLE "+TABLE_ARMOR+"("+ NAME+" TEXT PRIMARY KEY, "+ARMOR_CLASS+" TEXT, "+ STRENGTH_REQUIREMENT+" TEXT, "+ TRAITS+" TEXT, "+ PROPERTY+" TEXT)";
 
@@ -64,6 +65,14 @@ public class DatabaseManager extends SQLiteOpenHelper {
         onCreate( db );
     }
 
+    public String getNewCharacterID(){
+        String sqlQuery = "select * from "+ TABLE_CHAR;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(sqlQuery, null);
+        Log.w("newCharacterID","new character ID is C"+cursor.getCount());
+        return "C"+cursor.getCount();
+    }
+
     public ArrayList<character> selectAllCharacters(){
         String sqlQuery = "select * from " + TABLE_CHAR;
         SQLiteDatabase db = this.getWritableDatabase();
@@ -79,10 +88,10 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.close();
         return characters;
     }
-HashMap hashMap = new HashMap();
+
     public void insertChar(character newChar){
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqlInsert = "insert into " + TABLE_CHAR + " values ('" + newChar.getName() + "', '"
+        String sqlInsert = "insert into " + TABLE_CHAR + " values ('"+getNewCharacterID()+"', '" + newChar.getName() + "', '"
                 + newChar.getRace() + "', '" + newChar.getCharclass() + "', '" + newChar.getAlignment() + "')";
         db.execSQL(sqlInsert);
         db.close();
@@ -98,10 +107,9 @@ HashMap hashMap = new HashMap();
 
     public void updateCharacterByName(String name, String alignment, String charclass, String race){
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqUpdate = "update "+TABLE_CHAR+" set "+NAME+" = '"+ name + "' , " + ALIGNMENT +" = '"+alignment+"', "+CLASS+" = '"+charclass+"' , "+RACE+" = '"+race;
+        String sqUpdate = "update "+TABLE_CHAR+" set "+NAME+" = '"+ name + "', " + ALIGNMENT +" = '"+alignment+"', "+CLASS+" = '"+charclass+"', "+RACE+" = '"+race;
 
         db.execSQL(sqUpdate);
         db.close();
     }
-
 }
