@@ -36,7 +36,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     private static final String STRENGTH_REQUIREMENT = "strengthRequirement";
     private static final String CREATE_CHARACTER_TABLE = "create table " + TABLE_CHARACTER +"( "+ID+" TEXT PRIMARY KEY, "+ NAME +" text, " + RACE+" text, "+ CLASS +" text, "+ ALIGNMENT  + " text)";
     private static final String CREATE_MONSTER_TABLE = "create table " +TABLE_MONSTER+"("+ID+" TEXT PRIMARY KEY, "+NAME+" TEXT, "+ ARMOR_CLASS+" TEXT, "+ HIT_POINTS+" TEXT, "+EXPERIENCE+" TEXT)";
-    private static final String CREATE_STATS_TABLE = "CREATE TABLE "+TABLE_STATS+"("+ID+" TEXT PRIMARY KEY, "+NAME+" TEXT, "+STRENGTH+" TEXT, "+ DEXTERITY+" TEXT, "+ CONSTITUTION+" TEXT, "+INTELLIGENCE+" TEXT, "+ WISDOM+" TEXT, "+CHARISMA+" TEXT)";
+    private static final String CREATE_STATS_TABLE = "CREATE TABLE "+TABLE_STATS+"("+ID+" TEXT, "+NAME+" TEXT, "+STRENGTH+" TEXT, "+ DEXTERITY+" TEXT, "+ CONSTITUTION+" TEXT, "+INTELLIGENCE+" TEXT, "+ WISDOM+" TEXT, "+CHARISMA+" TEXT)";
     private static final String CREATE_WEAPONS_TABLE = "CREATE TABLE "+TABLE_WEAPONS+"("+ID+" TEXT PRIMARY KEY, "+NAME+" TEXT, "+DAMAGE+" TEXT, "+DAMAGE_TYPE+" TEXT,"+ TRAITS+" TEXT, "+PROPERTY+" TEXT)";
     private static final String CREATE_ARMOR_TABLE = "CREATE TABLE "+TABLE_ARMOR+"("+ID+" TEXT PRIMARY KEY, "+ NAME+" TEXT, "+ARMOR_CLASS+" TEXT, "+ STRENGTH_REQUIREMENT+" TEXT, "+ TRAITS+" TEXT, "+ PROPERTY+" TEXT)";
 
