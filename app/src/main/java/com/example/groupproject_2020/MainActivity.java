@@ -1,5 +1,6 @@
 package com.example.groupproject_2020;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -7,6 +8,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.View;
 
@@ -58,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         if (id == R.id.action_view) {
+            Intent viewIntent = new Intent(this, viewChar.class);
+            this.startActivity(viewIntent);
             return true;
         }
         if (id == R.id.action_delete) {

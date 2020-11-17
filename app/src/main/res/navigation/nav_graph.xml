@@ -19,7 +19,7 @@
             app:destination="@id/Mon_Creator_Nav" />
         <action
             android:id="@+id/action_Main_Menu_Nav_to_Weap_Stats_Nav"
-            app:destination="@id/Weap_Stats_Nav" />
+            app:destination="@id/Weap_Stats_Nav"/>
     </fragment>
     <fragment
         android:id="@+id/Char_Creator_Nav"

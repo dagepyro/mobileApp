@@ -4,7 +4,7 @@ public class character {
     private String name, alignment, charclass, race;
     private int id;
 
-    public character(int newId,String newName, String newAlignment, String newCharclass, String newRace){
+    public character(int newId,String newName, String newAlignment, String newRace, String newCharclass){
         setName(newName);
         setAlignment(newAlignment);
         setCharclass(newCharclass);
