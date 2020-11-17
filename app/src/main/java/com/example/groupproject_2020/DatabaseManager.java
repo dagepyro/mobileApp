@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -64,6 +65,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         String sqlQuery = "select * from "+ TABLE_CHARACTER;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(sqlQuery,null);
+        Log.w("info", "new Character ID is C"+cursor.getCount());
         return "C"+cursor.getCount();
     }
     public String getNewMonsterID(){
@@ -126,7 +128,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     public void insertMonster(monster newMonster){
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqlInsert = "insert into " + TABLE_CHARACTER + " values ('M"+ getNewMonsterID()+"', " + newMonster.getName() + "', '"
+        String sqlInsert = "insert into " + TABLE_MONSTER + " values ('"+ getNewMonsterID()+"', '" + newMonster.getName() + "', '"
                 + newMonster.getArmorclass() + "', '" + newMonster.getHitpoints() + "', '" + newMonster.getExp() + "')";
         db.execSQL(sqlInsert);
         db.close();
@@ -141,7 +143,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     public void updateMonsterByName(String name, int armorClass, int hitPoints, int experience){
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqUpdate = "update "+ TABLE_CHARACTER +" set "+NAME+" = '"+ name + "' , " + ARMOR_CLASS +" = '"+armorClass+"', "+HIT_POINTS+" = '"+hitPoints+"' , "+EXPERIENCE+" = '"+experience+"' where '"+NAME+"' = '"+name;
+        String sqUpdate = "update "+ TABLE_MONSTER +" set "+NAME+" = '"+ name + "' , " + ARMOR_CLASS +" = '"+armorClass+"', "+HIT_POINTS+" = '"+hitPoints+"' , "+EXPERIENCE+" = '"+experience+"' where '"+NAME+"' = '"+name;
 
         db.execSQL(sqUpdate);
         db.close();
@@ -149,7 +151,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
 /*
     public void insertCharacterStats(character newCharacter){
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqlInsert = "insert into " + TABLE_CHARACTER + " values ('"+newCharacter.getID+"', '" + newCharacter.getName() + "', '"
+        String sqlInsert = "insert into " + TABLE_STATS + " values ('"+newCharacter.getID+"', '" + newCharacter.getName() + "', '"
                 + newCharacter.getStrength() + "', '" + newCharacter.getDexterity() + "', '" + newCharacter.getConstitution() +"', '"+newCharacter.getIntelligence()+"', '"+newCharacter.getWisdom()+"', '"+newCharacter.getCharisma+ "')";
         db.execSQL(sqlInsert);
         db.close();
