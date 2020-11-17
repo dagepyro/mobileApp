@@ -61,12 +61,12 @@ public class DatabaseManager extends SQLiteOpenHelper {
         onCreate( db );
     }
 
-    public String getNewCharacterID(){
+    public int getNewCharacterID(){
         String sqlQuery = "select * from "+ TABLE_CHARACTER;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(sqlQuery,null);
         Log.w("info", "new Character ID is C"+cursor.getCount());
-        return "C"+cursor.getCount();
+        return cursor.getCount();
     }
     public String getNewMonsterID(){
         String sqlQuery = "select * from "+TABLE_MONSTER;
@@ -96,7 +96,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         ArrayList<character> characters = new ArrayList<>();
 
         while (cursor.moveToNext()){
-            character currentCharacter = new character(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3));
+            character currentCharacter = new character(Integer.parseInt(cursor.getString(0)),cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
             characters.add(currentCharacter);
         }
         db.close();
