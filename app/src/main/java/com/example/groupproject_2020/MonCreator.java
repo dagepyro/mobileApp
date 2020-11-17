@@ -30,7 +30,7 @@ public class MonCreator extends Fragment {
 
         view.findViewById(R.id.BackButton).setOnClickListener(view12 ->
                 NavHostFragment.findNavController(MonCreator.this)
-                        .navigate(R.id.action_SecondFragment_to_FirstFragment));
+                        .navigate(R.id.action_Mon_Creator_Nav_to_Main_Menu_Nav));
 
         view.findViewById(R.id.save_mon).setOnClickListener(view1 -> {
             EditText monnameET = view.findViewById(R.id.mon_name);
@@ -49,7 +49,7 @@ public class MonCreator extends Fragment {
             int exp = Integer.parseInt(expString);
 
             monster newmon = new monster(name,armorclass,hp,exp);
-            dbManager.insertmonster(newmon);
+           // dbManager.insertmonster(newmon);
             Toast.makeText(getActivity(), name + " was saved to the db", Toast.LENGTH_SHORT).show();
 
             monnameET.setText("");
