@@ -25,6 +25,9 @@
         <activity
             android:name=".DeleteMonActivity"
             android:screenOrientation="portrait" />
+
+        <activity android:name=".viewChar"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
