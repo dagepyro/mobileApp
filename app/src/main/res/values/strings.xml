@@ -28,5 +28,8 @@
     <string name="exp">Experience</string>
 
     <string name="save_char">Save Character</string>
+
     <string name="save_mon">Save Monster</string>
+
+    <string name="button_back">BACK</string>
 </resources>

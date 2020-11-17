@@ -48,7 +48,9 @@ public class CharCreator extends Fragment {
             EditText classET = view.findViewById(R.id.char_class);
             String charclass = classET.getText().toString();
 
-            character newchar = new character(name,align,charclass,race);
+            double id = (Math.random()*10);
+
+            character newchar = new character(name,align,charclass,race,id);
             dbManager.insertChar(newchar);
             Toast.makeText(getActivity(), name + " was saved to the db", Toast.LENGTH_SHORT).show();
 

@@ -2,12 +2,22 @@ package com.example.groupproject_2020;
 
 public class character {
     private String name, alignment, charclass, race;
+    private double id;
 
-    public character(String newName, String newAlignment, String newCharclass, String newRace){
+    public double getId() {
+        return id;
+    }
+
+    public void setId(double id) {
+        this.id = id;
+    }
+
+    public character(String newName, String newAlignment, String newCharclass, String newRace, double newId){
         setName(newName);
         setAlignment(newAlignment);
         setCharclass(newCharclass);
         setRace(newRace);
+        setId(newId);
     }
 
     public String getName() {
