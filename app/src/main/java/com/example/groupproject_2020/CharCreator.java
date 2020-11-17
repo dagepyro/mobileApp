@@ -40,8 +40,6 @@ public class CharCreator extends Fragment {
         alignspinner.setAdapter(alignadapter);
 
 
-
-
         Spinner racespinner =  getActivity().findViewById(R.id.race_spinner);
         ArrayAdapter<CharSequence> raceadapter = ArrayAdapter.createFromResource(getActivity(),R.array.races, android.R.layout.simple_spinner_item);
         raceadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -66,7 +64,6 @@ public class CharCreator extends Fragment {
 
             }
         });
-
 
         racespinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -99,17 +96,6 @@ public class CharCreator extends Fragment {
         view.findViewById(R.id.save_char).setOnClickListener(view1 -> {
             EditText nameET = view.findViewById(R.id.char_name);
             String name = nameET.getText().toString();
-
-
-
-//            EditText alignET = view.findViewById(R.id.align_spinner);
-//            String align = alignET.getText().toString();
-
-//            EditText raceET = view.findViewById(R.id.char_race);
-//            String race = raceET.getText().toString();
-//
-//            EditText classET = view.findViewById(R.id.char_class);
-//            String charclass = classET.getText().toString();
 
             character newchar = new character(name,align,charclass,race);
             dbManager.insertChar(newchar);
