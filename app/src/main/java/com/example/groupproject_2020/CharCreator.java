@@ -99,7 +99,7 @@ public class CharCreator extends Fragment {
 
             character newchar = new character(name,align,charclass,race);
             dbManager.insertChar(newchar);
-            Toast.makeText(getActivity(), name + " the  " + align + " " + race + " " + charclass +  " was saved to the db", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), name + " the " + align + " " + race + " " + charclass +  " was saved to the db", Toast.LENGTH_LONG).show();
 
         });
     }
