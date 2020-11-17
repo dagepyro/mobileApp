@@ -68,11 +68,11 @@ public class DatabaseManager extends SQLiteOpenHelper {
         Log.w("info", "new Character ID is C"+cursor.getCount());
         return cursor.getCount();
     }
-    public String getNewMonsterID(){
+    public int getNewMonsterID(){
         String sqlQuery = "select * from "+TABLE_MONSTER;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(sqlQuery,null);
-        return "M"+cursor.getCount();
+        return cursor.getCount();
     }
     public String getNewWeaponID(){
         String sqlQuery = "select * from "+TABLE_WEAPONS;
@@ -96,7 +96,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         ArrayList<character> characters = new ArrayList<>();
 
         while (cursor.moveToNext()){
-            character currentCharacter = new character(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
+            character currentCharacter = new character(Integer.parseInt(cursor.getString(0)),cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
             characters.add(currentCharacter);
         }
         db.close();
@@ -125,6 +125,21 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.execSQL(sqUpdate);
         db.close();
     }
+    public ArrayList<monster> selectAllMonsters(){
+        String sqlQuery = "select * from " + TABLE_MONSTER;
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery(sqlQuery, null);
+
+        ArrayList<monster> monsters = new ArrayList<>();
+
+        while (cursor.moveToNext()){
+            monster currentMonster = new monster(Integer.parseInt(cursor.getString(0)),cursor.getString(1), Integer.parseInt(cursor.getString(2)), Integer.parseInt(cursor.getString(3)), Integer.parseInt(cursor.getString(4)));
+            monsters.add(currentMonster);
+        }
+        db.close();
+        return monsters;
+    }
 
     public void insertMonster(monster newMonster){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -134,9 +149,9 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void deleteMonsterByName(monster monster){
+    public void deleteMonsterById(int id){
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqlDelete = "delete from "+TABLE_MONSTER+" where "+ NAME +" = "+ monster.getName();
+        String sqlDelete = "delete from "+TABLE_MONSTER+" where "+ ID +" = "+ id;
         db.execSQL(sqlDelete);
         db.close();
     }

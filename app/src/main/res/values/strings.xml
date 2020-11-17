@@ -4,18 +4,22 @@
     <string name="action_add">Add</string>
     <string name="action_update">Update</string>
     <string name="action_view">View</string>
-    <string name="action_delete">Delete</string>
+    <string name="action_delete_char">Delete Character</string>
+    <string name="action_delete_mon">Delete Monster</string>
 
     <!-- Strings used for fragments for navigation -->
     <string name="Main_menu">First Fragment</string>
     <string name="Char_Creator">Character Creator</string>
     <string name="Mon_Creator">Monster Creator</string>
-    <string name="Weap_Stats">Smithy</string>
+    <string name="Smithy">Smithy</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string name="weapon">Weapons</string>
+    <string name="armor">Armor</string>
 
     <string name="char_name">Name</string>
     <string name="char_align">Alignment</string>

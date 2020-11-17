@@ -2,17 +2,9 @@ package com.example.groupproject_2020;
 
 public class character {
     private String name, alignment, charclass, race;
-    private double id;
+    private int id;
 
-    public double getId() {
-        return id;
-    }
-
-    public void setId(double id) {
-        this.id = id;
-    }
-
-    public character(String newName, String newAlignment, String newCharclass, String newRace, double newId){
+    public character(int newId,String newName, String newAlignment, String newCharclass, String newRace){
         setName(newName);
         setAlignment(newAlignment);
         setCharclass(newCharclass);
@@ -50,5 +42,13 @@ public class character {
 
     public void setRace(String race) {
         this.race = race;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

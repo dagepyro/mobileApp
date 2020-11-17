@@ -60,6 +60,11 @@ public class MainActivity extends AppCompatActivity {
             this.startActivity(deleteIntent);
             return true;
         }
+        if (id == R.id.action_delete_mon) {
+            Intent deleteIntent = new Intent(this, DeleteMonActivity.class);
+            this.startActivity(deleteIntent);
+            return true;
+        }
         if (id == R.id.action_add) {
             return true;
         }
