@@ -146,7 +146,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.execSQL(sqUpdate);
         db.close();
     }
-
+/*
     public void insertCharacterStats(character newCharacter){
         SQLiteDatabase db = this.getWritableDatabase();
         String sqlInsert = "insert into " + TABLE_CHARACTER + " values ('"+newCharacter.getID+"', '" + newCharacter.getName() + "', '"
@@ -198,5 +198,5 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.execSQL(sqlInsert);
         db.close();
     }
-
+*/
 }
