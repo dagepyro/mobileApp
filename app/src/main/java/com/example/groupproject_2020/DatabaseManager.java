@@ -58,6 +58,10 @@ public class DatabaseManager extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL( "drop table if exists " + TABLE_CHARACTER);
+        db.execSQL( "drop table if exists " + TABLE_MONSTER);
+        db.execSQL( "drop table if exists " + TABLE_STATS);
+        db.execSQL( "drop table if exists " + TABLE_WEAPONS);
+        db.execSQL( "drop table if exists " + TABLE_ARMOR);
         onCreate( db );
     }
 
@@ -90,11 +94,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public ArrayList<character> selectAllCharacters(){
         String sqlQuery = "select * from " + TABLE_CHARACTER;
         SQLiteDatabase db = this.getWritableDatabase();
-
         Cursor cursor = db.rawQuery(sqlQuery, null);
-
         ArrayList<character> characters = new ArrayList<>();
-
         while (cursor.moveToNext()){
             character currentCharacter = new character(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3));
             characters.add(currentCharacter);
@@ -114,7 +115,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public void deleteCharacterByName(String name){
         SQLiteDatabase db = this.getWritableDatabase();
         String sqlDelete = "delete from "+ TABLE_CHARACTER +" where "+ NAME +" = "+ name;
-
         db.execSQL(sqlDelete);
         db.close();
     }
@@ -144,7 +144,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public void updateMonsterByName(String name, int armorClass, int hitPoints, int experience){
         SQLiteDatabase db = this.getWritableDatabase();
         String sqUpdate = "update "+ TABLE_MONSTER +" set "+NAME+" = '"+ name + "' , " + ARMOR_CLASS +" = '"+armorClass+"', "+HIT_POINTS+" = '"+hitPoints+"' , "+EXPERIENCE+" = '"+experience+"' where '"+NAME+"' = '"+name;
-
         db.execSQL(sqUpdate);
         db.close();
     }
