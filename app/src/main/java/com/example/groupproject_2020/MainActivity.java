@@ -1,5 +1,6 @@
 package com.example.groupproject_2020;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -48,22 +49,28 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        if (id == R.id.action_add) {
-            return true;
-        }
         if (id == R.id.action_update) {
             return true;
         }
         if (id == R.id.action_view) {
             return true;
         }
-        if (id == R.id.action_delete) {
+        if (id == R.id.action_delete_char) {
+            Intent deleteIntent = new Intent(this, DeleteCharActivity.class);
+            this.startActivity(deleteIntent);
             return true;
         }
-
+        if (id == R.id.action_delete_mon) {
+            Intent deleteIntent = new Intent(this, DeleteMonActivity.class);
+            this.startActivity(deleteIntent);
+            return true;
+        }
+        if (id == R.id.action_add) {
+            return true;
+        }
+        if (id == R.id.action_settings) {
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 }
