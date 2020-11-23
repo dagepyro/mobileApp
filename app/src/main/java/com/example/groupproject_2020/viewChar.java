@@ -21,13 +21,24 @@ import java.util.List;
 
 public class viewChar extends AppCompatActivity {
     private GridView gridView;
-    public static ArrayList<String> charArray = new ArrayList<String>();
+    public static ArrayList<character> charArray;
     DatabaseManager db;
+    charAdapter adapter;
 
     public void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
-        db = new DatabaseManager(this);
         setContentView(R.layout.viewchararacter );
+
+        gridView = (GridView) findViewById(R.id.gv_char);
+
+        db = new DatabaseManager(this);
+        charArray = new ArrayList<character>();
+
+        charArray = db.selectAllCharacters();
+        adapter = new charAdapter(viewChar.this, charArray);
+        gridView.setAdapter(adapter);
+
+
 
 //
 //        List<character> characters = db.selectAllCharacters();
@@ -47,7 +58,7 @@ public class viewChar extends AppCompatActivity {
 
 
 
-        viewCharacter();
+
     }
 
    public void viewCharacter( ) {

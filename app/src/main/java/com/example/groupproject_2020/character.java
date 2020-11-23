@@ -3,6 +3,9 @@ package com.example.groupproject_2020;
 public class character {
     private String name, alignment, charclass, race;
     private int id;
+    public character(){
+
+    }
 
     public character(int newId,String newName, String newAlignment, String newRace, String newCharclass){
         setName(newName);
