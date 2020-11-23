@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.strictmode.SqliteObjectLeakedViolation;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -34,12 +35,14 @@ public class DatabaseManager extends SQLiteOpenHelper {
     private static final String DAMAGE_TYPE = "damageType";
     private static final String TRAITS = "traits";
     private static final String PROPERTY = "property";
+    private static final String WEAPON_TYPE = "weaponType";
+    private static final String ARMOR_TYPE = "armorType";
     private static final String STRENGTH_REQUIREMENT = "strengthRequirement";
     private static final String CREATE_CHARACTER_TABLE = "create table " + TABLE_CHARACTER +"( "+ID+" TEXT PRIMARY KEY, "+ NAME +" text, " + RACE+" text, "+ CLASS +" text, "+ ALIGNMENT  + " text)";
     private static final String CREATE_MONSTER_TABLE = "create table " +TABLE_MONSTER+"("+ID+" TEXT PRIMARY KEY, "+NAME+" TEXT, "+ ARMOR_CLASS+" TEXT, "+ HIT_POINTS+" TEXT, "+EXPERIENCE+" TEXT)";
     private static final String CREATE_STATS_TABLE = "CREATE TABLE "+TABLE_STATS+"("+ID+" TEXT, "+NAME+" TEXT, "+STRENGTH+" TEXT, "+ DEXTERITY+" TEXT, "+ CONSTITUTION+" TEXT, "+INTELLIGENCE+" TEXT, "+ WISDOM+" TEXT, "+CHARISMA+" TEXT)";
-    private static final String CREATE_WEAPONS_TABLE = "CREATE TABLE "+TABLE_WEAPONS+"("+ID+" TEXT PRIMARY KEY, "+NAME+" TEXT, "+DAMAGE+" TEXT, "+DAMAGE_TYPE+" TEXT,"+ TRAITS+" TEXT, "+PROPERTY+" TEXT)";
-    private static final String CREATE_ARMOR_TABLE = "CREATE TABLE "+TABLE_ARMOR+"("+ID+" TEXT PRIMARY KEY, "+ NAME+" TEXT, "+ARMOR_CLASS+" TEXT, "+ STRENGTH_REQUIREMENT+" TEXT, "+ TRAITS+" TEXT, "+ PROPERTY+" TEXT)";
+    private static final String CREATE_WEAPONS_TABLE = "CREATE TABLE "+TABLE_WEAPONS+"("+ID+" TEXT PRIMARY KEY, "+ WEAPON_TYPE+" TEXT, "+NAME+" TEXT, "+DAMAGE+" TEXT, "+DAMAGE_TYPE+" TEXT,"+ TRAITS+" TEXT, "+PROPERTY+" TEXT)";
+    private static final String CREATE_ARMOR_TABLE = "CREATE TABLE "+TABLE_ARMOR+"("+ID+" TEXT PRIMARY KEY, "+ARMOR_TYPE+" TEXT, "+ NAME+" TEXT, "+ARMOR_CLASS+" TEXT, "+ STRENGTH_REQUIREMENT+" TEXT, "+ TRAITS+" TEXT, "+ PROPERTY+" TEXT)";
 
 
     public DatabaseManager(Context context){
@@ -97,7 +100,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(sqlQuery, null);
         ArrayList<character> characters = new ArrayList<>();
         while (cursor.moveToNext()){
-            character currentCharacter = new character(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3));
+            String id = cursor.getString(0);
+            character currentCharacter = new character(Integer.parseInt(id.substring(1)), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
             characters.add(currentCharacter);
         }
         db.close();
@@ -112,16 +116,16 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void deleteCharacterByName(String name){
+    public void deleteCharacterByID(int charID){
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqlDelete = "delete from "+ TABLE_CHARACTER +" where "+ NAME +" = "+ name;
+        String sqlDelete = "delete from "+ TABLE_CHARACTER +" where "+ NAME +" = 'C"+ charID+"'";
         db.execSQL(sqlDelete);
         db.close();
     }
 
-    public void updateCharacterByName(String name, String alignment, String charClass, String race){
+    public void updateCharacter(character updateCharacter){
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqUpdate = "update "+ TABLE_CHARACTER +" set "+NAME+" = '"+ name + "' , " + ALIGNMENT +" = '"+alignment+"', "+CLASS+" = '"+charClass+"' , "+RACE+" = '"+race+"' where " + NAME + " = '"+name+"'";
+        String sqUpdate = "update "+ TABLE_CHARACTER +" set "+NAME+" = '"+ updateCharacter.getName() + "' , " + ALIGNMENT +" = '"+updateCharacter.getAlignment()+"', "+CLASS+" = '"+updateCharacter.getCharclass()+"' , "+RACE+" = '"+updateCharacter.getRace()+"' where " + ID + " = 'C"+updateCharacter.getId()+"'";
         db.execSQL(sqUpdate);
         db.close();
     }
@@ -134,38 +138,38 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void deleteMonsterByName(monster monster){
+    public void deleteMonsterById(monster monster){
         SQLiteDatabase db = this.getWritableDatabase();
         String sqlDelete = "delete from "+TABLE_MONSTER+" where "+ NAME +" = "+ monster.getName();
         db.execSQL(sqlDelete);
         db.close();
     }
 
-    public void updateMonsterByName(String name, int armorClass, int hitPoints, int experience){
+    public void updateMonster(monster updateMonster){
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqUpdate = "update "+ TABLE_MONSTER +" set "+NAME+" = '"+ name + "' , " + ARMOR_CLASS +" = '"+armorClass+"', "+HIT_POINTS+" = '"+hitPoints+"' , "+EXPERIENCE+" = '"+experience+"' where '"+NAME+"' = '"+name;
+        String sqUpdate = "update "+ TABLE_MONSTER +" set "+NAME+" = '"+ updateMonster.getName() + "' , " + ARMOR_CLASS +" = '"+updateMonster.getArmorclass()+"', "+HIT_POINTS+" = '"+updateMonster.getHitpoints()+"' , "+EXPERIENCE+" = '"+updateMonster.getExp()+"' where '"+ID+"' = '"+updateMonster.getId();
         db.execSQL(sqUpdate);
         db.close();
     }
-/*
+
     public void insertCharacterStats(character newCharacter){
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqlInsert = "insert into " + TABLE_STATS + " values ('"+newCharacter.getID+"', '" + newCharacter.getName() + "', '"
-                + newCharacter.getStrength() + "', '" + newCharacter.getDexterity() + "', '" + newCharacter.getConstitution() +"', '"+newCharacter.getIntelligence()+"', '"+newCharacter.getWisdom()+"', '"+newCharacter.getCharisma+ "')";
+        String sqlInsert = "insert into " + TABLE_STATS + " values ('"+newCharacter.getId()+"', '" + newCharacter.getName() + "', '"
+                + newCharacter.stats.getStrength() + "', '" + newCharacter.stats.getDexterity() + "', '" + newCharacter.stats.getConstitution() +"', '"+newCharacter.stats.getIntelligence()+"', '"+newCharacter.stats.getWisdom()+"', '"+newCharacter.stats.getCharisma()+ "')";
         db.execSQL(sqlInsert);
         db.close();
     }
 
     public void updateStatsByCharacterID(character updateCharacter){
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqlUpdate = "update "+TABLE_STATS+" set "+STRENGTH+" = "+updateCharacter.getStrength()+", "+DEXTERITY+" = "+updateCharacter.getDexterity()+", "+CONSTITUTION+" = "+updateCharacter.getConstitution()+", "+INTELLIGENCE+" = "+updateCharacter.getIntelligence()+", "+WISDOM+" = "+updateCharacter.getWisdom()+", "+CHARISMA+" = "+updateCharacter.getCharisma()+" where "+NAME+" = '"+updateCharacter.getName()+"'";
+        String sqlUpdate = "update "+TABLE_STATS+" set "+STRENGTH+" = "+updateCharacter.stats.getStrength()+", "+DEXTERITY+" = "+updateCharacter.stats.getDexterity()+", "+CONSTITUTION+" = "+updateCharacter.stats.getConstitution()+", "+INTELLIGENCE+" = "+updateCharacter.stats.getIntelligence()+", "+WISDOM+" = "+updateCharacter.stats.getWisdom()+", "+CHARISMA+" = "+updateCharacter.stats.getCharisma()+" where "+NAME+" = '"+updateCharacter.getName()+"'";
         db.execSQL(sqlUpdate);
         db.close();
     }
 
     public void deleteStatsByCharacterID(character deleteCharacter){
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqlDelete = "delete from "+TABLE_STATS+" where "+ NAME +" = "+ deleteCharacter.getName();
+        String sqlDelete = "delete from "+TABLE_STATS+" where "+ ID +" = 'C"+ deleteCharacter.getId()+"'";
         db.execSQL(sqlDelete);
         db.close();
     }
@@ -173,14 +177,14 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public void insertMonsterStats(monster newMonster){
         SQLiteDatabase db = this.getWritableDatabase();
         String sqlInsert = "insert into " + TABLE_CHARACTER + " values ('" + newMonster.getName() + "', '"
-                + newMonster.getStrength() + "', '" + newMonster.getDexterity() + "', '" + newMonster.getConstitution() +"', '"+newMonster.getIntelligence()+"', '"+newMonster.getWisdom()+"', '"+newMonster.getCharisma+ "')";
+                + newMonster.stats.getStrength() + "', '" + newMonster.stats.getDexterity() + "', '" + newMonster.stats.getConstitution() +"', '"+newMonster.stats.getIntelligence()+"', '"+newMonster.stats.getWisdom()+"', '"+newMonster.stats.getCharisma()+ "')";
         db.execSQL(sqlInsert);
         db.close();
     }
 
-    public void updateStatsByCharacterID(monster updateMonster){
+    public void updateStatsByMonsterID(monster updateMonster){
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqlUpdate = "update "+TABLE_STATS+" set "+STRENGTH+" = "+updateMonster.getStrength()+", "+DEXTERITY+" = "+updateMonster.getDexterity()+", "+CONSTITUTION+" = "+updateMonster.getConstitution()+", "+INTELLIGENCE+" = "+updateMonster.getIntelligence()+", "+WISDOM+" = "+updateMonster.getWisdom()+", "+CHARISMA+" = "+updateMonster.getCharisma()+" where "+NAME+" = '"+updateMonster.getName()+"'";
+        String sqlUpdate = "update "+TABLE_STATS+" set "+STRENGTH+" = "+updateMonster.stats.getStrength()+", "+DEXTERITY+" = "+updateMonster.stats.getDexterity()+", "+CONSTITUTION+" = "+updateMonster.stats.getConstitution()+", "+INTELLIGENCE+" = "+updateMonster.stats.getIntelligence()+", "+WISDOM+" = "+updateMonster.stats.getWisdom()+", "+CHARISMA+" = "+updateMonster.stats.getCharisma()+" where "+ID+" = '"+updateMonster.getId()+"'";
         db.execSQL(sqlUpdate);
         db.close();
     }
@@ -194,10 +198,43 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     public void insertWeapon(weapon newWeapon){
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqlInsert = "insert into " + TABLE_CHARACTER + " values ('" + newWeapon.getWeaponType() + "', '"
+        String sqlInsert = "insert into " + TABLE_WEAPONS + " values ('"+getNewWeaponID()+"', '" + newWeapon.getWeaponType() + "', '"
                 + newWeapon.getName() + "', '" + newWeapon.getDamage() + "', '" + newWeapon.getDamageType() +"', '"+newWeapon.getTraits+"', '"+newWeapon.getProperty()+ "')";
         db.execSQL(sqlInsert);
         db.close();
     }
-*/
+
+    public void  updateWeapon(weapon weapon){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sqlupdate = "update "+TABLE_WEAPONS+" set "+WEAPON_TYPE+" = '"+ weapon.getWeaponType() +"', "+NAME+" = '"+weapon.getName()+"', "+DAMAGE+" = '"+weapon.getDamage+"', "+DAMAGE_TYPE+" = '"+weapon.getDamageType()+"', "+TRAITS+" = '"+weapon.getTraits+"', "+PROPERTY+" = '"+weapon.getProperty()+"' where "+ID+" = 'W"+weapon.getID()+"'";
+        db.execSQL(sqlupdate);
+        db.close();
+    }
+
+    private void deleteWeaponByID(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sqlDelete = "delete from "+TABLE_WEAPONS+" where "+ID+" = 'W"+id+"'" ;
+        db.execSQL(sqlDelete);
+        db.close();
+    }
+
+    private void insertArmor(armor armor){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sqlInsert = "insert into "+TABLE_ARMOR+" values ('"+getNewArmorID()+"', '"+armor.getType()+"', '"+armor.getName+"', '"+armor.getArmorClass()+"', '"+armor.getStrenght()+"', '"+armor.getTraits()+"', '"+armor.getProperty()+"'";
+        db.execSQL(sqlInsert);
+        db.close();
+    }
+
+    private void updateArmor(armor armor){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sqlUpdate = "update "+TABLE_ARMOR+" set "+NAME+" = '"+ armor.getName()+"', "+ARMOR_CLASS+" = '"+armor.getArmorClass()+"', "+STRENGTH_REQUIREMENT+" = '"+armor.getStrength()+"', "+TRAITS+" = '"+armor.getTraits()+"', "+PROPERTY+" = '"+armor.getProperty()+"' where "+ID+" = 'A"+armor.getID+"'";
+        db.execSQL(sqlUpdate);
+        db.close();
+    }
+
+    private void deleteArmorByID(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sqlDelete = "delete from "+TABLE_ARMOR+" ";
+        db.execSQL(sqlDelete);
+    }
 }
