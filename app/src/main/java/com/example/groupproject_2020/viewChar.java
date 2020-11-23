@@ -94,11 +94,11 @@ public class viewChar extends AppCompatActivity {
                 // add the elements to grid
 
                 grid.addView( ids[i], width/10, ViewGroup.LayoutParams.WRAP_CONTENT );
-                grid.addView( charviews[i][0], ( int ) ( width * .4 ),
+                grid.addView( charviews[i][0], ( int ) ( width * .25 ),
                         ViewGroup.LayoutParams.WRAP_CONTENT );
                 grid.addView( charviews[i][1], ( int ) ( width * .25 ),
                         ViewGroup.LayoutParams.WRAP_CONTENT );
-                grid.addView( charviews[i][2], ( int ) ( width * .4 ),
+                grid.addView( charviews[i][2], ( int ) ( width * .25 ),
                         ViewGroup.LayoutParams.WRAP_CONTENT );
                 grid.addView( charviews[i][3], ( int ) ( width * .25 ),
                         ViewGroup.LayoutParams.WRAP_CONTENT );
