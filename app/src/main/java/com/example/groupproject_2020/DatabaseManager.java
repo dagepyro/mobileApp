@@ -199,14 +199,14 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public void insertWeapon(weapon newWeapon){
         SQLiteDatabase db = this.getWritableDatabase();
         String sqlInsert = "insert into " + TABLE_WEAPONS + " values ('"+getNewWeaponID()+"', '" + newWeapon.getWeaponType() + "', '"
-                + newWeapon.getName() + "', '" + newWeapon.getDamage() + "', '" + newWeapon.getDamageType() +"', '"+newWeapon.getTraits+"', '"+newWeapon.getProperty()+ "')";
+                + newWeapon.getName() + "', '" + newWeapon.getDamage() + "', '" + newWeapon.getDamageType() +"', '"+newWeapon.getTraits()+"', '"+newWeapon.getProperty()+ "')";
         db.execSQL(sqlInsert);
         db.close();
     }
 
     public void  updateWeapon(weapon weapon){
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqlupdate = "update "+TABLE_WEAPONS+" set "+WEAPON_TYPE+" = '"+ weapon.getWeaponType() +"', "+NAME+" = '"+weapon.getName()+"', "+DAMAGE+" = '"+weapon.getDamage+"', "+DAMAGE_TYPE+" = '"+weapon.getDamageType()+"', "+TRAITS+" = '"+weapon.getTraits+"', "+PROPERTY+" = '"+weapon.getProperty()+"' where "+ID+" = 'W"+weapon.getID()+"'";
+        String sqlupdate = "update "+TABLE_WEAPONS+" set "+WEAPON_TYPE+" = '"+ weapon.getWeaponType() +"', "+NAME+" = '"+weapon.getName()+"', "+DAMAGE+" = '"+weapon.getDamage()+"', "+DAMAGE_TYPE+" = '"+weapon.getDamageType()+"', "+TRAITS+" = '"+weapon.getTraits()+"', "+PROPERTY+" = '"+weapon.getProperty()+"' where "+ID+" = 'W"+weapon.getId()+"'";
         db.execSQL(sqlupdate);
         db.close();
     }
@@ -220,14 +220,14 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     private void insertArmor(armor armor){
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqlInsert = "insert into "+TABLE_ARMOR+" values ('"+getNewArmorID()+"', '"+armor.getType()+"', '"+armor.getName+"', '"+armor.getArmorClass()+"', '"+armor.getStrenght()+"', '"+armor.getTraits()+"', '"+armor.getProperty()+"'";
+        String sqlInsert = "insert into "+TABLE_ARMOR+" values ('"+getNewArmorID()+"', '"+armor.getType()+"', '"+armor.getName()+"', '"+armor.getArmorClass()+"', '"+armor.getStrength()+"', '"+armor.getTraits()+"', '"+armor.getProperty()+"'";
         db.execSQL(sqlInsert);
         db.close();
     }
 
     private void updateArmor(armor armor){
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqlUpdate = "update "+TABLE_ARMOR+" set "+NAME+" = '"+ armor.getName()+"', "+ARMOR_CLASS+" = '"+armor.getArmorClass()+"', "+STRENGTH_REQUIREMENT+" = '"+armor.getStrength()+"', "+TRAITS+" = '"+armor.getTraits()+"', "+PROPERTY+" = '"+armor.getProperty()+"' where "+ID+" = 'A"+armor.getID+"'";
+        String sqlUpdate = "update "+TABLE_ARMOR+" set "+NAME+" = '"+ armor.getName()+"', "+ARMOR_CLASS+" = '"+armor.getArmorClass()+"', "+STRENGTH_REQUIREMENT+" = '"+armor.getStrength()+"', "+TRAITS+" = '"+armor.getTraits()+"', "+PROPERTY+" = '"+armor.getProperty()+"' where "+ID+" = 'A"+armor.getId()+"'";
         db.execSQL(sqlUpdate);
         db.close();
     }
