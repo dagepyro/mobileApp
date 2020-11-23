@@ -18,8 +18,8 @@
             android:id="@+id/action_Main_Menu_Nav_to_Mon_Creator_Nav"
             app:destination="@id/Mon_Creator_Nav" />
         <action
-            android:id="@+id/action_Main_Menu_Nav_to_Weap_Stats_Nav"
-            app:destination="@id/Weap_Stats_Nav" />
+            android:id="@+id/action_Main_Menu_Nav_to_Smithy_Nav"
+            app:destination="@id/Smithy_Nav" />
     </fragment>
     <fragment
         android:id="@+id/Char_Creator_Nav"
@@ -44,13 +44,13 @@
     </fragment>
 
     <fragment
-        android:id="@+id/Weap_Stats_Nav"
-        android:name="com.example.groupproject_2020.WeapStats"
-        android:label="@string/Weap_Stats"
-        tools:layout="@layout/weapstats">
+        android:id="@+id/Smithy_Nav"
+        android:name="com.example.groupproject_2020.Smithy"
+        android:label="@string/Smithy"
+        tools:layout="@layout/smithy">
 
         <action
-            android:id="@+id/action_Weap_Stats_Nav_to_Main_Menu_Nav"
+            android:id="@+id/action_Smithy_Nav_to_Main_Menu_Nav"
             app:destination="@id/Main_Menu_Nav" />
     </fragment>
 </navigation>

@@ -22,40 +22,40 @@
     <TableRow>
 
         <TextView
+            android:text="@string/char_align"
             android:padding="10dp"
-            android:text="@string/char_align" />
-
-        <EditText
-            android:id="@+id/char_align"
-            android:layout_width="140dp"
-
-            android:autofillHints="Name" />
+            />
+        <Spinner
+            android:id="@+id/align_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
     </TableRow>
 
     <TableRow>
 
         <TextView
+            android:text="@string/char_race"
             android:padding="10dp"
-            android:text="@string/char_race" />
-
-        <EditText
-            android:id="@+id/char_race"
-            android:layout_width="140dp"
-
-            android:autofillHints="Name" />
+            />
+        <Spinner
+            android:id="@+id/race_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
     </TableRow>
 
     <TableRow>
 
         <TextView
+            android:text="@string/char_class"
             android:padding="10dp"
-            android:text="@string/char_class" />
-
-        <EditText
-            android:id="@+id/char_class"
-            android:layout_width="140dp"
-
-            android:autofillHints="Name" />
+            />
+        <Spinner
+            android:id="@+id/class_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
     </TableRow>
 
     <TableRow android:gravity="center_horizontal">

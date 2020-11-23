@@ -2,29 +2,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.groupproject_2020.MainActivity">
+
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_delete_char"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="@string/action_delete_char"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_add"
+        android:id="@+id/action_delete_mon"
         android:orderInCategory="100"
-        android:title="@string/action_add"
+        android:title="@string/action_delete_mon"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/action_update"
-        android:orderInCategory="100"
-        android:title="@string/action_update"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_view"
-        android:orderInCategory="100"
-        android:title="@string/action_view"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_delete"
-        android:orderInCategory="100"
-        android:title="@string/action_delete"
-        app:showAsAction="never" />
+<!--    <item-->
+<!--        android:id="@+id/action_update"-->
+<!--        android:orderInCategory="100"-->
+<!--        android:title="@string/action_update"-->
+<!--        app:showAsAction="never" />-->
+<!--    <item-->
+<!--        android:id="@+id/action_view"-->
+<!--        android:orderInCategory="100"-->
+<!--        android:title="@string/action_view"-->
+<!--        app:showAsAction="never" />-->
+<!--    <item-->
+<!--        android:id="@+id/action_settings"-->
+<!--        android:orderInCategory="100"-->
+<!--        android:title="@string/action_settings"-->
+<!--        app:showAsAction="never" />-->
 </menu>
