@@ -38,11 +38,11 @@ public class MainMenu extends Fragment {
             }
         });
 
-        view.findViewById(R.id.Weap_Stats).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.Smithy).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(MainMenu.this)
-                        .navigate(R.id.action_Main_Menu_Nav_to_Weap_Stats_Nav);
+                        .navigate(R.id.action_Main_Menu_Nav_to_Smithy_Nav);
             }
         });
     }

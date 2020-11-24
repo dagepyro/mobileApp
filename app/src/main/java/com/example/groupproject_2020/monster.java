@@ -2,13 +2,14 @@ package com.example.groupproject_2020;
 
 public class monster {
     private String name;
-    int armorclass, hitpoints, exp;
+    int id, armorclass, hitpoints, exp;
 
-    public monster(String newName, int armorclass, int hitpoints, int exp) {
+    public monster(int newId, String newName, int armorclass, int hitpoints, int exp) {
         setName(newName);
         setArmorclass(armorclass);
         setHitpoints(hitpoints);
         setExp(exp);
+        setId(newId);
     }
 
     public String getName() {
@@ -41,5 +42,13 @@ public class monster {
 
     public void setExp(int exp) {
         this.exp = exp;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
