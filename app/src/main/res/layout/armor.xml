@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ArmorCreator">
+
+    <TableRow android:gravity="center_horizontal">
+        <ImageView
+            android:autofillHints="Click here to choose an Image"
+            android:id="@+id/armor_image"
+            android:layout_width="150dp"
+            android:layout_height="150dp" />
+    </TableRow>
+    <TableRow android:gravity="center_horizontal">
+        <TextView android:text="Click above to Upload Image" />
+    </TableRow>
+
+    <TableRow android:gravity="center_horizontal">
+        <EditText
+            android:id="@+id/armor_image_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="Image Name" />
+    </TableRow>
+
+    <TableRow android:gravity="center_horizontal">
+        <Button
+            android:id="@+id/upload_armor_image"
+            android:text="Upload Image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </TableRow>
+
+    <TableRow android:padding="10dp">
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:padding="10dp"
+            android:text="@string/arm_name" />
+        <EditText
+            android:id="@+id/arm_name"
+            android:layout_width="140dp"
+            android:autofillHints="Name" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:text="@string/arm_str"
+            android:padding="10dp"
+            />
+        <EditText
+            android:id="@+id/arm_str"
+            android:layout_width="140dp"
+            android:autofillHints="Strength" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:padding="10dp"
+            android:text="@string/arm_class" />
+        <EditText
+            android:id="@+id/arm_class"
+            android:layout_width="140dp"
+            android:autofillHints="Armor Class" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:text="@string/arm_traits"
+            android:padding="10dp"
+            />
+        <EditText
+            android:id="@+id/arm_traits"
+            android:layout_width="140dp"
+            android:autofillHints="Armor Traits" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:text="@string/arm_property"
+            android:padding="10dp"
+            />
+        <EditText
+            android:id="@+id/arm_property"
+            android:layout_width="140dp"
+            android:autofillHints="Armor Property" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:text="@string/arm_type"
+            android:padding="10dp"
+            />
+        <EditText
+            android:id="@+id/arm_type"
+            android:layout_width="140dp"
+            android:autofillHints="Armor Type" />
+    </TableRow>
+
+    <TableRow android:padding="10dp">
+    </TableRow>
+
+    <TableRow android:gravity="center_horizontal">
+        <Button
+            android:id="@+id/save_armor"
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:text="@string/save_armor" />
+    </TableRow>
+
+    <TableRow android:gravity="center_horizontal">
+        <Button
+            android:id="@+id/BackButton"
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:text="@string/previous" />
+    </TableRow>
+</TableLayout>

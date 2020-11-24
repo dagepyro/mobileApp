@@ -4,7 +4,7 @@ public class armor {
     int id, strength;
     String name, armorClass, traits, property, type;
 
-    public armor(int id, int strength, String name, String armorClass, String traits, String property, String type) {
+    public armor(int id, String name, int strength, String armorClass, String traits, String property, String type) {
         this.id = id;
         this.strength = strength;
         this.name = name;

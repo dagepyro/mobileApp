@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WeaponCreator">
+
+    <TableRow android:gravity="center_horizontal">
+        <ImageView
+            android:autofillHints="Click here to choose an Image"
+            android:id="@+id/weapon_image"
+            android:layout_width="150dp"
+            android:layout_height="150dp" />
+    </TableRow>
+    <TableRow android:gravity="center_horizontal">
+        <TextView android:text="Click above to Upload Image" />
+    </TableRow>
+
+    <TableRow android:gravity="center_horizontal">
+        <EditText
+            android:id="@+id/weapon_image_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="Image Name" />
+    </TableRow>
+
+    <TableRow android:gravity="center_horizontal">
+        <Button
+            android:id="@+id/upload_weapon_image"
+            android:text="Upload Image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </TableRow>
+
+    <TableRow android:padding="10dp">
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:padding="10dp"
+            android:text="@string/weap_name" />
+        <EditText
+            android:id="@+id/weap_name"
+            android:layout_width="140dp"
+            android:autofillHints="Name" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:text="@string/dmg"
+            android:padding="10dp"
+            />
+        <EditText
+            android:id="@+id/dmg"
+            android:layout_width="140dp"
+            android:autofillHints="Damage" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:padding="10dp"
+            android:text="@string/dmg_type" />
+        <EditText
+            android:id="@+id/dmg_type"
+            android:layout_width="140dp"
+            android:autofillHints="Damage Type" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:text="@string/weap_type"
+            android:padding="10dp"
+            />
+        <EditText
+            android:id="@+id/weap_type"
+            android:layout_width="140dp"
+            android:autofillHints="Weapon Type" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:text="@string/weap_traits"
+            android:padding="10dp"
+            />
+        <EditText
+            android:id="@+id/weap_traits"
+            android:layout_width="140dp"
+            android:autofillHints="Weapon Traits" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:text="@string/weap_property"
+            android:padding="10dp"
+            />
+        <EditText
+            android:id="@+id/weap_property"
+            android:layout_width="140dp"
+            android:autofillHints="Weapon Property" />
+    </TableRow>
+
+    <TableRow android:padding="10dp">
+    </TableRow>
+
+    <TableRow android:gravity="center_horizontal">
+        <Button
+            android:id="@+id/save_weapon"
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:text="@string/save_weapon" />
+    </TableRow>
+
+    <TableRow android:gravity="center_horizontal">
+        <Button
+            android:id="@+id/BackButton"
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:text="@string/previous" />
+    </TableRow>
+</TableLayout>

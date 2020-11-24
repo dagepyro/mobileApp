@@ -146,7 +146,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         while (cursor.moveToNext()){
             String id = cursor.getString(0);
             id = id.substring(1);
-            weapon currentWeapon = new weapon(Integer.parseInt(id), Integer.parseInt(cursor.getString(1)), cursor.getString(2),cursor.getString(3),cursor.getString(4), cursor.getString(5), cursor.getString(6));
+            weapon currentWeapon = new weapon(Integer.parseInt(id), cursor.getString(1), Integer.parseInt(cursor.getString(2)), cursor.getString(3),cursor.getString(4), cursor.getString(5), cursor.getString(6));
             weapons.add(currentWeapon);
         }
         return weapons;
@@ -161,7 +161,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         while (cursor.moveToNext()){
             String id = cursor.getString(0);
             id = id.substring(1);
-            armor currentArmor = new armor(Integer.parseInt(id),Integer.parseInt(cursor.getString(4)), cursor.getString(2),cursor.getString(3), cursor.getString(5),cursor.getString(6),cursor.getString(1));
+            armor currentArmor = new armor(Integer.parseInt(id), cursor.getString(1), Integer.parseInt(cursor.getString(2)), cursor.getString(3), cursor.getString(4),cursor.getString(5),cursor.getString(6));
             armors.add(currentArmor);
         }
         return armors;
@@ -283,9 +283,9 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.close();
     }
 
-    private void insertArmor(armor armor){
+    public void insertArmor(armor armor){
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqlInsert = "insert into "+TABLE_ARMOR+" values ('"+getNewArmorID()+"', '"+armor.getType()+"', '"+armor.getName()+"', '"+armor.getArmorClass()+"', '"+armor.getStrength()+"', '"+armor.getTraits()+"', '"+armor.getProperty()+"'";
+        String sqlInsert = "insert into "+TABLE_ARMOR+" values ('"+getNewArmorID()+"', '"+armor.getName()+"', '"+armor.getStrength()+"', '"+armor.getArmorClass()+"', '"+armor.getTraits()+"', '"+armor.getProperty()+"', '"+armor.getType()+"'";
         db.execSQL(sqlInsert);
         db.close();
     }
