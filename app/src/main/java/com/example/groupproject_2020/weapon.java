@@ -4,7 +4,7 @@ public class weapon {
     int id, damage;
     String name, damageType, weaponType, traits, property;
 
-    public weapon(int id, int damage, String name, String damageType, String weaponType, String traits, String property) {
+    public weapon(int id, String name, int damage, String damageType, String weaponType, String traits, String property) {
         this.id = id;
         this.damage = damage;
         this.name = name;

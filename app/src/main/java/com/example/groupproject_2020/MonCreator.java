@@ -50,7 +50,7 @@ public class MonCreator extends Fragment {
 
         view.findViewById(R.id.BackButton).setOnClickListener(view12 ->
                 NavHostFragment.findNavController(MonCreator.this)
-                        .navigate(R.id.action_Mon_Creator_Nav_to_Main_Menu_Nav));
+                        .navigate(R.id.action_Mon_Creator_Nav_to_Main_Nav));
 
         view.findViewById(R.id.save_mon).setOnClickListener(view1 -> {
             EditText monnameET = view.findViewById(R.id.mon_name);
@@ -87,7 +87,7 @@ public class MonCreator extends Fragment {
                 Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
                 break;
-            case R.id.upload_char_image:
+            case R.id.upload_mon_image:
 
                 break;
         }
