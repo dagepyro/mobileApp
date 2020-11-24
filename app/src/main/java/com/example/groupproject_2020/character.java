@@ -3,6 +3,7 @@ package com.example.groupproject_2020;
 public class character {
     private String name, alignment, charclass, race;
     private int id;
+    stats stats;
 
     public character(int newId,String newName, String newAlignment, String newCharclass, String newRace){
         setName(newName);
@@ -10,6 +11,7 @@ public class character {
         setCharclass(newCharclass);
         setRace(newRace);
         setId(newId);
+        stats = new stats(0,0,0,0,0,0,0);
     }
 
     public String getName() {
@@ -51,4 +53,6 @@ public class character {
     public void setId(int id) {
         this.id = id;
     }
+
+
 }
