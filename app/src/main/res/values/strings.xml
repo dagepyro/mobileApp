@@ -12,6 +12,7 @@
     <string name="Char_Creator">Character Creator</string>
     <string name="Mon_Creator">Monster Creator</string>
     <string name="Weapon_Creator">Weapon Creator</string>
+    <string name="Armor_Creator">Armor Creator</string>
     <string name="Smithy">Smithy</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
@@ -33,10 +34,9 @@
     <string name="exp">Experience</string>
 
     <string name="save_char">Save Character</string>
-
     <string name="save_mon">Save Monster</string>
-
     <string name="save_weapon">Save Weapon</string>
+    <string name="save_armor">Save Armor</string>
 
     <string name="button_back">BACK</string>
 
@@ -46,5 +46,12 @@
     <string name="weap_type">Weapon Type</string>
     <string name="weap_traits">Weapon Traits</string>
     <string name="weap_property">Weapon Property</string>
+
+    <string name="arm_name">Name</string>
+    <string name="arm_str">Strength</string>
+    <string name="arm_class">Armor Class</string>
+    <string name="arm_traits">Armor Traits</string>
+    <string name="arm_property">Armor Property</string>
+    <string name="arm_type">Armor Type</string>
 
 </resources>

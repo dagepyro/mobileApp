@@ -39,5 +39,13 @@ public class Smithy extends Fragment {
            }
        });
 
+       view.findViewById(R.id.Armor).setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               NavHostFragment.findNavController(Smithy.this)
+                       .navigate(R.id.action_Smithy_Nav_to_Armor_Creator);
+           }
+       });
+
     }
 }
