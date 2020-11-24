@@ -1,11 +1,25 @@
 package com.example.groupproject_2020;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
+
 public class character {
     private String name, alignment, charclass, race;
     private int id;
+    private Bitmap image;
     stats stats;
 
-    public character(int newId,String newName, String newAlignment, String newCharclass, String newRace){
+    public character(int newId, String newName, String newAlignment, String newCharclass, String newRace, Bitmap image){
+        setName(newName);
+        setAlignment(newAlignment);
+        setCharclass(newCharclass);
+        setRace(newRace);
+        setId(newId);
+        setImage(image);
+        stats = new stats(0,0,0,0,0,0,0);
+    }
+
+    public character(int newId, String newName, String newAlignment, String newCharclass, String newRace){
         setName(newName);
         setAlignment(newAlignment);
         setCharclass(newCharclass);
@@ -54,5 +68,19 @@ public class character {
         this.id = id;
     }
 
+    public Bitmap getImage() {
+        return image;
+    }
 
+    public void setImage(Bitmap image) {
+        this.image = image;
+    }
+
+    public stats getStats() {
+        return stats;
+    }
+
+    public void setStats(stats stats) {
+        this.stats = stats;
+    }
 }

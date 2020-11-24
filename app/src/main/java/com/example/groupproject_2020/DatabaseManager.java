@@ -4,6 +4,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.strictmode.SqliteObjectLeakedViolation;
 import android.util.Log;
 
@@ -13,7 +16,7 @@ import java.util.ArrayList;
 
 public class DatabaseManager extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "RPGenerator";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String TABLE_CHARACTER = "char";
     private static final String TABLE_MONSTER = "monster";
     private static final String TABLE_STATS = "stats";
@@ -105,7 +108,9 @@ public class DatabaseManager extends SQLiteOpenHelper {
         ArrayList<character> characters = new ArrayList<>();
         while (cursor.moveToNext()){
             String id = cursor.getString(0);
-            character currentCharacter = new character(Integer.parseInt(id.substring(1)), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
+            byte[] bmArray = cursor.getBlob(5);
+            Bitmap bm = BitmapFactory.decodeByteArray(bmArray,0,bmArray.length);
+            character currentCharacter = new character(Integer.parseInt(id.substring(1)), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4),  bm);
             characters.add(currentCharacter);
         }
         db.close();
