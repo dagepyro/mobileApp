@@ -40,11 +40,13 @@ public class DatabaseManager extends SQLiteOpenHelper {
     private static final String WEAPON_TYPE = "weaponType";
     private static final String ARMOR_TYPE = "armorType";
     private static final String STRENGTH_REQUIREMENT = "strengthRequirement";
-    private static final String CREATE_CHARACTER_TABLE = "create table " + TABLE_CHARACTER +"( "+ID+" TEXT PRIMARY KEY, "+ NAME +" text, " + RACE+" text, "+ CLASS +" text, "+ ALIGNMENT  + " text)";
-    private static final String CREATE_MONSTER_TABLE = "create table " +TABLE_MONSTER+"("+ID+" TEXT PRIMARY KEY, "+NAME+" TEXT, "+ ARMOR_CLASS+" TEXT, "+ HIT_POINTS+" TEXT, "+EXPERIENCE+" TEXT)";
+    private static final String IMAGE = "image";
+    private static final String IMAGE_NAME = "imageName";
+    private static final String CREATE_CHARACTER_TABLE = "create table " + TABLE_CHARACTER +"( "+ID+" TEXT PRIMARY KEY, "+ NAME +" text, " + RACE+" text, "+ CLASS +" text, "+ ALIGNMENT  + " text, "+IMAGE+" blob, "+IMAGE_NAME+" text)";
+    private static final String CREATE_MONSTER_TABLE = "create table " +TABLE_MONSTER+"("+ID+" TEXT PRIMARY KEY, "+NAME+" TEXT, "+ ARMOR_CLASS+" TEXT, "+ HIT_POINTS+" TEXT, "+EXPERIENCE+" TEXT,"+IMAGE+" blob, "+IMAGE_NAME+" text )";
     private static final String CREATE_STATS_TABLE = "CREATE TABLE "+TABLE_STATS+"("+ID+" TEXT, "+NAME+" TEXT, "+STRENGTH+" TEXT, "+ DEXTERITY+" TEXT, "+ CONSTITUTION+" TEXT, "+INTELLIGENCE+" TEXT, "+ WISDOM+" TEXT, "+CHARISMA+" TEXT)";
-    private static final String CREATE_WEAPONS_TABLE = "CREATE TABLE "+TABLE_WEAPONS+"("+ID+" TEXT PRIMARY KEY, "+ WEAPON_TYPE+" TEXT, "+NAME+" TEXT, "+DAMAGE+" TEXT, "+DAMAGE_TYPE+" TEXT,"+ TRAITS+" TEXT, "+PROPERTY+" TEXT)";
-    private static final String CREATE_ARMOR_TABLE = "CREATE TABLE "+TABLE_ARMOR+"("+ID+" TEXT PRIMARY KEY, "+ARMOR_TYPE+" TEXT, "+ NAME+" TEXT, "+ARMOR_CLASS+" TEXT, "+ STRENGTH_REQUIREMENT+" TEXT, "+ TRAITS+" TEXT, "+ PROPERTY+" TEXT)";
+    private static final String CREATE_WEAPONS_TABLE = "CREATE TABLE "+TABLE_WEAPONS+"("+ID+" TEXT PRIMARY KEY, "+ WEAPON_TYPE+" TEXT, "+NAME+" TEXT, "+DAMAGE+" TEXT, "+DAMAGE_TYPE+" TEXT,"+ TRAITS+" TEXT, "+PROPERTY+" TEXT, "+IMAGE+" blob,"+IMAGE_NAME+" text)";
+    private static final String CREATE_ARMOR_TABLE = "CREATE TABLE "+TABLE_ARMOR+"("+ID+" TEXT PRIMARY KEY, "+ARMOR_TYPE+" TEXT, "+ NAME+" TEXT, "+ARMOR_CLASS+" TEXT, "+ STRENGTH_REQUIREMENT+" TEXT, "+ TRAITS+" TEXT, "+ PROPERTY+" TEXT, "+IMAGE+" blob, "+IMAGE_NAME+" text)";
 
 
     public DatabaseManager(Context context){
