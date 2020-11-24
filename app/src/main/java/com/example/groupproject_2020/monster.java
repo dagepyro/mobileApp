@@ -3,6 +3,7 @@ package com.example.groupproject_2020;
 public class monster {
     private String name;
     int id, armorclass, hitpoints, exp;
+    stats stats;
 
     public monster(int newId, String newName, int armorclass, int hitpoints, int exp) {
         setName(newName);
@@ -10,6 +11,7 @@ public class monster {
         setHitpoints(hitpoints);
         setExp(exp);
         setId(newId);
+        stats = new stats(newId,0,0,0,0,0,0);
     }
 
     public String getName() {
