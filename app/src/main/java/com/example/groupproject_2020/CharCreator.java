@@ -36,7 +36,7 @@ import static android.app.Activity.RESULT_OK;
 public class CharCreator extends Fragment implements View.OnClickListener {
 
     private DatabaseManager dbManager;
-    String align,charclass,race;
+    String  name,align,charclass,race;
     private Bitmap image;
 
     private static final int RESULT_LOAD_IMAGE = 1;
@@ -125,9 +125,9 @@ public class CharCreator extends Fragment implements View.OnClickListener {
 
         view.findViewById(R.id.save_char).setOnClickListener(view1 -> {
             EditText nameET = view.findViewById(R.id.char_name);
-            String name = nameET.getText().toString();
+            name = nameET.getText().toString();
 
-            character newchar = new character(0,name,align,race,charclass);
+            character newchar = new character(0,name,align,race,charclass,image,uploadCharImageName.getText().toString());
             dbManager.insertChar(newchar);
             Toast.makeText(getActivity(), name + " the " + align + " " + race + " " + charclass +  " was saved to the db", Toast.LENGTH_LONG).show();
 

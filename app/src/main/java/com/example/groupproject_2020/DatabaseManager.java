@@ -1,5 +1,6 @@
 package com.example.groupproject_2020;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,6 +13,7 @@ import android.util.Log;
 
 import org.w3c.dom.ls.LSOutput;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class DatabaseManager extends SQLiteOpenHelper {
@@ -79,7 +81,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         String sqlQuery = "select * from "+ TABLE_CHARACTER;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(sqlQuery,null);
-        Log.w("Character", "new Character ID is C"+cursor.getCount());
+        Log.w("Character", "new Character ID is C"+cursor.moveToLast());
         return "C"+cursor.getCount();
     }
     public String getNewMonsterID(){
@@ -110,7 +112,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
             String id = cursor.getString(0);
             byte[] bmArray = cursor.getBlob(5);
             Bitmap bm = BitmapFactory.decodeByteArray(bmArray,0,bmArray.length);
-            character currentCharacter = new character(Integer.parseInt(id.substring(1)), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4),  bm);
+            character currentCharacter = new character(Integer.parseInt(id.substring(1)), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
             characters.add(currentCharacter);
         }
         db.close();
@@ -124,7 +126,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
         ArrayList<monster> monsters = new ArrayList<>();
         while (cursor.moveToNext()){
             String id = cursor.getString(0);
-            Log.w("DEBUG",cursor.getString(2));
             monster currentMonster = new monster(
                     Integer.parseInt(id.substring(1)),
                     cursor.getString(1),
@@ -168,8 +169,13 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     public void insertChar(character newChar){
         SQLiteDatabase db = this.getWritableDatabase();
+        Bitmap image = newChar.getImage();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        ContentValues cv = new ContentValues();
+        cv.put("image",stream.toByteArray());
         String sqlInsert = "insert into " + TABLE_CHARACTER + " values ('"+ getNewCharacterID()+"', '" + newChar.getName() + "', '"
-                + newChar.getRace() + "', '" + newChar.getCharclass() + "', '" + newChar.getAlignment() + "')";
+                + newChar.getRace() + "', '" + newChar.getCharclass() + "', '" + newChar.getAlignment() + "', '"+cv+"', '"+newChar.getImageName()+"')";
         db.execSQL(sqlInsert);
         db.close();
         insertCharacterStats(newChar);
