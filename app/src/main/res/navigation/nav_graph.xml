@@ -72,7 +72,7 @@
 
     <fragment
         android:id="@+id/Armor_Creator"
-        android:name="com.example.groupproject_2020.WeaponCreator"
+        android:name="com.example.groupproject_2020.ArmorCreator"
         android:label="@string/Armor_Creator"
         tools:layout="@layout/armor">
         <action
