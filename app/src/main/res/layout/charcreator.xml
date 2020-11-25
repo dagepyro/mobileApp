@@ -25,17 +25,6 @@
             android:autofillHints="Image Name" />
     </TableRow>
 
-    <TableRow android:gravity="center_horizontal">
-        <Button
-            android:id="@+id/upload_char_image"
-            android:text="Upload Image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </TableRow>
-
-    <TableRow android:padding="20dp">
-    </TableRow>
-
     <TableRow>
 
         <TextView
@@ -45,7 +34,7 @@
         <EditText
             android:id="@+id/char_name"
             android:layout_width="140dp"
-
+            android:gravity="center_horizontal"
             android:autofillHints="Name" />
     </TableRow>
 

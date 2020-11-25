@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class DeleteCharActivity extends AppCompatActivity{
     private DatabaseManager dbManager;
-
+    private ArrayList<character> characterArrayList;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dbManager = new DatabaseManager(this);
@@ -24,16 +24,17 @@ public class DeleteCharActivity extends AppCompatActivity{
 
     public void updateView() {
 
-        ArrayList<character> Characters = dbManager.selectAllCharacters();
+        characterArrayList = dbManager.selectAllCharacters();
 
         RelativeLayout layout = new RelativeLayout(this);
         ScrollView scrollView = new ScrollView(this);
 
         RadioGroup group = new RadioGroup(this);
-        for (character character: Characters){
+        for (character character: characterArrayList){
             RadioButton rb = new RadioButton(this);
-            rb.setId(character.getId());
+            rb.setId(characterArrayList.indexOf(character));
             rb.setText(character.getName());
+            rb.setTag(character);
             group.addView(rb);
         }
 
@@ -70,9 +71,9 @@ public class DeleteCharActivity extends AppCompatActivity{
     private class RadioButtonHandler implements RadioGroup.OnCheckedChangeListener {
         public void onCheckedChanged(RadioGroup group, int charId) {
 
-            dbManager.deleteCharacterByID(charId);
+            dbManager.deleteCharacter(characterArrayList.get(charId));
 
-            Toast.makeText(DeleteCharActivity.this, "Character is toast!"+charId, Toast.LENGTH_SHORT).show();
+            Toast.makeText(DeleteCharActivity.this, "Character is toast!", Toast.LENGTH_SHORT).show();
 
             // update screen
             updateView();

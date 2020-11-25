@@ -114,10 +114,8 @@ public class CharCreator extends Fragment implements View.OnClickListener {
         });
 
         uploadChar = (ImageView) view.findViewById(R.id.char_image);
-        uploadCharImage = (Button) view.findViewById(R.id.upload_char_image);
         uploadCharImageName = (EditText) view.findViewById(R.id.char_image_name);
         uploadChar.setOnClickListener(this);
-        uploadCharImage.setOnClickListener(this);
 
         view.findViewById(R.id.BackButton).setOnClickListener(view12 ->
                 NavHostFragment.findNavController(CharCreator.this)
@@ -140,9 +138,6 @@ public class CharCreator extends Fragment implements View.OnClickListener {
             case R.id.char_image:
                 Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
-            break;
-            case R.id.upload_char_image:
-
             break;
         }
     }

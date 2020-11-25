@@ -1,9 +1,11 @@
 package com.example.groupproject_2020;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +19,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import java.io.IOException;
+
 import static android.app.Activity.RESULT_OK;
 
 public class ArmorCreator extends Fragment {
 
     private DatabaseManager dbManager;
+    private Bitmap image;
 
     private static final int RESULT_LOAD_IMAGE = 1;
 
@@ -74,7 +79,7 @@ public class ArmorCreator extends Fragment {
             EditText armTypeET = view.findViewById(R.id.arm_type);
             String type = armTypeET.getText().toString();
 
-            armor newarmor = new armor(0, name, strength, armorClass, traits, property, type);
+            armor newarmor = new armor(0, name, strength, armorClass, traits, property, type, image, uploadArmorImageName.getText().toString());
 
             dbManager.insertArmor(newarmor);
 
@@ -107,7 +112,13 @@ public class ArmorCreator extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null)  {
             Uri selectedImage = data.getData();
-            uploadArmor.setImageURI(selectedImage);
+            try {
+                image = MediaStore.Images.Media.getBitmap(this.getContext().getContentResolver(), selectedImage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Log.w("data", "data: "+data);
+            uploadArmor.setImageBitmap(image);
         }
     }
 }

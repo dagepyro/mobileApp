@@ -1,10 +1,13 @@
 package com.example.groupproject_2020;
 
+import android.graphics.Bitmap;
+
 public class armor {
     int id, strength;
-    String name, armorClass, traits, property, type;
+    String name, armorClass, traits, property, type, imageName;
+    Bitmap image;
 
-    public armor(int id, String name, int strength, String armorClass, String traits, String property, String type) {
+    public armor(int id, String name, int strength, String armorClass, String traits, String property, String type, Bitmap image, String imageName) {
         this.id = id;
         this.strength = strength;
         this.name = name;
@@ -12,6 +15,8 @@ public class armor {
         this.traits = traits;
         this.property = property;
         this.type = type;
+        this.image = image;
+        this.imageName = imageName;
     }
 
     public int getId() {
@@ -68,5 +73,21 @@ public class armor {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
+    public Bitmap getImage() {
+        return image;
+    }
+
+    public void setImage(Bitmap image) {
+        this.image = image;
     }
 }

@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 public class DeleteMonActivity extends AppCompatActivity{
     private DatabaseManager dbManager;
+    ArrayList<monster> Monsters;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +24,7 @@ public class DeleteMonActivity extends AppCompatActivity{
 
     public void updateView() {
 
-        ArrayList<monster> Monsters = dbManager.selectAllMonsters();
+        Monsters = dbManager.selectAllMonsters();
 
         RelativeLayout layout = new RelativeLayout(this);
         ScrollView scrollView = new ScrollView(this);
@@ -31,7 +32,7 @@ public class DeleteMonActivity extends AppCompatActivity{
         RadioGroup group = new RadioGroup(this);
         for (monster monster: Monsters){
             RadioButton rb = new RadioButton(this);
-            rb.setId(monster.getId());
+            rb.setId(Monsters.indexOf(monster));
             rb.setText(monster.getName());
             group.addView(rb);
         }
@@ -69,7 +70,7 @@ public class DeleteMonActivity extends AppCompatActivity{
     private class RadioButtonHandler implements RadioGroup.OnCheckedChangeListener {
         public void onCheckedChanged(RadioGroup group, int monId) {
 
-            dbManager.deleteMonsterById(monId);
+            dbManager.deleteMonster(Monsters.get(monId));
 
             Toast.makeText(DeleteMonActivity.this, "Monster is toast!", Toast.LENGTH_SHORT).show();
 

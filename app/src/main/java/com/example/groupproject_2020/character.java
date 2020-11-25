@@ -7,7 +7,7 @@ public class character {
     private String name, alignment, charclass, race, imageName;
     private int id;
     private Bitmap image;
-    stats stats;
+    protected stats stats;
 
     public character(int newId, String newName, String newAlignment, String newCharclass, String newRace, Bitmap image, String imageName){
         setName(newName);
