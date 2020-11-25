@@ -81,26 +81,42 @@ public class DatabaseManager extends SQLiteOpenHelper {
         String sqlQuery = "select * from "+ TABLE_CHARACTER;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(sqlQuery,null);
-        Log.w("Character", "new Character ID is C"+cursor.moveToLast());
-        return "C"+cursor.getCount();
+        int idNumber = 0;
+        cursor.moveToLast();
+            idNumber = Integer.parseInt(cursor.getString(0).substring(1))+1;
+
+        Log.w("Character", "new Character ID is C "+idNumber);
+        return "C"+idNumber;
     }
     public String getNewMonsterID(){
         String sqlQuery = "select * from "+TABLE_MONSTER;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(sqlQuery,null);
-        return "M"+cursor.getCount();
+        int idNumber = 0;
+        cursor.moveToLast();
+        idNumber = Integer.parseInt(cursor.getString(0).substring(1))+1;
+        Log.w("Monster", "new Monster ID is M"+idNumber);
+        return "M"+idNumber;
     }
     public String getNewWeaponID(){
         String sqlQuery = "select * from "+TABLE_WEAPONS;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(sqlQuery,null);
-        return "W"+cursor.getCount();
+        int idNumber = 0;
+        cursor.moveToLast();
+        idNumber = Integer.parseInt(cursor.getString(0).substring(1))+1;
+        Log.w("Weapon", "new Weapon ID is W"+idNumber);
+        return "W"+idNumber;
     }
     public String getNewArmorID(){
         String sqlQuery = "select * from "+TABLE_ARMOR;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(sqlQuery,null);
-        return "A"+cursor.getCount();
+        int idNumber = 0;
+        cursor.moveToLast();
+        idNumber = Integer.parseInt(cursor.getString(0).substring(1))+1;
+        Log.w("Armor", "new Armor ID is A "+idNumber);
+        return "A"+idNumber;
     }
 
     public ArrayList<character> selectAllCharacters(){
@@ -285,7 +301,13 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     public void insertArmor(armor armor){
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqlInsert = "insert into "+TABLE_ARMOR+" values ('"+getNewArmorID()+"', '"+armor.getName()+"', '"+armor.getStrength()+"', '"+armor.getArmorClass()+"', '"+armor.getTraits()+"', '"+armor.getProperty()+"', '"+armor.getType()+"'";
+        String sqlInsert = "insert into "+TABLE_ARMOR+" values ('"+getNewArmorID()+"', '"
+                +armor.getName()+"', '"
+                +armor.getStrength()+"', '"
+                +armor.getArmorClass()+"', '"
+                +armor.getTraits()+"', '"
+                +armor.getProperty()+"', '"
+                +armor.getType()+"'";
         db.execSQL(sqlInsert);
         db.close();
     }
