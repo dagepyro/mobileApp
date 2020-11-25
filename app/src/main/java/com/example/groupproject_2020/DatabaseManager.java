@@ -1,19 +1,24 @@
 package com.example.groupproject_2020;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.strictmode.SqliteObjectLeakedViolation;
 import android.util.Log;
 
 import org.w3c.dom.ls.LSOutput;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class DatabaseManager extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "RPGenerator";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String TABLE_CHARACTER = "char";
     private static final String TABLE_MONSTER = "monster";
     private static final String TABLE_STATS = "stats";
@@ -40,11 +45,13 @@ public class DatabaseManager extends SQLiteOpenHelper {
     private static final String WEAPON_TYPE = "weaponType";
     private static final String ARMOR_TYPE = "armorType";
     private static final String STRENGTH_REQUIREMENT = "strengthRequirement";
-    private static final String CREATE_CHARACTER_TABLE = "create table " + TABLE_CHARACTER + "( " + ID + " TEXT PRIMARY KEY, " + NAME + " text, " + ALIGNMENT + " text, " + RACE + " text, " + CLASS + " text)";
-    private static final String CREATE_MONSTER_TABLE = "create table " + TABLE_MONSTER + "(" + ID + " TEXT PRIMARY KEY, " + NAME + " TEXT, " + ARMOR_CLASS + " TEXT, " + HIT_POINTS + " TEXT, " + EXPERIENCE + " TEXT)";
+    private static final String IMAGE = "image";
+    private static final String IMAGE_NAME = "imageName";
+    private static final String CREATE_CHARACTER_TABLE = "create table " + TABLE_CHARACTER + "( " + ID + " TEXT PRIMARY KEY, " + NAME + " text, " + RACE + " text, " + CLASS + " text, " + ALIGNMENT + " text, " + IMAGE + " blob, " + IMAGE_NAME + " text)";
+    private static final String CREATE_MONSTER_TABLE = "create table " + TABLE_MONSTER + "(" + ID + " TEXT PRIMARY KEY, " + NAME + " TEXT, " + ARMOR_CLASS + " TEXT, " + HIT_POINTS + " TEXT, " + EXPERIENCE + " TEXT," + IMAGE + " blob, " + IMAGE_NAME + " text )";
     private static final String CREATE_STATS_TABLE = "CREATE TABLE " + TABLE_STATS + "(" + ID + " TEXT, " + NAME + " TEXT, " + STRENGTH + " TEXT, " + DEXTERITY + " TEXT, " + CONSTITUTION + " TEXT, " + INTELLIGENCE + " TEXT, " + WISDOM + " TEXT, " + CHARISMA + " TEXT)";
-    private static final String CREATE_WEAPONS_TABLE = "CREATE TABLE " + TABLE_WEAPONS + "(" + ID + " TEXT PRIMARY KEY, " + WEAPON_TYPE + " TEXT, " + NAME + " TEXT, " + DAMAGE + " TEXT, " + DAMAGE_TYPE + " TEXT," + TRAITS + " TEXT, " + PROPERTY + " TEXT)";
-    private static final String CREATE_ARMOR_TABLE = "CREATE TABLE " + TABLE_ARMOR + "(" + ID + " TEXT PRIMARY KEY, " + ARMOR_TYPE + " TEXT, " + NAME + " TEXT, " + ARMOR_CLASS + " TEXT, " + STRENGTH_REQUIREMENT + " TEXT, " + TRAITS + " TEXT, " + PROPERTY + " TEXT)";
+    private static final String CREATE_WEAPONS_TABLE = "CREATE TABLE " + TABLE_WEAPONS + "(" + ID + " TEXT PRIMARY KEY, " + WEAPON_TYPE + " TEXT, " + NAME + " TEXT, " + DAMAGE + " TEXT, " + DAMAGE_TYPE + " TEXT," + TRAITS + " TEXT, " + PROPERTY + " TEXT, " + IMAGE + " blob," + IMAGE_NAME + " text)";
+    private static final String CREATE_ARMOR_TABLE = "CREATE TABLE " + TABLE_ARMOR + "(" + ID + " TEXT PRIMARY KEY, " + ARMOR_TYPE + " TEXT, " + NAME + " TEXT, " + ARMOR_CLASS + " TEXT, " + STRENGTH_REQUIREMENT + " TEXT, " + TRAITS + " TEXT, " + PROPERTY + " TEXT, " + IMAGE + " blob, " + IMAGE_NAME + " text)";
 
 
     public DatabaseManager(Context context) {
@@ -74,7 +81,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         String sqlQuery = "select * from " + TABLE_CHARACTER;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(sqlQuery, null);
-        Log.w("Character", "new Character ID is C" + cursor.getCount());
+        Log.w("Character", "new Character ID is C" + cursor.moveToLast());
         return "C" + cursor.getCount();
     }
 
@@ -106,6 +113,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
         ArrayList<character> characters = new ArrayList<>();
         while (cursor.moveToNext()) {
             String id = cursor.getString(0);
+            byte[] bmArray = cursor.getBlob(5);
+            Bitmap bm = BitmapFactory.decodeByteArray(bmArray, 0, bmArray.length);
             character currentCharacter = new character(Integer.parseInt(id.substring(1)), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
             characters.add(currentCharacter);
         }
@@ -164,8 +173,13 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     public void insertChar(character newChar) {
         SQLiteDatabase db = this.getWritableDatabase();
+        Bitmap image = newChar.getImage();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        ContentValues cv = new ContentValues();
+        cv.put("image", stream.toByteArray());
         String sqlInsert = "insert into " + TABLE_CHARACTER + " values ('" + getNewCharacterID() + "', '" + newChar.getName() + "', '"
-                + newChar.getAlignment() + "', '" + newChar.getRace() + "', '" + newChar.getCharclass() + "')";
+                + newChar.getRace() + "', '" + newChar.getCharclass() + "', '" + newChar.getAlignment() + "', '" + cv + "', '" + newChar.getImageName() + "')";
         db.execSQL(sqlInsert);
         db.close();
         insertCharacterStats(newChar);

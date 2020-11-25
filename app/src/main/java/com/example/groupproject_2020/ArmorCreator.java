@@ -76,7 +76,7 @@ public class ArmorCreator extends Fragment {
             dbManager.insertArmor(newarmor);
 
             Toast.makeText(getActivity(), "the " + name + " with " + strength + " strength " + armorClass
-                    + " armor class " + traits + " traits" + property + " property and "+ type + " type was saved to the db", Toast.LENGTH_SHORT).show();
+                    + " armor class " + traits + " traits" + property + " property and " + type + " type was saved to the db", Toast.LENGTH_SHORT).show();
 
             armornameET.setText("");
             armStrET.setText("");

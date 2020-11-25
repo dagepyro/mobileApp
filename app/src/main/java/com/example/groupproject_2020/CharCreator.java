@@ -7,9 +7,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,12 +29,15 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import java.io.IOException;
+
 import static android.app.Activity.RESULT_OK;
 
 public class CharCreator extends Fragment implements View.OnClickListener {
 
     private DatabaseManager dbManager;
-    String align, charclass, race;
+    String name, align, charclass, race;
+    private Bitmap image;
 
     private static final int RESULT_LOAD_IMAGE = 1;
 
@@ -120,9 +125,9 @@ public class CharCreator extends Fragment implements View.OnClickListener {
 
         view.findViewById(R.id.save_char).setOnClickListener(view1 -> {
             EditText nameET = view.findViewById(R.id.char_name);
-            String name = nameET.getText().toString();
+            name = nameET.getText().toString();
 
-            character newchar = new character(0, name, align, race, charclass);
+            character newchar = new character(0, name, align, race, charclass, image, uploadCharImageName.getText().toString());
             dbManager.insertChar(newchar);
             Toast.makeText(getActivity(), name + " the " + align + " " + race + " " + charclass + " was saved to the db", Toast.LENGTH_LONG).show();
 
@@ -140,7 +145,13 @@ public class CharCreator extends Fragment implements View.OnClickListener {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null) {
             Uri selectedImage = data.getData();
-            uploadChar.setImageURI(selectedImage);
+            try {
+                image = MediaStore.Images.Media.getBitmap(this.getContext().getContentResolver(), selectedImage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Log.w("data", "data: " + data);
+            uploadChar.setImageBitmap(image);
         }
     }
 }
