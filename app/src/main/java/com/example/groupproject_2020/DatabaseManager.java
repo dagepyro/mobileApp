@@ -83,7 +83,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(sqlQuery,null);
         int idNumber = 0;
         cursor.moveToLast();
-        if (cursor.getCount() < 0)
+        if (cursor.getCount() >= -1)
             idNumber = Integer.parseInt(cursor.getString(0).substring(1))+1;
         Log.w("Character", "new Character ID is C "+idNumber);
         return "C"+idNumber;
@@ -94,7 +94,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(sqlQuery,null);
         int idNumber = 0;
         cursor.moveToLast();
-        if (cursor.getCount() < 0)
+        if (cursor.getCount() > 0)
         idNumber = Integer.parseInt(cursor.getString(0).substring(1))+1;
         Log.w("Monster", "new Monster ID is M"+idNumber);
         return "M"+idNumber;
@@ -104,7 +104,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(sqlQuery,null);
         int idNumber = 0;
-        if (cursor.getCount()<0)
+        if (cursor.getCount()>0)
         cursor.moveToLast();
         idNumber = Integer.parseInt(cursor.getString(0).substring(1))+1;
         Log.w("Weapon", "new Weapon ID is W"+idNumber);
@@ -115,7 +115,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(sqlQuery,null);
         int idNumber = 0;
-        if (cursor.getCount()<0)
+        if (cursor.getCount()>0)
         cursor.moveToLast();
         idNumber = Integer.parseInt(cursor.getString(0).substring(1))+1;
         Log.w("Armor", "new Armor ID is A "+idNumber);
