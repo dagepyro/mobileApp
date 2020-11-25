@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-public class DeleteCharActivity extends AppCompatActivity{
+public class DeleteCharActivity extends AppCompatActivity {
     private DatabaseManager dbManager;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -30,18 +30,16 @@ public class DeleteCharActivity extends AppCompatActivity{
         ScrollView scrollView = new ScrollView(this);
 
         RadioGroup group = new RadioGroup(this);
-        for (character character: Characters){
+        for (character character : Characters) {
             RadioButton rb = new RadioButton(this);
             rb.setId(character.getId());
             rb.setText(character.getName());
             group.addView(rb);
         }
 
-        // set up event handling
         RadioButtonHandler rbh = new RadioButtonHandler();
         group.setOnCheckedChangeListener(rbh);
 
-        // create a back button
         Button backButton = new Button(this);
         backButton.setBackgroundResource(R.drawable.button);
         backButton.setText(R.string.button_back);
@@ -55,7 +53,6 @@ public class DeleteCharActivity extends AppCompatActivity{
         scrollView.addView(group);
         layout.addView(scrollView);
 
-        // add back button at bottom
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -72,9 +69,8 @@ public class DeleteCharActivity extends AppCompatActivity{
 
             dbManager.deleteCharacterByID(charId);
 
-            Toast.makeText(DeleteCharActivity.this, "Character is toast!"+charId, Toast.LENGTH_SHORT).show();
+            Toast.makeText(DeleteCharActivity.this, "Character is toast!", Toast.LENGTH_SHORT).show();
 
-            // update screen
             updateView();
         }
     }

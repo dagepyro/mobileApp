@@ -5,13 +5,13 @@ public class character {
     private int id;
     stats stats;
 
-    public character(int newId,String newName, String newAlignment, String newCharclass, String newRace){
+    public character(int newId, String newName, String newAlignment, String newCharclass, String newRace) {
         setName(newName);
         setAlignment(newAlignment);
         setCharclass(newCharclass);
         setRace(newRace);
         setId(newId);
-        stats = new stats(0,0,0,0,0,0,0);
+        stats = new stats(0, 0, 0, 0, 0, 0, 0);
     }
 
     public String getName() {
@@ -53,6 +53,4 @@ public class character {
     public void setId(int id) {
         this.id = id;
     }
-
-
 }

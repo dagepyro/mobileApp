@@ -13,19 +13,14 @@
         android:orderInCategory="100"
         android:title="@string/action_delete_mon"
         app:showAsAction="never" />
-<!--    <item-->
-<!--        android:id="@+id/action_update"-->
-<!--        android:orderInCategory="100"-->
-<!--        android:title="@string/action_update"-->
-<!--        app:showAsAction="never" />-->
+    <!--    <item-->
+    <!--        android:id="@+id/action_update"-->
+    <!--        android:orderInCategory="100"-->
+    <!--        android:title="@string/action_update"-->
+    <!--        app:showAsAction="never" />-->
     <item
         android:id="@+id/action_view"
         android:orderInCategory="100"
         android:title="@string/action_view"
         app:showAsAction="never" />
-<!--    <item-->
-<!--        android:id="@+id/action_settings"-->
-<!--        android:orderInCategory="100"-->
-<!--        android:title="@string/action_settings"-->
-<!--        app:showAsAction="never" />-->
 </menu>

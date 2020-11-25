@@ -11,7 +11,7 @@ public class monster {
         setHitpoints(hitpoints);
         setExp(exp);
         setId(newId);
-        stats = new stats(newId,0,0,0,0,0,0);
+        stats = new stats(newId, 0, 0, 0, 0, 0, 0);
     }
 
     public String getName() {

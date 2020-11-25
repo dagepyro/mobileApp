@@ -7,17 +7,25 @@
     tools:context=".CharCreator">
 
     <TableRow android:gravity="center_horizontal">
+
         <ImageView
-            android:autofillHints="Click here to choose an Image"
             android:id="@+id/char_image"
             android:layout_width="150dp"
-            android:layout_height="150dp" />
-    </TableRow>
-    <TableRow android:gravity="center_horizontal">
-        <TextView android:text="Click above to Upload Image" />
+            android:layout_height="150dp"
+            android:autofillHints="Click here to choose an Image" />
     </TableRow>
 
     <TableRow android:gravity="center_horizontal">
+
+        <TextView android:text="Click above to Upload Image" />
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:padding="10dp"
+            android:text="Image Name" />
+
         <EditText
             android:id="@+id/char_image_name"
             android:layout_width="match_parent"
@@ -25,70 +33,55 @@
             android:autofillHints="Image Name" />
     </TableRow>
 
-    <TableRow android:gravity="center_horizontal">
-        <Button
-            android:id="@+id/upload_char_image"
-            android:text="Upload Image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </TableRow>
-
-    <TableRow android:padding="20dp">
-    </TableRow>
-
     <TableRow>
 
         <TextView
             android:padding="10dp"
-            android:text="@string/char_name" />
+            android:text="Name" />
 
         <EditText
             android:id="@+id/char_name"
             android:layout_width="140dp"
-
             android:autofillHints="Name" />
     </TableRow>
 
     <TableRow>
 
         <TextView
-            android:text="@string/char_align"
             android:padding="10dp"
-            />
+            android:text="@string/char_align" />
+
         <Spinner
             android:id="@+id/align_spinner"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
+            android:layout_height="match_parent" />
     </TableRow>
 
     <TableRow>
 
         <TextView
-            android:text="@string/char_race"
             android:padding="10dp"
-            />
+            android:text="@string/char_race" />
+
         <Spinner
             android:id="@+id/race_spinner"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
+            android:layout_height="match_parent" />
     </TableRow>
 
     <TableRow>
 
         <TextView
-            android:text="@string/char_class"
             android:padding="10dp"
-            />
+            android:text="@string/char_class" />
+
         <Spinner
             android:id="@+id/class_spinner"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
+            android:layout_height="match_parent" />
     </TableRow>
-    <TableRow android:padding="20dp">
-    </TableRow>
+
+    <TableRow android:padding="20dp"></TableRow>
 
     <TableRow android:gravity="center_horizontal">
 

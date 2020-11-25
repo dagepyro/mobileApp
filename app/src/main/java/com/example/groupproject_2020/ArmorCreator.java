@@ -26,7 +26,6 @@ public class ArmorCreator extends Fragment {
     private static final int RESULT_LOAD_IMAGE = 1;
 
     ImageView uploadArmor;
-    Button uploadArmorImage;
     EditText uploadArmorImageName;
 
     @Override
@@ -45,10 +44,8 @@ public class ArmorCreator extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         uploadArmor = (ImageView) view.findViewById(R.id.armor_image);
-        uploadArmorImage = (Button) view.findViewById(R.id.upload_armor_image);
         uploadArmorImageName = (EditText) view.findViewById(R.id.armor_image_name);
         uploadArmor.setOnClickListener(this::onClick);
-        uploadArmorImage.setOnClickListener(this::onClick);
 
         view.findViewById(R.id.BackButton).setOnClickListener(view12 ->
                 NavHostFragment.findNavController(ArmorCreator.this)
@@ -78,8 +75,8 @@ public class ArmorCreator extends Fragment {
 
             dbManager.insertArmor(newarmor);
 
-            Toast.makeText(getActivity(), "the " + name + " with " + strength + armorClass + traits
-                    + property + type +" was saved to the db", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "the " + name + " with " + strength + " strength " + armorClass
+                    + " armor class " + traits + " traits" + property + " property and "+ type + " type was saved to the db", Toast.LENGTH_SHORT).show();
 
             armornameET.setText("");
             armStrET.setText("");
@@ -91,21 +88,14 @@ public class ArmorCreator extends Fragment {
     }
 
     public void onClick(View v) {
-        switch(v.getId()){
-            case R.id.armor_image:
-                Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
-                break;
-            case R.id.upload_armor_image:
-
-                break;
-        }
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null)  {
+        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null) {
             Uri selectedImage = data.getData();
             uploadArmor.setImageURI(selectedImage);
         }
