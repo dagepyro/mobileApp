@@ -72,7 +72,7 @@ public class DeleteCharActivity extends AppCompatActivity{
 
             dbManager.deleteCharacterByID(charId);
 
-            Toast.makeText(DeleteCharActivity.this, "Character is toast!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(DeleteCharActivity.this, "Character is toast!"+charId, Toast.LENGTH_SHORT).show();
 
             // update screen
             updateView();

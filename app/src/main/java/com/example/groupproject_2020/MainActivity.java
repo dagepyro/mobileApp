@@ -8,6 +8,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.View;
 
@@ -49,12 +50,12 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_update) {
-            return true;
-        }
-        if (id == R.id.action_view) {
-            return true;
-        }
+//        if (id == R.id.action_update) {
+//            return true;
+//        }
+//        if (id == R.id.action_view) {
+//            return true;
+//        }
         if (id == R.id.action_delete_char) {
             Intent deleteIntent = new Intent(this, DeleteCharActivity.class);
             this.startActivity(deleteIntent);
@@ -65,12 +66,15 @@ public class MainActivity extends AppCompatActivity {
             this.startActivity(deleteIntent);
             return true;
         }
-        if (id == R.id.action_add) {
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+        if (id == R.id.action_view) {
+            Intent viewIntent = new Intent(this, viewChar.class);
+            this.startActivity(viewIntent);
             return true;
         }
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
         return super.onOptionsItemSelected(item);
     }
 }
