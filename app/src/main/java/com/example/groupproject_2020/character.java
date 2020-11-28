@@ -28,6 +28,9 @@ public class character {
         setId(newId);
         stats = new stats(0,0,0,0,0,0,0);
     }
+    public character(){
+
+    }
 
     public String getName() {
         return name;
