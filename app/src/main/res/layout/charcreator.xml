@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -76,6 +81,80 @@
             android:layout_height="match_parent"
             />
     </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:padding="10dp"
+            android:text="Strength" />
+
+        <EditText
+            android:id="@+id/char_strength"
+            android:layout_width="140dp"
+            android:gravity="center_horizontal"
+            android:autofillHints="Name" />
+    </TableRow>
+
+    <TableRow>
+            <TextView
+            android:padding="10dp"
+            android:text="Dexterity" />
+
+        <EditText
+            android:id="@+id/char_dexterity"
+            android:layout_width="140dp"
+            android:gravity="center_horizontal"
+            android:autofillHints="Name" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:padding="10dp"
+            android:text="Constitution" />
+
+        <EditText
+            android:id="@+id/char_constitution"
+            android:layout_width="140dp"
+            android:gravity="center_horizontal"
+            android:autofillHints="Name" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:padding="10dp"
+            android:text="Intelligence" />
+
+        <EditText
+            android:id="@+id/char_intelligence"
+            android:layout_width="140dp"
+            android:gravity="center_horizontal"
+            android:autofillHints="Name" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:padding="10dp"
+            android:text="Wisdom" />
+
+        <EditText
+            android:id="@+id/char_wisdom"
+            android:layout_width="140dp"
+            android:gravity="center_horizontal"
+            android:autofillHints="Name" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:padding="10dp"
+            android:text="Charisma" />
+
+        <EditText
+            android:id="@+id/char_charisma"
+            android:layout_width="140dp"
+            android:gravity="center_horizontal"
+            android:autofillHints="Name" />
+    </TableRow>
+
     <TableRow android:padding="20dp">
     </TableRow>
 
@@ -98,3 +177,4 @@
     </TableRow>
 </TableLayout>
 
+</ScrollView>

@@ -83,8 +83,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(sqlQuery,null);
         int idNumber = 0;
         cursor.moveToLast();
-        if (cursor.getCount() >= 0)
-            idNumber = Integer.parseInt(cursor.getString(0).substring(1))+1;
+        if (cursor.getCount() > 0){
+            idNumber = Integer.parseInt(cursor.getString(0).substring(1))+1;}
         Log.w("Character", "new Character ID is C "+idNumber);
         return "C"+idNumber;
     }
@@ -221,9 +221,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         newChar.setId(Integer.parseInt(getNewCharacterID().substring(1)));
         Bitmap image = newChar.getImage();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        if (image != null)
-            image.compress(Bitmap.CompressFormat.PNG, 100, stream);
-
+        image.compress(Bitmap.CompressFormat.PNG, 100, stream);
         ContentValues cv = new ContentValues();
         cv.put("image",stream.toByteArray());
         String sqlInsert = "insert into " + TABLE_CHARACTER
