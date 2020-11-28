@@ -83,8 +83,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(sqlQuery,null);
         int idNumber = 0;
         cursor.moveToLast();
-        if (cursor.getCount() >= -1)
-            idNumber = Integer.parseInt(cursor.getString(0).substring(1))+1;
+        if (cursor.getCount() > 0){
+            idNumber = Integer.parseInt(cursor.getString(0).substring(1))+1;}
         Log.w("Character", "new Character ID is C "+idNumber);
         return "C"+idNumber;
     }
