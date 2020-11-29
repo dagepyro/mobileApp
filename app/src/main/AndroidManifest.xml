@@ -29,6 +29,12 @@
         <activity
             android:name=".DeleteMonActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".DeleteWeapon"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DeleteArmor"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".viewChar"

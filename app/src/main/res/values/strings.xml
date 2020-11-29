@@ -8,7 +8,10 @@
     <string name="action_view_weapon">View Weapons</string>
     <string name="action_view_armor">View Armor</string>
     <string name="action_delete_char">Delete Character</string>
-    <string name="action_delete_mon">Delete Monster</string>
+    <string name="action_delete_mon">Delete Monsters</string>
+    <string name="action_delete_weapon">Delete Weapons</string>
+    <string name="action_delete_armor">Delete Armor</string>
+
 
     <!-- Strings used for fragments for navigation -->
     <string name="Main_menu">First Fragment</string>
