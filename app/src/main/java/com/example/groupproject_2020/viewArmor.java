@@ -8,23 +8,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-public class viewWeapon extends AppCompatActivity {
+public class viewArmor extends AppCompatActivity {
     private GridView gridView;
-    public static ArrayList<weapon> weaponArray;
+    public static ArrayList<armor> armorArray;
     DatabaseManager db;
-    weaponAdapter adapter;
+    armorAdapter adapter;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.viewweapon);
+        setContentView(R.layout.viewarmor);
 
-        gridView = (GridView) findViewById(R.id.gv_weapon);
+        gridView = (GridView) findViewById(R.id.gv_armor);
 
         db = new DatabaseManager(this);
-        weaponArray = new ArrayList<weapon>();
+        armorArray = new ArrayList<armor>();
 
-        weaponArray = db.selectAllWeapons();
-        adapter = new weaponAdapter(viewWeapon.this, weaponArray);
+        armorArray = db.selectAllArmor();
+        adapter = new armorAdapter(viewArmor.this, armorArray);
         gridView.setAdapter(adapter);
 
     }

@@ -19,6 +19,10 @@ public class armor {
         this.imageName = imageName;
     }
 
+    public armor() {
+
+    }
+
     public int getId() {
         return id;
     }

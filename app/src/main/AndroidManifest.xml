@@ -41,6 +41,10 @@
         <activity
             android:name=".viewWeapon"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".viewArmor"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -1,0 +1,35 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    >
+
+    <EditText
+        android:layout_centerHorizontal="true"
+        android:id="@+id/armor_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Armor"
+        />
+
+    <GridView
+        android:id="@+id/gv_armor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="3"
+        android:horizontalSpacing="4dp"
+        android:verticalSpacing="4dp"
+        android:layout_below="@+id/armor_view" >
+    </GridView>
+
+
+    <Button
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/gv_armor"
+        android:text="Previous"
+        android:onClick="previous"
+        />
+</RelativeLayout>

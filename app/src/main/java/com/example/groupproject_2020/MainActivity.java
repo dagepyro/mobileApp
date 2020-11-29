@@ -66,6 +66,12 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
+        if (id == R.id.action_view_armor) {
+            Intent viewIntent = new Intent(this, viewArmor.class);
+            this.startActivity(viewIntent);
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 }

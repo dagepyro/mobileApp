@@ -10,7 +10,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class weaponAdapter extends BaseAdapter {
-
     Context context;
     ArrayList<weapon> weaponlist;
     private static LayoutInflater inflater = null;
@@ -55,11 +54,11 @@ public class weaponAdapter extends BaseAdapter {
         weapon e = new weapon();
         e = weaponlist.get(position);
         nameTextView.setText("Name: " + String.valueOf(e.getName()));
-        damageTextView.setText("Armor Class: " + String.valueOf(e.getDamage()));
-        dmgTypeTextView.setText("Hit Points: " + String.valueOf(e.getDamageType()));
-        weapTypeTextView.setText("Experience: " + String.valueOf(e.getWeaponType()));
-        weapTraitTextView.setText("Experience: " + String.valueOf(e.getTraits()));
-        weapPropertyTextView.setText("Experience: " + String.valueOf(e.getProperty()));
+        damageTextView.setText("Damage: " + String.valueOf(e.getDamage()));
+        dmgTypeTextView.setText("Damage Type: " + String.valueOf(e.getDamageType()));
+        weapTypeTextView.setText("Weapon Type: " + String.valueOf(e.getWeaponType()));
+        weapTraitTextView.setText("Traits: " + String.valueOf(e.getTraits()));
+        weapPropertyTextView.setText("Property: " + String.valueOf(e.getProperty()));
 
         return convertView;
     }
