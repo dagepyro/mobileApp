@@ -1,9 +1,11 @@
 package com.example.groupproject_2020;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +19,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import java.io.IOException;
+
 import static android.app.Activity.RESULT_OK;
 
 public class WeaponCreator extends Fragment {
     private DatabaseManager dbManager;
+    private Bitmap image;
 
     private static final int RESULT_LOAD_IMAGE = 1;
 
@@ -69,7 +74,7 @@ public class WeaponCreator extends Fragment {
             EditText propertyET = view.findViewById(R.id.weap_property);
             String property = propertyET.getText().toString();
 
-            weapon newweapon = new weapon(0, name, damage, damageType, weaponType, traits, property);
+            weapon newweapon = new weapon(0, name, damage, damageType, weaponType, traits, property, image, uploadWeaponImageName.getText().toString());
 
             dbManager.insertWeapon(newweapon);
 
@@ -96,7 +101,13 @@ public class WeaponCreator extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null) {
             Uri selectedImage = data.getData();
-            uploadWeapon.setImageURI(selectedImage);
+            try {
+                image = MediaStore.Images.Media.getBitmap(this.getContext().getContentResolver(), selectedImage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Log.w("data", "data: " + data);
+            uploadWeapon.setImageBitmap(image);
         }
     }
 }

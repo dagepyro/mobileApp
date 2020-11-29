@@ -81,29 +81,49 @@ public class DatabaseManager extends SQLiteOpenHelper {
         String sqlQuery = "select * from " + TABLE_CHARACTER;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(sqlQuery, null);
-        Log.w("Character", "new Character ID is C" + cursor.moveToLast());
-        return "C" + cursor.getCount();
+        int idNumber = 0;
+        cursor.moveToLast();
+        if (cursor.getCount() > 0) {
+            idNumber = Integer.parseInt(cursor.getString(0).substring(1)) + 1;
+        }
+        Log.w("Character", "new Character ID is C " + idNumber);
+        return "C" + idNumber;
     }
 
     public String getNewMonsterID() {
         String sqlQuery = "select * from " + TABLE_MONSTER;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(sqlQuery, null);
-        return "M" + cursor.getCount();
+        int idNumber = 0;
+        cursor.moveToLast();
+        if (cursor.getCount() > 0)
+            idNumber = Integer.parseInt(cursor.getString(0).substring(1)) + 1;
+        Log.w("Monster", "new Monster ID is M" + idNumber);
+        return "M" + idNumber;
     }
 
     public String getNewWeaponID() {
         String sqlQuery = "select * from " + TABLE_WEAPONS;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(sqlQuery, null);
-        return "W" + cursor.getCount();
+        int idNumber = 0;
+        cursor.moveToLast();
+        if (cursor.getCount() > 0)
+            idNumber = Integer.parseInt(cursor.getString(0).substring(1)) + 1;
+        Log.w("Weapon", "new Weapon ID is W" + idNumber);
+        return "W" + idNumber;
     }
 
     public String getNewArmorID() {
         String sqlQuery = "select * from " + TABLE_ARMOR;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(sqlQuery, null);
-        return "A" + cursor.getCount();
+        int idNumber = 0;
+        cursor.moveToLast();
+        if (cursor.getCount() > 0)
+            idNumber = Integer.parseInt(cursor.getString(0).substring(1)) + 1;
+        Log.w("Armor", "new Armor ID is A " + idNumber);
+        return "A" + idNumber;
     }
 
     public ArrayList<character> selectAllCharacters() {
@@ -114,8 +134,14 @@ public class DatabaseManager extends SQLiteOpenHelper {
         while (cursor.moveToNext()) {
             String id = cursor.getString(0);
             byte[] bmArray = cursor.getBlob(5);
-            Bitmap bm = BitmapFactory.decodeByteArray(bmArray, 0, bmArray.length);
-            character currentCharacter = new character(Integer.parseInt(id.substring(1)), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
+            Bitmap image = BitmapFactory.decodeByteArray(bmArray, 0, bmArray.length);
+            character currentCharacter = new character(Integer.parseInt(id.substring(1)),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getString(3),
+                    cursor.getString(4),
+                    image,
+                    cursor.getString(6));
             characters.add(currentCharacter);
         }
         db.close();
@@ -129,13 +155,16 @@ public class DatabaseManager extends SQLiteOpenHelper {
         ArrayList<monster> monsters = new ArrayList<>();
         while (cursor.moveToNext()) {
             String id = cursor.getString(0);
-            Log.w("DEBUG", cursor.getString(2));
+            byte[] bmArray = cursor.getBlob(5);
+            Bitmap image = BitmapFactory.decodeByteArray(bmArray, 0, bmArray.length);
             monster currentMonster = new monster(
                     Integer.parseInt(id.substring(1)),
                     cursor.getString(1),
                     Integer.parseInt(cursor.getString(2)),
                     Integer.parseInt(cursor.getString(3)),
-                    Integer.parseInt(cursor.getString(4)));
+                    Integer.parseInt(cursor.getString(4)),
+                    image,
+                    cursor.getString(6));
             monsters.add(currentMonster);
         }
         db.close();
@@ -150,7 +179,17 @@ public class DatabaseManager extends SQLiteOpenHelper {
         while (cursor.moveToNext()) {
             String id = cursor.getString(0);
             id = id.substring(1);
-            weapon currentWeapon = new weapon(Integer.parseInt(id), cursor.getString(1), Integer.parseInt(cursor.getString(2)), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6));
+            byte[] bmArray = cursor.getBlob(7);
+            Bitmap image = BitmapFactory.decodeByteArray(bmArray, 0, bmArray.length);
+            weapon currentWeapon = new weapon(Integer.parseInt(id),
+                    cursor.getString(1),
+                    Integer.parseInt(cursor.getString(2)),
+                    cursor.getString(3),
+                    cursor.getString(4),
+                    cursor.getString(5),
+                    cursor.getString(6),
+                    image,
+                    cursor.getString(8));
             weapons.add(currentWeapon);
         }
         return weapons;
@@ -165,7 +204,17 @@ public class DatabaseManager extends SQLiteOpenHelper {
         while (cursor.moveToNext()) {
             String id = cursor.getString(0);
             id = id.substring(1);
-            armor currentArmor = new armor(Integer.parseInt(id), cursor.getString(1), Integer.parseInt(cursor.getString(2)), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6));
+            byte[] bmArray = cursor.getBlob(7);
+            Bitmap image = BitmapFactory.decodeByteArray(bmArray, 0, bmArray.length);
+            armor currentArmor = new armor(Integer.parseInt(id),
+                    cursor.getString(1),
+                    Integer.parseInt(cursor.getString(2)),
+                    cursor.getString(3),
+                    cursor.getString(4),
+                    cursor.getString(5),
+                    cursor.getString(6),
+                    image,
+                    cursor.getString(8));
             armors.add(currentArmor);
         }
         return armors;
@@ -173,41 +222,66 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     public void insertChar(character newChar) {
         SQLiteDatabase db = this.getWritableDatabase();
+        newChar.setId(Integer.parseInt(getNewCharacterID().substring(1)));
         Bitmap image = newChar.getImage();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         image.compress(Bitmap.CompressFormat.PNG, 100, stream);
         ContentValues cv = new ContentValues();
         cv.put("image", stream.toByteArray());
-        String sqlInsert = "insert into " + TABLE_CHARACTER + " values ('" + getNewCharacterID() + "', '" + newChar.getName() + "', '"
-                + newChar.getRace() + "', '" + newChar.getCharclass() + "', '" + newChar.getAlignment() + "', '" + cv + "', '" + newChar.getImageName() + "')";
+        String sqlInsert = "insert into " + TABLE_CHARACTER
+                + " values ('C" + newChar.getId() + "', '"
+                + newChar.getName() + "', '"
+                + newChar.getRace() + "', '"
+                + newChar.getCharclass() + "', '"
+                + newChar.getAlignment() + "', '"
+                + cv + "', '"
+                + newChar.getImageName() + "')";
         db.execSQL(sqlInsert);
         db.close();
         insertCharacterStats(newChar);
     }
 
-    public void deleteCharacterByID(int charID) {
+    public void deleteCharacter(character delchar) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqlDelete = "delete from " + TABLE_CHARACTER + " where " + ID + " = 'C" + charID + "'";
+        String sqlDelete = "delete from " + TABLE_CHARACTER + " where " + ID + " = 'C" + delchar.getId() + "'";
         db.execSQL(sqlDelete);
         db.close();
+        deleteStatsByCharacterID(delchar);
     }
 
     public void updateCharacter(character updateCharacter) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqUpdate = "update " + TABLE_CHARACTER + " set " + NAME + " = '" + updateCharacter.getName() + "' , " + ALIGNMENT + " = '" + updateCharacter.getAlignment() + "', " + CLASS + " = '" + updateCharacter.getCharclass() + "' , " + RACE + " = '" + updateCharacter.getRace() + "' where " + ID + " = 'C" + updateCharacter.getId() + "'";
+        String sqUpdate = "update " + TABLE_CHARACTER
+                + " set " + NAME + " = '" + updateCharacter.getName() + "' , "
+                + ALIGNMENT + " = '" + updateCharacter.getAlignment() + "', "
+                + CLASS + " = '" + updateCharacter.getCharclass() + "' , "
+                + RACE + " = '" + updateCharacter.getRace()
+                + "' where " + ID + " = 'C" + updateCharacter.getId() + "'";
         db.execSQL(sqUpdate);
         db.close();
     }
 
     public void insertMonster(monster newMonster) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqlInsert = "insert into " + TABLE_MONSTER + " values ('" + getNewMonsterID() + "', '" + newMonster.getName() + "', '"
-                + newMonster.getArmorclass() + "', '" + newMonster.getHitpoints() + "', '" + newMonster.getExp() + "')";
+        newMonster.setId(Integer.parseInt(getNewMonsterID().substring(1)));
+        Bitmap image = newMonster.getImage();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        ContentValues cv = new ContentValues();
+        cv.put("image", stream.toByteArray());
+        String sqlInsert = "insert into " + TABLE_MONSTER
+                + " values ('M" + newMonster.getId() + "', '"
+                + newMonster.getName() + "', '"
+                + newMonster.getArmorclass() + "', '"
+                + newMonster.getHitpoints() + "', '"
+                + newMonster.getExp() + "', '"
+                + cv + "', '"
+                + newMonster.getImageName() + "')";
         db.execSQL(sqlInsert);
         db.close();
     }
 
-    public void deleteMonsterById(int monster) {
+    public void deleteMonster(monster monster) {
         SQLiteDatabase db = this.getWritableDatabase();
         String sqlDelete = "delete from " + TABLE_MONSTER + " where " + ID + " = 'M" + monster + "'";
         db.execSQL(sqlDelete);
@@ -216,22 +290,41 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     public void updateMonster(monster updateMonster) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqUpdate = "update " + TABLE_MONSTER + " set " + NAME + " = '" + updateMonster.getName() + "' , " + ARMOR_CLASS + " = '" + updateMonster.getArmorclass() + "', " + HIT_POINTS + " = '" + updateMonster.getHitpoints() + "' , " + EXPERIENCE + " = '" + updateMonster.getExp() + "' where '" + ID + "' = 'M" + updateMonster.getId();
+        String sqUpdate = "update " + TABLE_MONSTER
+                + " set " + NAME + " = '" + updateMonster.getName() + "' , "
+                + ARMOR_CLASS + " = '" + updateMonster.getArmorclass() + "', "
+                + HIT_POINTS + " = '" + updateMonster.getHitpoints() + "' , "
+                + EXPERIENCE + " = '" + updateMonster.getExp()
+                + "' where '" + ID + "' = 'M" + updateMonster.getId();
         db.execSQL(sqUpdate);
         db.close();
     }
 
     public void insertCharacterStats(character newCharacter) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqlInsert = "insert into " + TABLE_STATS + " values ('" + newCharacter.getId() + "', '" + newCharacter.getName() + "', '"
-                + newCharacter.stats.getStrength() + "', '" + newCharacter.stats.getDexterity() + "', '" + newCharacter.stats.getConstitution() + "', '" + newCharacter.stats.getIntelligence() + "', '" + newCharacter.stats.getWisdom() + "', '" + newCharacter.stats.getCharisma() + "')";
+        String sqlInsert = "insert into " + TABLE_STATS
+                + " values ('C" + newCharacter.getId() + "', '"
+                + newCharacter.getName() + "', '"
+                + newCharacter.stats.getStrength() + "', '"
+                + newCharacter.stats.getDexterity() + "', '"
+                + newCharacter.stats.getConstitution() + "', '"
+                + newCharacter.stats.getIntelligence() + "', '"
+                + newCharacter.stats.getWisdom() + "', '"
+                + newCharacter.stats.getCharisma() + "')";
         db.execSQL(sqlInsert);
         db.close();
     }
 
-    public void updateStatsByCharacterID(character updateCharacter) {
+    public void updateStatsByCharacter(character updateCharacter) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqlUpdate = "update " + TABLE_STATS + " set " + STRENGTH + " = " + updateCharacter.stats.getStrength() + ", " + DEXTERITY + " = " + updateCharacter.stats.getDexterity() + ", " + CONSTITUTION + " = " + updateCharacter.stats.getConstitution() + ", " + INTELLIGENCE + " = " + updateCharacter.stats.getIntelligence() + ", " + WISDOM + " = " + updateCharacter.stats.getWisdom() + ", " + CHARISMA + " = " + updateCharacter.stats.getCharisma() + " where " + NAME + " = 'C" + updateCharacter.getName() + "'";
+        String sqlUpdate = "update " + TABLE_STATS
+                + " set " + STRENGTH + " = " + updateCharacter.stats.getStrength() + ", "
+                + DEXTERITY + " = " + updateCharacter.stats.getDexterity() + ", "
+                + CONSTITUTION + " = " + updateCharacter.stats.getConstitution() + ", "
+                + INTELLIGENCE + " = " + updateCharacter.stats.getIntelligence() + ", "
+                + WISDOM + " = " + updateCharacter.stats.getWisdom() + ", "
+                + CHARISMA + " = " + updateCharacter.stats.getCharisma()
+                + " where " + ID + " = 'C" + updateCharacter.getId() + "'";
         db.execSQL(sqlUpdate);
         db.close();
     }
@@ -245,58 +338,115 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     public void insertMonsterStats(monster newMonster) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqlInsert = "insert into " + TABLE_CHARACTER + " values ('" + newMonster.getId() + "', '" + newMonster.getName() + "', '"
-                + newMonster.stats.getStrength() + "', '" + newMonster.stats.getDexterity() + "', '" + newMonster.stats.getConstitution() + "', '" + newMonster.stats.getIntelligence() + "', '" + newMonster.stats.getWisdom() + "', '" + newMonster.stats.getCharisma() + "')";
+        String sqlInsert = "insert into " + TABLE_CHARACTER
+                + " values ('M" + newMonster.getId() + "', '"
+                + newMonster.getName() + "', '"
+                + newMonster.stats.getStrength() + "', '"
+                + newMonster.stats.getDexterity() + "', '"
+                + newMonster.stats.getConstitution() + "', '"
+                + newMonster.stats.getIntelligence() + "', '"
+                + newMonster.stats.getWisdom() + "', '"
+                + newMonster.stats.getCharisma() + "')";
         db.execSQL(sqlInsert);
         db.close();
     }
 
-    public void updateStatsByMonsterID(monster updateMonster) {
+    public void updateStatsByMonster(monster updateMonster) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqlUpdate = "update " + TABLE_STATS + " set " + STRENGTH + " = " + updateMonster.stats.getStrength() + ", " + DEXTERITY + " = " + updateMonster.stats.getDexterity() + ", " + CONSTITUTION + " = " + updateMonster.stats.getConstitution() + ", " + INTELLIGENCE + " = " + updateMonster.stats.getIntelligence() + ", " + WISDOM + " = " + updateMonster.stats.getWisdom() + ", " + CHARISMA + " = " + updateMonster.stats.getCharisma() + " where " + ID + " = 'M" + updateMonster.getId() + "'";
+        String sqlUpdate = "update " + TABLE_STATS
+                + " set " + STRENGTH + " = " + updateMonster.stats.getStrength() + ", "
+                + DEXTERITY + " = " + updateMonster.stats.getDexterity() + ", "
+                + CONSTITUTION + " = " + updateMonster.stats.getConstitution() + ", "
+                + INTELLIGENCE + " = " + updateMonster.stats.getIntelligence() + ", "
+                + WISDOM + " = " + updateMonster.stats.getWisdom() + ", "
+                + CHARISMA + " = " + updateMonster.stats.getCharisma()
+                + " where " + ID + " = 'M" + updateMonster.getId() + "'";
         db.execSQL(sqlUpdate);
         db.close();
     }
 
-    public void deleteStatsByCharacterID(monster deleteMonster) {
+    public void deleteStatsByMonster(monster deleteMonster) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqlDelete = "delete from " + TABLE_STATS + " where " + ID + " = 'C" + deleteMonster.getId() + "'";
+        String sqlDelete = "delete from " + TABLE_STATS
+                + " where " + ID + " = 'M" + deleteMonster.getId() + "'";
         db.execSQL(sqlDelete);
         db.close();
     }
 
     public void insertWeapon(weapon newWeapon) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqlInsert = "insert into " + TABLE_WEAPONS + " values ('" + getNewWeaponID() + "', '" + newWeapon.getWeaponType() + "', '"
-                + newWeapon.getName() + "', '" + newWeapon.getDamage() + "', '" + newWeapon.getDamageType() + "', '" + newWeapon.getTraits() + "', '" + newWeapon.getProperty() + "')";
+        newWeapon.setId(Integer.parseInt(getNewWeaponID().substring(1)));
+        Bitmap image = newWeapon.getImage();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        ContentValues cv = new ContentValues();
+        cv.put("image", stream.toByteArray());
+        String sqlInsert = "insert into " + TABLE_WEAPONS
+                + " values ('" + getNewWeaponID() + "', '"
+                + newWeapon.getWeaponType() + "', '"
+                + newWeapon.getName() + "', '"
+                + newWeapon.getDamage() + "', '"
+                + newWeapon.getDamageType() + "', '"
+                + newWeapon.getTraits() + "', '"
+                + newWeapon.getProperty() + "', '"
+                + cv + "', '"
+                + newWeapon.getImageName() + "')";
         db.execSQL(sqlInsert);
         db.close();
     }
 
     public void updateWeapon(weapon weapon) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqlupdate = "update " + TABLE_WEAPONS + " set " + WEAPON_TYPE + " = '" + weapon.getWeaponType() + "', " + NAME + " = '" + weapon.getName() + "', " + DAMAGE + " = '" + weapon.getDamage() + "', " + DAMAGE_TYPE + " = '" + weapon.getDamageType() + "', " + TRAITS + " = '" + weapon.getTraits() + "', " + PROPERTY + " = '" + weapon.getProperty() + "' where " + ID + " = 'W" + weapon.getId() + "'";
+        String sqlupdate = "update " + TABLE_WEAPONS
+                + " set " + WEAPON_TYPE + " = '" + weapon.getWeaponType() + "', "
+                + NAME + " = '" + weapon.getName() + "', "
+                + DAMAGE + " = '" + weapon.getDamage() + "', "
+                + DAMAGE_TYPE + " = '" + weapon.getDamageType() + "', "
+                + TRAITS + " = '" + weapon.getTraits() + "', "
+                + PROPERTY + " = '" + weapon.getProperty()
+                + "' where " + ID + " = 'W" + weapon.getId() + "')";
         db.execSQL(sqlupdate);
         db.close();
     }
 
-    private void deleteWeaponByID(int id) {
+    public void deleteWeaponById(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqlDelete = "delete from " + TABLE_WEAPONS + " where " + ID + " = 'W" + id + "'";
+        String sqlDelete = "delete from " + TABLE_WEAPONS
+                + " where " + ID + " = 'W" + id + "'";
         db.execSQL(sqlDelete);
         db.close();
     }
 
-    public void insertArmor(armor armor) {
+    public void insertArmor(armor newArmor) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqlInsert = "insert into " + TABLE_ARMOR + " values ('" + getNewArmorID() + "', '" + armor.getName() + "', '" + armor.getStrength() + "', '" + armor.getArmorClass() + "', '" + armor.getTraits() + "', '" + armor.getProperty() + "', '" + armor.getType() + "'";
+        newArmor.setId(Integer.parseInt(getNewMonsterID().substring(1)));
+        Bitmap image = newArmor.getImage();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        ContentValues cv = new ContentValues();
+        cv.put("image", stream.toByteArray());
+        String sqlInsert = "insert into " + TABLE_ARMOR + " values ('" + getNewArmorID() + "', '"
+                + newArmor.getName() + "', '"
+                + newArmor.getStrength() + "', '"
+                + newArmor.getArmorClass() + "', '"
+                + newArmor.getTraits() + "', '"
+                + newArmor.getProperty() + "', '"
+                + newArmor.getType() + "', '"
+                + cv + "', '"
+                + newArmor.getImageName() + "')";
         db.execSQL(sqlInsert);
         db.close();
     }
 
     private void updateArmor(armor armor) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqlUpdate = "update " + TABLE_ARMOR + " set " + NAME + " = '" + armor.getName() + "', " + ARMOR_CLASS + " = '" + armor.getArmorClass() + "', " + STRENGTH_REQUIREMENT + " = '" + armor.getStrength() + "', " + TRAITS + " = '" + armor.getTraits() + "', " + PROPERTY + " = '" + armor.getProperty() + "' where " + ID + " = 'A" + armor.getId() + "'";
+        String sqlUpdate = "update " + TABLE_ARMOR
+                + " set " + NAME + " = '" + armor.getName() + "', "
+                + ARMOR_CLASS + " = '" + armor.getArmorClass() + "', "
+                + STRENGTH_REQUIREMENT + " = '" + armor.getStrength() + "', "
+                + TRAITS + " = '" + armor.getTraits() + "', "
+                + PROPERTY + " = '" + armor.getProperty()
+                + "' where " + ID + " = 'A" + armor.getId() + "'";
         db.execSQL(sqlUpdate);
         db.close();
     }

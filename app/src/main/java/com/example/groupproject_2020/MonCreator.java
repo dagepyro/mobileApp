@@ -1,9 +1,11 @@
 package com.example.groupproject_2020;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +19,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import java.io.IOException;
+
 import static android.app.Activity.RESULT_OK;
 
 public class MonCreator extends Fragment {
     private DatabaseManager dbManager;
-
+    private Bitmap image;
     private static final int RESULT_LOAD_IMAGE = 1;
 
     ImageView uploadMon;
@@ -66,7 +70,7 @@ public class MonCreator extends Fragment {
             String expString = expET.getText().toString();
             int exp = Integer.parseInt(expString);
 
-            monster newmon = new monster(0, name, armorclass, hp, exp);
+            monster newmon = new monster(0, name, armorclass, hp, exp, image, uploadMonImageName.getText().toString());
 
             dbManager.insertMonster(newmon);
 
@@ -90,7 +94,13 @@ public class MonCreator extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null) {
             Uri selectedImage = data.getData();
-            uploadMon.setImageURI(selectedImage);
+            try {
+                image = MediaStore.Images.Media.getBitmap(this.getContext().getContentResolver(), selectedImage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Log.w("data", "data: " + data);
+            uploadMon.setImageBitmap(image);
         }
     }
 }
