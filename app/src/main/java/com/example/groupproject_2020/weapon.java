@@ -1,8 +1,23 @@
 package com.example.groupproject_2020;
 
+import android.graphics.Bitmap;
+
 public class weapon {
-    int id, damage;
-    String name, damageType, weaponType, traits, property;
+    private int id, damage;
+    private String name, damageType, weaponType, traits, property, imageName;
+    private Bitmap image;
+
+    public weapon(int id, String name, int damage, String damageType, String weaponType, String traits, String property, Bitmap image, String imageName) {
+        this.id = id;
+        this.damage = damage;
+        this.name = name;
+        this.damageType = damageType;
+        this.weaponType = weaponType;
+        this.traits = traits;
+        this.property = property;
+        this.image = image;
+        this.imageName = imageName;
+    }
 
     public weapon(int id, String name, int damage, String damageType, String weaponType, String traits, String property) {
         this.id = id;
@@ -12,6 +27,10 @@ public class weapon {
         this.weaponType = weaponType;
         this.traits = traits;
         this.property = property;
+    }
+
+    public weapon() {
+
     }
 
     public int getId() {
@@ -68,5 +87,21 @@ public class weapon {
 
     public void setProperty(String property) {
         this.property = property;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
+    public Bitmap getImage() {
+        return image;
+    }
+
+    public void setImage(Bitmap image) {
+        this.image = image;
     }
 }

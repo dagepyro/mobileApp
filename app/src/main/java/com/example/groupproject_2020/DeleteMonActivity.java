@@ -12,8 +12,10 @@ import android.widget.ScrollView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
-public class DeleteMonActivity extends AppCompatActivity{
+
+public class DeleteMonActivity extends AppCompatActivity {
     private DatabaseManager dbManager;
+    ArrayList<monster> Monsters;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,24 +25,22 @@ public class DeleteMonActivity extends AppCompatActivity{
 
     public void updateView() {
 
-        ArrayList<monster> Monsters = dbManager.selectAllMonsters();
+        Monsters = dbManager.selectAllMonsters();
 
         RelativeLayout layout = new RelativeLayout(this);
         ScrollView scrollView = new ScrollView(this);
 
         RadioGroup group = new RadioGroup(this);
-        for (monster monster: Monsters){
+        for (monster monster : Monsters) {
             RadioButton rb = new RadioButton(this);
-            rb.setId(monster.getId());
+            rb.setId(Monsters.indexOf(monster));
             rb.setText(monster.getName());
             group.addView(rb);
         }
 
-        // set up event handling
         RadioButtonHandler rbh = new RadioButtonHandler();
         group.setOnCheckedChangeListener(rbh);
 
-        // create a back button
         Button backButton = new Button(this);
         backButton.setBackgroundResource(R.drawable.button);
         backButton.setText(R.string.button_back);
@@ -54,7 +54,6 @@ public class DeleteMonActivity extends AppCompatActivity{
         scrollView.addView(group);
         layout.addView(scrollView);
 
-        // add back button at bottom
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -69,11 +68,10 @@ public class DeleteMonActivity extends AppCompatActivity{
     private class RadioButtonHandler implements RadioGroup.OnCheckedChangeListener {
         public void onCheckedChanged(RadioGroup group, int monId) {
 
-            dbManager.deleteMonsterById(monId);
+            dbManager.deleteMonster(Monsters.get(monId));
 
             Toast.makeText(DeleteMonActivity.this, "Monster is toast!", Toast.LENGTH_SHORT).show();
 
-            // update screen
             updateView();
         }
     }

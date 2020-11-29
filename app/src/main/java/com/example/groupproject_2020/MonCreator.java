@@ -1,8 +1,11 @@
 package com.example.groupproject_2020;
+
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,15 +19,16 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import java.io.IOException;
+
 import static android.app.Activity.RESULT_OK;
 
 public class MonCreator extends Fragment {
     private DatabaseManager dbManager;
-
+    private Bitmap image;
     private static final int RESULT_LOAD_IMAGE = 1;
 
     ImageView uploadMon;
-    Button uploadMonImage;
     EditText uploadMonImageName;
 
     @Override
@@ -33,7 +37,7 @@ public class MonCreator extends Fragment {
             Bundle savedInstanceState
     ) {
         dbManager = new DatabaseManager(getActivity());
-        // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.moncreator, container, false);
 
         return view;
@@ -43,10 +47,8 @@ public class MonCreator extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         uploadMon = (ImageView) view.findViewById(R.id.mon_image);
-        uploadMonImage = (Button) view.findViewById(R.id.upload_mon_image);
         uploadMonImageName = (EditText) view.findViewById(R.id.mon_image_name);
         uploadMon.setOnClickListener(this::onClick);
-        uploadMonImage.setOnClickListener(this::onClick);
 
         view.findViewById(R.id.BackButton).setOnClickListener(view12 ->
                 NavHostFragment.findNavController(MonCreator.this)
@@ -68,11 +70,12 @@ public class MonCreator extends Fragment {
             String expString = expET.getText().toString();
             int exp = Integer.parseInt(expString);
 
-            monster newmon = new monster(0,name,armorclass,hp,exp);
+            monster newmon = new monster(0, name, armorclass, hp, exp, image, uploadMonImageName.getText().toString());
 
             dbManager.insertMonster(newmon);
 
-            Toast.makeText(getActivity(), "the " + name + " with " + armorclass + hp + exp +" was saved to the db", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "the " + name + " with " + armorclass + " armor class " + hp
+                    + " hp and " + exp + " exp was saved to the db", Toast.LENGTH_SHORT).show();
 
             monnameET.setText("");
             armorclassET.setText("");
@@ -82,24 +85,22 @@ public class MonCreator extends Fragment {
     }
 
     public void onClick(View v) {
-        switch(v.getId()){
-            case R.id.mon_image:
-                Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
-                break;
-            case R.id.upload_mon_image:
-
-                break;
-        }
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null)  {
+        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null) {
             Uri selectedImage = data.getData();
-            uploadMon.setImageURI(selectedImage);
+            try {
+                image = MediaStore.Images.Media.getBitmap(this.getContext().getContentResolver(), selectedImage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Log.w("data", "data: " + data);
+            uploadMon.setImageBitmap(image);
         }
     }
-
 }

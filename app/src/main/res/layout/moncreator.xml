@@ -7,33 +7,30 @@
     tools:context=".MonCreator">
 
     <TableRow android:gravity="center_horizontal">
+
         <ImageView
-            android:autofillHints="Click here to choose an Image"
             android:id="@+id/mon_image"
             android:layout_width="150dp"
-            android:layout_height="150dp" />
-    </TableRow>
-    <TableRow android:gravity="center_horizontal">
-        <TextView android:text="Click above to Upload Image" />
+            android:layout_height="150dp"
+            android:autofillHints="Click here to choose an Image" />
     </TableRow>
 
     <TableRow android:gravity="center_horizontal">
+
+        <TextView android:text="Click above to Upload Image" />
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:padding="10dp"
+            android:text="Image Name" />
+
         <EditText
             android:id="@+id/mon_image_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints="Image Name" />
-    </TableRow>
-
-    <TableRow android:gravity="center_horizontal">
-        <Button
-            android:id="@+id/upload_mon_image"
-            android:text="Upload Image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </TableRow>
-
-    <TableRow android:padding="20dp">
     </TableRow>
 
     <TableRow>
@@ -45,7 +42,6 @@
         <EditText
             android:id="@+id/mon_name"
             android:layout_width="140dp"
-
             android:autofillHints="Name" />
     </TableRow>
 
@@ -88,8 +84,7 @@
             android:autofillHints="Experience" />
     </TableRow>
 
-    <TableRow android:padding="20dp">
-    </TableRow>
+    <TableRow android:padding="20dp"></TableRow>
 
     <TableRow android:gravity="center_horizontal">
 

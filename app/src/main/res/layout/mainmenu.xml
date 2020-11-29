@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainMenu">
 
-
     <Button
         android:id="@+id/Char_Creator"
         android:layout_width="wrap_content"

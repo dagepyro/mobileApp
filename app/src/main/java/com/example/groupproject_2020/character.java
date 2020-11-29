@@ -1,17 +1,35 @@
 package com.example.groupproject_2020;
 
-public class character {
-    private String name, alignment, charclass, race;
-    private int id;
-    stats stats;
+import android.graphics.Bitmap;
 
-    public character(int newId,String newName, String newAlignment, String newCharclass, String newRace){
+public class character {
+    private String name, alignment, charclass, race, imageName;
+    private int id;
+    private Bitmap image;
+    protected stats stats;
+
+    public character(int newId, String newName, String newAlignment, String newCharclass, String newRace, Bitmap image, String imageName) {
         setName(newName);
         setAlignment(newAlignment);
         setCharclass(newCharclass);
         setRace(newRace);
         setId(newId);
-        stats = new stats(0,0,0,0,0,0,0);
+        setImage(image);
+        setImageName(imageName);
+        stats = new stats(0, 0, 0, 0, 0, 0, 0);
+    }
+
+    public character(int newId, String newName, String newAlignment, String newCharclass, String newRace) {
+        setName(newName);
+        setAlignment(newAlignment);
+        setCharclass(newCharclass);
+        setRace(newRace);
+        setId(newId);
+        stats = new stats(0, 0, 0, 0, 0, 0, 0);
+    }
+
+    public character() {
+
     }
 
     public String getName() {
@@ -54,5 +72,27 @@ public class character {
         this.id = id;
     }
 
+    public Bitmap getImage() {
+        return image;
+    }
 
+    public void setImage(Bitmap image) {
+        this.image = image;
+    }
+
+    public stats getStats() {
+        return stats;
+    }
+
+    public void setStats(stats stats) {
+        this.stats = stats;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
 }

@@ -1,17 +1,26 @@
 package com.example.groupproject_2020;
 
-public class monster {
-    private String name;
-    int id, armorclass, hitpoints, exp;
-    stats stats;
+import android.graphics.Bitmap;
 
-    public monster(int newId, String newName, int armorclass, int hitpoints, int exp) {
+public class monster {
+    private String name, imageName;
+    private int id, armorclass, hitpoints, exp;
+    private Bitmap image;
+    protected stats stats;
+
+    public monster(int newId, String newName, int armorclass, int hitpoints, int exp, Bitmap image, String imageName) {
         setName(newName);
         setArmorclass(armorclass);
         setHitpoints(hitpoints);
         setExp(exp);
         setId(newId);
-        stats = new stats(newId,0,0,0,0,0,0);
+        setImage(image);
+        setImageName(imageName);
+        stats = new stats(newId, 0, 0, 0, 0, 0, 0);
+    }
+
+    public monster() {
+
     }
 
     public String getName() {
@@ -52,5 +61,29 @@ public class monster {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
+    public Bitmap getImage() {
+        return image;
+    }
+
+    public void setImage(Bitmap image) {
+        this.image = image;
+    }
+
+    public stats getStats() {
+        return stats;
+    }
+
+    public void setStats(stats stats) {
+        this.stats = stats;
     }
 }

@@ -1,111 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CharCreator">
+    android:fillViewport="true">
 
-    <TableRow android:gravity="center_horizontal">
-        <ImageView
-            android:autofillHints="Click here to choose an Image"
-            android:id="@+id/char_image"
-            android:layout_width="150dp"
-            android:layout_height="150dp" />
-    </TableRow>
-    <TableRow android:gravity="center_horizontal">
-        <TextView android:text="Click above to Upload Image" />
-    </TableRow>
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".CharCreator">
 
-    <TableRow android:gravity="center_horizontal">
-        <EditText
-            android:id="@+id/char_image_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints="Image Name" />
-    </TableRow>
+        <TableRow android:gravity="center_horizontal">
 
-    <TableRow android:gravity="center_horizontal">
-        <Button
-            android:id="@+id/upload_char_image"
-            android:text="Upload Image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </TableRow>
+            <ImageView
+                android:id="@+id/char_image"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:autofillHints="Click here to choose an Image" />
+        </TableRow>
 
-    <TableRow android:padding="20dp">
-    </TableRow>
+        <TableRow android:gravity="center_horizontal">
 
-    <TableRow>
+            <TextView android:text="Click above to Upload Image" />
+        </TableRow>
 
-        <TextView
-            android:padding="10dp"
-            android:text="@string/char_name" />
+        <TableRow>
 
-        <EditText
-            android:id="@+id/char_name"
-            android:layout_width="140dp"
+            <TextView
+                android:padding="10dp"
+                android:text="Image Name" />
 
-            android:autofillHints="Name" />
-    </TableRow>
+            <EditText
+                android:id="@+id/char_image_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="Image Name" />
+        </TableRow>
 
-    <TableRow>
+        <TableRow>
 
-        <TextView
-            android:text="@string/char_align"
-            android:padding="10dp"
-            />
-        <Spinner
-            android:id="@+id/align_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
-    </TableRow>
+            <TextView
+                android:padding="10dp"
+                android:text="Name" />
 
-    <TableRow>
+            <EditText
+                android:id="@+id/char_name"
+                android:layout_width="140dp"
+                android:autofillHints="Name"
+                android:gravity="center_horizontal" />
+        </TableRow>
 
-        <TextView
-            android:text="@string/char_race"
-            android:padding="10dp"
-            />
-        <Spinner
-            android:id="@+id/race_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
-    </TableRow>
+        <TableRow>
 
-    <TableRow>
+            <TextView
+                android:padding="10dp"
+                android:text="@string/char_align" />
 
-        <TextView
-            android:text="@string/char_class"
-            android:padding="10dp"
-            />
-        <Spinner
-            android:id="@+id/class_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
-    </TableRow>
-    <TableRow android:padding="20dp">
-    </TableRow>
+            <Spinner
+                android:id="@+id/align_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </TableRow>
 
-    <TableRow android:gravity="center_horizontal">
+        <TableRow>
 
-        <Button
-            android:id="@+id/save_char"
-            android:backgroundTint="@android:color/holo_red_dark"
-            android:text="@string/save_char" />
-    </TableRow>
+            <TextView
+                android:padding="10dp"
+                android:text="@string/char_race" />
 
-    <TableRow android:gravity="center_horizontal">
+            <Spinner
+                android:id="@+id/race_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </TableRow>
 
-        <Button
+        <TableRow>
 
-            android:id="@+id/BackButton"
-            android:backgroundTint="@android:color/holo_red_dark"
+            <TextView
+                android:padding="10dp"
+                android:text="@string/char_class" />
 
-            android:text="@string/previous" />
-    </TableRow>
-</TableLayout>
+            <Spinner
+                android:id="@+id/class_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </TableRow>
 
+        <TableRow>
+
+            <TextView
+                android:padding="10dp"
+                android:text="Strength" />
+
+            <EditText
+                android:id="@+id/char_strength"
+                android:layout_width="140dp"
+                android:autofillHints="Name"
+                android:gravity="center_horizontal" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:padding="10dp"
+                android:text="Dexterity" />
+
+            <EditText
+                android:id="@+id/char_dexterity"
+                android:layout_width="140dp"
+                android:autofillHints="Name"
+                android:gravity="center_horizontal" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:padding="10dp"
+                android:text="Constitution" />
+
+            <EditText
+                android:id="@+id/char_constitution"
+                android:layout_width="140dp"
+                android:autofillHints="Name"
+                android:gravity="center_horizontal" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:padding="10dp"
+                android:text="Intelligence" />
+
+            <EditText
+                android:id="@+id/char_intelligence"
+                android:layout_width="140dp"
+                android:autofillHints="Name"
+                android:gravity="center_horizontal" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:padding="10dp"
+                android:text="Wisdom" />
+
+            <EditText
+                android:id="@+id/char_wisdom"
+                android:layout_width="140dp"
+                android:autofillHints="Name"
+                android:gravity="center_horizontal" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:padding="10dp"
+                android:text="Charisma" />
+
+            <EditText
+                android:id="@+id/char_charisma"
+                android:layout_width="140dp"
+                android:autofillHints="Name"
+                android:gravity="center_horizontal" />
+        </TableRow>
+
+        <TableRow android:padding="20dp"></TableRow>
+
+        <TableRow android:gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/save_char"
+                android:backgroundTint="@android:color/holo_red_dark"
+                android:text="@string/save_char" />
+        </TableRow>
+
+        <TableRow android:gravity="center_horizontal">
+
+            <Button
+
+                android:id="@+id/BackButton"
+                android:backgroundTint="@android:color/holo_red_dark"
+
+                android:text="@string/previous" />
+        </TableRow>
+    </TableLayout>
+
+</ScrollView>

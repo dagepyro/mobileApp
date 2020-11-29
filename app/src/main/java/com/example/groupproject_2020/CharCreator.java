@@ -7,9 +7,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,17 +29,18 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import java.io.IOException;
+
 import static android.app.Activity.RESULT_OK;
 
 public class CharCreator extends Fragment implements View.OnClickListener {
 
     private DatabaseManager dbManager;
-    String align,charclass,race;
-
+    String name, align, charclass, race;
+    private Bitmap image;
     private static final int RESULT_LOAD_IMAGE = 1;
 
     ImageView uploadChar;
-    Button uploadCharImage;
     EditText uploadCharImageName;
 
     @Override
@@ -46,7 +49,6 @@ public class CharCreator extends Fragment implements View.OnClickListener {
             Bundle savedInstanceState
     ) {
         dbManager = new DatabaseManager(getActivity());
-
         View view = inflater.inflate(R.layout.charcreator, container, false);
 
         return view;
@@ -56,18 +58,18 @@ public class CharCreator extends Fragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
 
         Spinner alignspinner = getActivity().findViewById(R.id.align_spinner);
-        ArrayAdapter<CharSequence> alignadapter = ArrayAdapter.createFromResource(getActivity(),R.array.alignment, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> alignadapter = ArrayAdapter.createFromResource(getActivity(), R.array.alignment, android.R.layout.simple_spinner_item);
         alignadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         alignspinner.setAdapter(alignadapter);
 
-        Spinner racespinner =  getActivity().findViewById(R.id.race_spinner);
-        ArrayAdapter<CharSequence> raceadapter = ArrayAdapter.createFromResource(getActivity(),R.array.races, android.R.layout.simple_spinner_item);
+        Spinner racespinner = getActivity().findViewById(R.id.race_spinner);
+        ArrayAdapter<CharSequence> raceadapter = ArrayAdapter.createFromResource(getActivity(), R.array.races, android.R.layout.simple_spinner_item);
         raceadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         racespinner.setAdapter(raceadapter);
         racespinner.setSelection(-1);
 
-        Spinner classspinner =  getActivity().findViewById(R.id.class_spinner);
-        ArrayAdapter<CharSequence> classadapter = ArrayAdapter.createFromResource(getActivity(),R.array.classes, android.R.layout.simple_spinner_item);
+        Spinner classspinner = getActivity().findViewById(R.id.class_spinner);
+        ArrayAdapter<CharSequence> classadapter = ArrayAdapter.createFromResource(getActivity(), R.array.classes, android.R.layout.simple_spinner_item);
         classadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         classspinner.setAdapter(classadapter);
         classspinner.setSelection(-1);
@@ -75,9 +77,10 @@ public class CharCreator extends Fragment implements View.OnClickListener {
         alignspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    alignspinner.setOnItemSelectedListener(this);
-                    align = adapterView.getItemAtPosition(i).toString();
+                alignspinner.setOnItemSelectedListener(this);
+                align = adapterView.getItemAtPosition(i).toString();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
@@ -90,6 +93,7 @@ public class CharCreator extends Fragment implements View.OnClickListener {
                 racespinner.setOnItemSelectedListener(this);
                 race = (String) adapterView.getItemAtPosition(i);
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
@@ -102,6 +106,7 @@ public class CharCreator extends Fragment implements View.OnClickListener {
                 classspinner.setOnItemSelectedListener(this);
                 charclass = (String) adapterView.getItemAtPosition(i);
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
@@ -109,45 +114,61 @@ public class CharCreator extends Fragment implements View.OnClickListener {
         });
 
         uploadChar = (ImageView) view.findViewById(R.id.char_image);
-        uploadCharImage = (Button) view.findViewById(R.id.upload_char_image);
         uploadCharImageName = (EditText) view.findViewById(R.id.char_image_name);
         uploadChar.setOnClickListener(this);
-        uploadCharImage.setOnClickListener(this);
 
         view.findViewById(R.id.BackButton).setOnClickListener(view12 ->
                 NavHostFragment.findNavController(CharCreator.this)
-                .navigate(R.id.action_SecondFragment_to_FirstFragment));
+                        .navigate(R.id.action_SecondFragment_to_FirstFragment));
 
         view.findViewById(R.id.save_char).setOnClickListener(view1 -> {
             EditText nameET = view.findViewById(R.id.char_name);
-            String name = nameET.getText().toString();
+            name = nameET.getText().toString();
 
-            character newchar = new character(0,name,align,race,charclass);
+            EditText strET = view.findViewById(R.id.char_strength);
+            int str = Integer.parseInt(strET.getText().toString());
+
+            EditText dexET = view.findViewById(R.id.char_dexterity);
+            int dex = Integer.parseInt(dexET.getText().toString());
+
+            EditText conET = view.findViewById(R.id.char_constitution);
+            int con = Integer.parseInt(conET.getText().toString());
+
+            EditText intET = view.findViewById(R.id.char_intelligence);
+            int intelligence = Integer.parseInt(intET.getText().toString());
+
+            EditText wisET = view.findViewById(R.id.char_wisdom);
+            int wis = Integer.parseInt(wisET.getText().toString());
+
+            EditText charismaET = view.findViewById(R.id.char_charisma);
+            int charisma = Integer.parseInt(charismaET.getText().toString());
+
+            character newchar = new character(0, name, align, race, charclass, image, uploadCharImageName.getText().toString());
+            newchar.setStats(new stats(0, str, dex, con, intelligence, wis, charisma));
             dbManager.insertChar(newchar);
-            Toast.makeText(getActivity(), name + " the " + align + " " + race + " " + charclass +  " was saved to the db", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), name + " the " + align + " " + race + " " + charclass + " was saved to the db", Toast.LENGTH_LONG).show();
 
         });
     }
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()){
-            case R.id.char_image:
-                Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
-            break;
-            case R.id.upload_char_image:
-
-            break;
-        }
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null)  {
+        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null) {
             Uri selectedImage = data.getData();
-            uploadChar.setImageURI(selectedImage);
+            try {
+                image = MediaStore.Images.Media.getBitmap(this.getContext().getContentResolver(), selectedImage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Log.w("data", "data: " + data);
+            uploadChar.setImageBitmap(image);
         }
     }
 }

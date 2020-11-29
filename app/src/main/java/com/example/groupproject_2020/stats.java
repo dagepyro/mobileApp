@@ -3,9 +3,9 @@ package com.example.groupproject_2020;
 public class stats {
     int id, strength, dexterity, constitution, intelligence, wisdom, charisma;
 
-    stats(int id, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma){
+    stats(int id, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma) {
         this.id = id;
-        this.strength =strength;
+        this.strength = strength;
         this.dexterity = dexterity;
         this.constitution = constitution;
         this.intelligence = intelligence;
