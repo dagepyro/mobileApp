@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/weapon_gridname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/weapon_griddamage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Damage"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/weapon_griddmgtype"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Damage Type"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/weapon_gridweapontype"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weapon Type"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/weapon_gridweapontrait"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weapon Traits"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/weapon_gridweaponproperty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weapon Property"
+        android:textColor="@color/white" />
+
+</LinearLayout>

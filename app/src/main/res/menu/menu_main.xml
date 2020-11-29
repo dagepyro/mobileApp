@@ -28,4 +28,10 @@
         android:orderInCategory="100"
         android:title="@string/action_view_mon"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_view_weapon"
+        android:orderInCategory="100"
+        android:title="@string/action_view_weapon"
+        app:showAsAction="never" />
 </menu>

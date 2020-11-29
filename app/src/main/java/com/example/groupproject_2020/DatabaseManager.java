@@ -50,7 +50,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     private static final String CREATE_CHARACTER_TABLE = "create table " + TABLE_CHARACTER + "( " + ID + " TEXT PRIMARY KEY, " + NAME + " text, " + RACE + " text, " + CLASS + " text, " + ALIGNMENT + " text, " + IMAGE + " blob, " + IMAGE_NAME + " text)";
     private static final String CREATE_MONSTER_TABLE = "create table " + TABLE_MONSTER + "(" + ID + " TEXT PRIMARY KEY, " + NAME + " TEXT, " + ARMOR_CLASS + " TEXT, " + HIT_POINTS + " TEXT, " + EXPERIENCE + " TEXT," + IMAGE + " blob, " + IMAGE_NAME + " text )";
     private static final String CREATE_STATS_TABLE = "CREATE TABLE " + TABLE_STATS + "(" + ID + " TEXT, " + NAME + " TEXT, " + STRENGTH + " TEXT, " + DEXTERITY + " TEXT, " + CONSTITUTION + " TEXT, " + INTELLIGENCE + " TEXT, " + WISDOM + " TEXT, " + CHARISMA + " TEXT)";
-    private static final String CREATE_WEAPONS_TABLE = "CREATE TABLE " + TABLE_WEAPONS + "(" + ID + " TEXT PRIMARY KEY, " + WEAPON_TYPE + " TEXT, " + NAME + " TEXT, " + DAMAGE + " TEXT, " + DAMAGE_TYPE + " TEXT," + TRAITS + " TEXT, " + PROPERTY + " TEXT, " + IMAGE + " blob," + IMAGE_NAME + " text)";
+    private static final String CREATE_WEAPONS_TABLE = "CREATE TABLE " + TABLE_WEAPONS + "(" + ID + " TEXT PRIMARY KEY, " + NAME + " TEXT, " + DAMAGE + " TEXT, " + DAMAGE_TYPE + " TEXT," + WEAPON_TYPE + " TEXT, " + TRAITS + " TEXT, " + PROPERTY + " TEXT, " + IMAGE + " blob," + IMAGE_NAME + " text)";
     private static final String CREATE_ARMOR_TABLE = "CREATE TABLE " + TABLE_ARMOR + "(" + ID + " TEXT PRIMARY KEY, " + ARMOR_TYPE + " TEXT, " + NAME + " TEXT, " + ARMOR_CLASS + " TEXT, " + STRENGTH_REQUIREMENT + " TEXT, " + TRAITS + " TEXT, " + PROPERTY + " TEXT, " + IMAGE + " blob, " + IMAGE_NAME + " text)";
 
     public DatabaseManager(Context context) {
@@ -134,7 +134,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
             String id = cursor.getString(0);
             byte[] bmArray = cursor.getBlob(5);
             Bitmap image = BitmapFactory.decodeByteArray(bmArray, 0, bmArray.length);
-            character currentCharacter = new character(Integer.parseInt(id.substring(1)),
+            character currentCharacter = new character(
+                    Integer.parseInt(id.substring(1)),
                     cursor.getString(1),
                     cursor.getString(2),
                     cursor.getString(3),
@@ -180,7 +181,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
             id = id.substring(1);
             byte[] bmArray = cursor.getBlob(7);
             Bitmap image = BitmapFactory.decodeByteArray(bmArray, 0, bmArray.length);
-            weapon currentWeapon = new weapon(Integer.parseInt(id),
+            weapon currentWeapon = new weapon(
+                    Integer.parseInt(id),
                     cursor.getString(1),
                     Integer.parseInt(cursor.getString(2)),
                     cursor.getString(3),
@@ -282,7 +284,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     public void deleteMonster(monster monster) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqlDelete = "delete from " + TABLE_MONSTER + " where " + ID + " = 'M" + monster + "'";
+        String sqlDelete = "delete from " + TABLE_MONSTER + " where " + ID + " = 'M" + monster.getId() + "'";
         db.execSQL(sqlDelete);
         db.close();
     }

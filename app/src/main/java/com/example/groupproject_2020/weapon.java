@@ -19,6 +19,20 @@ public class weapon {
         this.imageName = imageName;
     }
 
+    public weapon(int id, String name, int damage, String damageType, String weaponType, String traits, String property) {
+        this.id = id;
+        this.damage = damage;
+        this.name = name;
+        this.damageType = damageType;
+        this.weaponType = weaponType;
+        this.traits = traits;
+        this.property = property;
+    }
+
+    public weapon() {
+
+    }
+
     public int getId() {
         return id;
     }
