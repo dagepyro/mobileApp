@@ -19,6 +19,10 @@ public class monster {
         stats = new stats(newId, 0, 0, 0, 0, 0, 0);
     }
 
+    public monster() {
+
+    }
+
     public String getName() {
         return name;
     }

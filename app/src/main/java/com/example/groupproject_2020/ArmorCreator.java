@@ -27,7 +27,6 @@ public class ArmorCreator extends Fragment {
 
     private DatabaseManager dbManager;
     private Bitmap image;
-
     private static final int RESULT_LOAD_IMAGE = 1;
 
     ImageView uploadArmor;
@@ -39,7 +38,6 @@ public class ArmorCreator extends Fragment {
             Bundle savedInstanceState
     ) {
         dbManager = new DatabaseManager(getActivity());
-
         View view = inflater.inflate(R.layout.armor, container, false);
 
         return view;

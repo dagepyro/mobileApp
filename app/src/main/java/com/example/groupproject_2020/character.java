@@ -2,7 +2,6 @@ package com.example.groupproject_2020;
 
 import android.graphics.Bitmap;
 
-
 public class character {
     private String name, alignment, charclass, race, imageName;
     private int id;
@@ -27,6 +26,10 @@ public class character {
         setRace(newRace);
         setId(newId);
         stats = new stats(0, 0, 0, 0, 0, 0, 0);
+    }
+
+    public character() {
+
     }
 
     public String getName() {

@@ -53,7 +53,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
     private static final String CREATE_WEAPONS_TABLE = "CREATE TABLE " + TABLE_WEAPONS + "(" + ID + " TEXT PRIMARY KEY, " + WEAPON_TYPE + " TEXT, " + NAME + " TEXT, " + DAMAGE + " TEXT, " + DAMAGE_TYPE + " TEXT," + TRAITS + " TEXT, " + PROPERTY + " TEXT, " + IMAGE + " blob," + IMAGE_NAME + " text)";
     private static final String CREATE_ARMOR_TABLE = "CREATE TABLE " + TABLE_ARMOR + "(" + ID + " TEXT PRIMARY KEY, " + ARMOR_TYPE + " TEXT, " + NAME + " TEXT, " + ARMOR_CLASS + " TEXT, " + STRENGTH_REQUIREMENT + " TEXT, " + TRAITS + " TEXT, " + PROPERTY + " TEXT, " + IMAGE + " blob, " + IMAGE_NAME + " text)";
 
-
     public DatabaseManager(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -440,13 +439,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     private void updateArmor(armor armor) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqlUpdate = "update " + TABLE_ARMOR
-                + " set " + NAME + " = '" + armor.getName() + "', "
-                + ARMOR_CLASS + " = '" + armor.getArmorClass() + "', "
-                + STRENGTH_REQUIREMENT + " = '" + armor.getStrength() + "', "
-                + TRAITS + " = '" + armor.getTraits() + "', "
-                + PROPERTY + " = '" + armor.getProperty()
-                + "' where " + ID + " = 'A" + armor.getId() + "'";
+        String sqlUpdate = "update " + TABLE_ARMOR + " set " + NAME + " = '" + armor.getName() + "', " + ARMOR_CLASS + " = '" + armor.getArmorClass() + "', " + STRENGTH_REQUIREMENT + " = '" + armor.getStrength() + "', " + TRAITS + " = '" + armor.getTraits() + "', " + PROPERTY + " = '" + armor.getProperty() + "' where " + ID + " = 'A" + armor.getId() + "'";
         db.execSQL(sqlUpdate);
         db.close();
     }

@@ -38,7 +38,6 @@ public class CharCreator extends Fragment implements View.OnClickListener {
     private DatabaseManager dbManager;
     String name, align, charclass, race;
     private Bitmap image;
-
     private static final int RESULT_LOAD_IMAGE = 1;
 
     ImageView uploadChar;
@@ -50,7 +49,6 @@ public class CharCreator extends Fragment implements View.OnClickListener {
             Bundle savedInstanceState
     ) {
         dbManager = new DatabaseManager(getActivity());
-
         View view = inflater.inflate(R.layout.charcreator, container, false);
 
         return view;
@@ -127,7 +125,26 @@ public class CharCreator extends Fragment implements View.OnClickListener {
             EditText nameET = view.findViewById(R.id.char_name);
             name = nameET.getText().toString();
 
+            EditText strET = view.findViewById(R.id.char_strength);
+            int str = Integer.parseInt(strET.getText().toString());
+
+            EditText dexET = view.findViewById(R.id.char_dexterity);
+            int dex = Integer.parseInt(dexET.getText().toString());
+
+            EditText conET = view.findViewById(R.id.char_constitution);
+            int con = Integer.parseInt(conET.getText().toString());
+
+            EditText intET = view.findViewById(R.id.char_intelligence);
+            int intelligence = Integer.parseInt(intET.getText().toString());
+
+            EditText wisET = view.findViewById(R.id.char_wisdom);
+            int wis = Integer.parseInt(wisET.getText().toString());
+
+            EditText charismaET = view.findViewById(R.id.char_charisma);
+            int charisma = Integer.parseInt(charismaET.getText().toString());
+
             character newchar = new character(0, name, align, race, charclass, image, uploadCharImageName.getText().toString());
+            newchar.setStats(new stats(0, str, dex, con, intelligence, wis, charisma));
             dbManager.insertChar(newchar);
             Toast.makeText(getActivity(), name + " the " + align + " " + race + " " + charclass + " was saved to the db", Toast.LENGTH_LONG).show();
 

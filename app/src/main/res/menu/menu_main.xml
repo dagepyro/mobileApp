@@ -19,8 +19,13 @@
     <!--        android:title="@string/action_update"-->
     <!--        app:showAsAction="never" />-->
     <item
-        android:id="@+id/action_view"
+        android:id="@+id/action_view_char"
         android:orderInCategory="100"
-        android:title="@string/action_view"
+        android:title="@string/action_view_char"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_view_mon"
+        android:orderInCategory="100"
+        android:title="@string/action_view_mon"
         app:showAsAction="never" />
 </menu>

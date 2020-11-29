@@ -2,34 +2,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
-   >
+    android:layout_margin="10dp">
 
     <EditText
-        android:layout_centerHorizontal="true"
-        android:id="@+id/char_view"
+        android:id="@+id/mon_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Characters"
-        />
+        android:layout_centerHorizontal="true"
+        android:text="Monsters" />
 
     <GridView
-        android:id="@+id/gv_char"
+        android:id="@+id/gv_mon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:numColumns="3"
+        android:layout_below="@+id/mon_view"
         android:horizontalSpacing="4dp"
-        android:verticalSpacing="4dp"
-        android:layout_below="@+id/char_view" >
-    </GridView>
+        android:numColumns="3"
+        android:verticalSpacing="4dp"></GridView>
 
 
     <Button
-        android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/gv_char"
-        android:text="Previous"
+        android:layout_below="@id/gv_mon"
+        android:layout_centerInParent="true"
         android:onClick="previous"
-        />
+        android:text="Previous" />
 </RelativeLayout>
