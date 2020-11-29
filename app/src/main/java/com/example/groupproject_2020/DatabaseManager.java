@@ -384,9 +384,9 @@ public class DatabaseManager extends SQLiteOpenHelper {
         cv.put("image", stream.toByteArray());
         String sqlInsert = "insert into " + TABLE_WEAPONS
                 + " values ('" + getNewWeaponID() + "', '"
-                + newWeapon.getWeaponType() + "', '"
                 + newWeapon.getName() + "', '"
                 + newWeapon.getDamage() + "', '"
+                + newWeapon.getWeaponType() + "', '"
                 + newWeapon.getDamageType() + "', '"
                 + newWeapon.getTraits() + "', '"
                 + newWeapon.getProperty() + "', '"
