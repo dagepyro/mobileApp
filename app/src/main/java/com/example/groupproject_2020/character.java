@@ -3,12 +3,13 @@ package com.example.groupproject_2020;
 import android.graphics.Bitmap;
 
 public class character {
+    DatabaseManager db;
     private String name, alignment, charclass, race, imageName;
     private int id;
     private Bitmap image;
     protected stats stats;
 
-    public character(int newId, String newName, String newAlignment, String newCharclass, String newRace, Bitmap image, String imageName) {
+    public character(int newId, String newName, String newAlignment, String newRace, String newCharclass, Bitmap image, String imageName) {
         setName(newName);
         setAlignment(newAlignment);
         setCharclass(newCharclass);
@@ -19,7 +20,7 @@ public class character {
         stats = new stats(0, 0, 0, 0, 0, 0, 0);
     }
 
-    public character(int newId, String newName, String newAlignment, String newCharclass, String newRace) {
+    public character(int newId, String newName, String newAlignment, String newRace, String newCharclass) {
         setName(newName);
         setAlignment(newAlignment);
         setCharclass(newCharclass);
@@ -29,6 +30,11 @@ public class character {
     }
 
     public character() {
+
+    }
+    public character(int newId, String newName) {
+        setId(newId);
+        setName(newName);
 
     }
 
