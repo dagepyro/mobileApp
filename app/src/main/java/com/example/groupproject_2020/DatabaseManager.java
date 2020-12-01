@@ -291,6 +291,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
                 + newMonster.getImageName() + "')";
         db.execSQL(sqlInsert);
         db.close();
+        insertMonsterStats(newMonster);
     }
 
     public void deleteMonster(monster monster) {
@@ -350,7 +351,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     public void insertMonsterStats(monster newMonster) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqlInsert = "insert into " + TABLE_CHARACTER
+        String sqlInsert = "insert into " + TABLE_STATS
                 + " values ('M" + newMonster.getId() + "', '"
                 + newMonster.getName() + "', '"
                 + newMonster.stats.getStrength() + "', '"

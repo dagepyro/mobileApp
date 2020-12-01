@@ -79,4 +79,8 @@
             android:id="@+id/action_Armor_Creator_to_Smithy_Nav"
             app:destination="@id/Smithy_Nav" />
     </fragment>
+    
+    <action
+        android:id="@+id/action_updatechartoolbar_to_updatecharacter"
+        app:destination="@+id/updatecharacter"/>
 </navigation>

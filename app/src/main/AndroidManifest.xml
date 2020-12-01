@@ -23,6 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".DeleteCharActivity"
             android:screenOrientation="portrait" />
@@ -35,24 +36,23 @@
         <activity
             android:name=".DeleteArmor"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".viewChar"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".viewMon"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".viewWeapon"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".viewArmor"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".updateChar"
+            android:name=".updatechar_toolbar"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".updateWeapon"
             android:screenOrientation="portrait" />
     </application>
 

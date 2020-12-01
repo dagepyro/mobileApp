@@ -70,7 +70,26 @@ public class MonCreator extends Fragment {
             String expString = expET.getText().toString();
             int exp = Integer.parseInt(expString);
 
+            EditText strET = view.findViewById(R.id.mon_str);
+            int str = Integer.parseInt(strET.getText().toString());
+
+            EditText dexET = view.findViewById(R.id.mon_dex);
+            int dex = Integer.parseInt(dexET.getText().toString());
+
+            EditText conET = view.findViewById(R.id.mon_con);
+            int con = Integer.parseInt(conET.getText().toString());
+
+            EditText intET = view.findViewById(R.id.mon_int);
+            int intelligence = Integer.parseInt(intET.getText().toString());
+
+            EditText wisET = view.findViewById(R.id.mon_wis);
+            int wis = Integer.parseInt(wisET.getText().toString());
+
+            EditText charismaET = view.findViewById(R.id.mon_cha);
+            int charisma = Integer.parseInt(charismaET.getText().toString());
+
             monster newmon = new monster(0, name, armorclass, hp, exp, image, uploadMonImageName.getText().toString());
+            newmon.setStats(new stats(0,str,dex,con,intelligence,wis,charisma));
 
             dbManager.insertMonster(newmon);
 
@@ -81,6 +100,13 @@ public class MonCreator extends Fragment {
             armorclassET.setText("");
             hpET.setText("");
             expET.setText("");
+            strET.setText("");
+            dexET.setText("");
+            conET.setText("");
+            intET.setText("");
+            wisET.setText("");
+            charismaET.setText("");
+
         });
     }
 

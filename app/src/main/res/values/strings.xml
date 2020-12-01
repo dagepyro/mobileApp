@@ -2,7 +2,8 @@
     <string name="app_name">Loud Mouth\s Pocket RPGenerator</string>
     <string name="action_settings">Settings</string>
     <string name="action_add">Add</string>
-    <string name="action_update">Update</string>
+    <string name="action_update_char">Update Character</string>
+    <string name="action_update_weapon">Update Weapon</string>
     <string name="action_view_char">View Characters</string>
     <string name="action_view_mon">View Monsters</string>
     <string name="action_view_weapon">View Weapons</string>
