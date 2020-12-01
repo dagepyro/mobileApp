@@ -410,10 +410,10 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void deleteWeaponById(int id) {
+    public void deleteWeaponById(weapon weapon) {
         SQLiteDatabase db = this.getWritableDatabase();
         String sqlDelete = "delete from " + TABLE_WEAPONS
-                + " where " + ID + " = 'W" + id + "'";
+                + " where " + ID + " = 'W" + weapon.getId() + "'";
         db.execSQL(sqlDelete);
         db.close();
     }
@@ -439,16 +439,16 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.close();
     }
 
-    private void updateArmor(armor armor) {
+    public void updateArmor(armor armor) {
         SQLiteDatabase db = this.getWritableDatabase();
         String sqlUpdate = "update " + TABLE_ARMOR + " set " + NAME + " = '" + armor.getName() + "', " + ARMOR_CLASS + " = '" + armor.getArmorClass() + "', " + STRENGTH_REQUIREMENT + " = '" + armor.getStrength() + "', " + TRAITS + " = '" + armor.getTraits() + "', " + PROPERTY + " = '" + armor.getProperty() + "' where " + ID + " = 'A" + armor.getId() + "'";
         db.execSQL(sqlUpdate);
         db.close();
     }
 
-    private void deleteArmorByID(int id) {
+    public void deleteArmorByID(armor armor) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String sqlDelete = "delete from " + TABLE_ARMOR + " where " + ID + " = 'A" + id + "'";
+        String sqlDelete = "delete from " + TABLE_ARMOR + " where " + ID + " = 'A" + armor.getId() + "'";
         db.execSQL(sqlDelete);
     }
 }
