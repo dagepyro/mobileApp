@@ -90,6 +90,13 @@ public class MainActivity extends AppCompatActivity {
             this.startActivity(viewIntent);
             return true;
         }
+
+        if (id == R.id.action_update_armor) {
+            Intent viewIntent = new Intent(this, updateArmor.class);
+            this.startActivity(viewIntent);
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 }
