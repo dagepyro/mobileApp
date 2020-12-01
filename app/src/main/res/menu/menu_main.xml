@@ -13,6 +13,16 @@
         android:orderInCategory="100"
         android:title="@string/action_delete_mon"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_delete_weapon"
+        android:orderInCategory="100"
+        android:title="@string/action_delete_weapon"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_delete_armor"
+        android:orderInCategory="100"
+        android:title="@string/action_delete_armor"
+        app:showAsAction="never" />
         <item
             android:id="@+id/action_update"
             android:orderInCategory="100"

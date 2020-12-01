@@ -42,8 +42,21 @@ public class MainActivity extends AppCompatActivity {
             this.startActivity(deleteIntent);
             return true;
         }
+
         if (id == R.id.action_delete_mon) {
             Intent deleteIntent = new Intent(this, DeleteMonActivity.class);
+            this.startActivity(deleteIntent);
+            return true;
+        }
+
+        if (id == R.id.action_delete_weapon) {
+            Intent deleteIntent = new Intent(this, DeleteWeapon.class);
+            this.startActivity(deleteIntent);
+            return true;
+        }
+
+        if (id == R.id.action_delete_armor) {
+            Intent deleteIntent = new Intent(this, DeleteArmor.class);
             this.startActivity(deleteIntent);
             return true;
         }
