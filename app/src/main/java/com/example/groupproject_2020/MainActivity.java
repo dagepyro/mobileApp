@@ -84,7 +84,11 @@ public class MainActivity extends AppCompatActivity {
             this.startActivity(viewIntent);
             return true;
         }
-
+        if (id == R.id.action_update) {
+            Intent viewIntent = new Intent(this, updateChar.class);
+            this.startActivity(viewIntent);
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 }

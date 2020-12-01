@@ -18,7 +18,7 @@
         android:layout_below="@+id/weapon_view"
         android:horizontalSpacing="4dp"
         android:numColumns="3"
-        android:verticalSpacing="4dp"></GridView>
+        android:verticalSpacing="4dp" />
 
 
     <Button

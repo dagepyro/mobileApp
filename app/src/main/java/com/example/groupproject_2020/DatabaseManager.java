@@ -64,6 +64,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.execSQL(CREATE_STATS_TABLE);
         db.execSQL(CREATE_WEAPONS_TABLE);
         db.execSQL(CREATE_ARMOR_TABLE);
+
     }
 
     @Override
@@ -254,13 +255,23 @@ public class DatabaseManager extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String sqUpdate = "update " + TABLE_CHARACTER
                 + " set " + NAME + " = '" + updateCharacter.getName() + "' , "
-                + ALIGNMENT + " = '" + updateCharacter.getAlignment() + "', "
+                + RACE + " = '" + updateCharacter.getRace() + "', "
                 + CLASS + " = '" + updateCharacter.getCharclass() + "' , "
-                + RACE + " = '" + updateCharacter.getRace()
+                + ALIGNMENT + " = '" + updateCharacter.getAlignment()
                 + "' where " + ID + " = 'C" + updateCharacter.getId() + "'";
         db.execSQL(sqUpdate);
         db.close();
     }
+
+//    public void updateCharacter(character updateCharacter) {
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        String sqUpdate = "update " + TABLE_CHARACTER
+//                + " set " + NAME + " = '" + updateCharacter.getName() + "' , "
+//                + ALIGNMENT + " = ?" + ", " + CLASS + " = ?" +  " , "
+//                + RACE + " = ?" + " where " + ID + " = 'C" + updateCharacter.getId() + "'";
+//        db.execSQL(sqUpdate);
+//        db.close();
+//    }
 
     public void insertMonster(monster newMonster) {
         SQLiteDatabase db = this.getWritableDatabase();
