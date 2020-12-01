@@ -3,14 +3,8 @@ package com.example.groupproject_2020;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.navigation.fragment.NavHostFragment;
-
-import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -85,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         if (id == R.id.action_update) {
-            Intent viewIntent = new Intent(this, updateChar.class);
+            Intent viewIntent = new Intent(this, updatechar_toolbar.class);
             this.startActivity(viewIntent);
             return true;
         }

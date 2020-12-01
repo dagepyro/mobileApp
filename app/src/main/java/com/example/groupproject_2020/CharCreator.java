@@ -148,6 +148,15 @@ public class CharCreator extends Fragment implements View.OnClickListener {
             dbManager.insertChar(newchar);
             Toast.makeText(getActivity(), name + " the " + align + " " + race + " " + charclass + " was saved to the db", Toast.LENGTH_LONG).show();
 
+
+            nameET.setText("");
+            strET.setText("");
+            dexET.setText("");
+            conET.setText("");
+            intET.setText("");
+            wisET.setText("");
+            charismaET.setText("");
+
         });
     }
 

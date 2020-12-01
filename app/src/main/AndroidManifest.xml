@@ -52,7 +52,7 @@
             android:name=".viewArmor"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".updateChar"
+            android:name=".updatechar_toolbar"
             android:screenOrientation="portrait" />
     </application>
 

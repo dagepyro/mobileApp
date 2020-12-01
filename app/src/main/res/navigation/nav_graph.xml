@@ -79,4 +79,14 @@
             android:id="@+id/action_Armor_Creator_to_Smithy_Nav"
             app:destination="@id/Smithy_Nav" />
     </fragment>
+
+    <fragment
+        android:id="@+id/updatecharacter"
+        android:name="com.example.groupproject_2020.updateCharacter"
+        android:label="@string/Armor_Creator"
+        tools:layout="@layout/updatechar">
+    </fragment>
+    <action
+        android:id="@+id/action_updatechartoolbar_to_updatecharacter"
+        app:destination="@+id/updatecharacter"/>
 </navigation>
