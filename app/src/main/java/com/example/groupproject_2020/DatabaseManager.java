@@ -417,7 +417,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
                 + DAMAGE_TYPE + " = '" + weapon.getDamageType() + "', "
                 + TRAITS + " = '" + weapon.getTraits() + "', "
                 + PROPERTY + " = '" + weapon.getProperty()
-                + "' where " + ID + " = 'W" + weapon.getId() + "')";
+                + "' where " + ID + " = 'W" + weapon.getId() + "'";
         db.execSQL(sqlupdate);
         db.close();
     }

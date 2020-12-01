@@ -68,19 +68,19 @@ public class updateWeapon extends AppCompatActivity {
                 test[i][3] = new EditText(this);
                 test[i][4] = new EditText(this);
                 test[i][5] = new EditText(this);
-                test[i][0].setText("Name: " + w.getName());
-                test[i][1].setText("" + w.getDamage());
+                test[i][0].setText( w.getName());
+                test[i][1].setText( ""+w.getDamage());
                 test[i][1].setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
-                test[i][2].setText("Dmg Type: " + w.getDamageType());
-                test[i][3].setText("Weapon Type: " + w.getWeaponType());
-                test[i][4].setText("Traits: " + w.getTraits());
-                test[i][5].setText("Property: " + w.getProperty());
+                test[i][2].setText( w.getDamageType());
+                test[i][3].setText( w.getWeaponType());
+                test[i][4].setText( w.getTraits());
+                test[i][5].setText( w.getProperty());
                 test[i][0].setId(10 * w.getId());
                 test[i][1].setId(10 * w.getId() +1);
-                test[i][2].setId(10 * w.getId() +1);
-                test[i][3].setId(10 * w.getId() +1);
-                test[i][4].setId(10 * w.getId() +1);
-                test[i][5].setId(10 * w.getId() +1);
+                test[i][2].setId(10 * w.getId() +2);
+                test[i][3].setId(10 * w.getId() +3);
+                test[i][4].setId(10 * w.getId() +4);
+                test[i][5].setId(10 * w.getId() +5);
 
                 buttons[i] = new Button(this);
                 buttons[i].setText("Update");
@@ -121,23 +121,23 @@ public class updateWeapon extends AppCompatActivity {
         public void onClick(View v) {
             int weaponId = v.getId();
 
-            EditText nameET = (EditText) findViewById(weaponId);
+            EditText nameET = (EditText) findViewById(10*weaponId);
             String name = nameET.getText().toString();
 
-            EditText dmgET = (EditText)findViewById(weaponId);
+            EditText dmgET = (EditText)findViewById(10*weaponId+1);
             String damageString = dmgET.getText().toString();
             int damage = Integer.parseInt(damageString);
 
-            EditText dmgTypeET = (EditText)findViewById(weaponId);
+            EditText dmgTypeET = (EditText)findViewById(10*weaponId+2);
             String damageType = dmgTypeET.getText().toString();
 
-            EditText weaponTypeET = (EditText)findViewById(weaponId);
+            EditText weaponTypeET = (EditText)findViewById(10*weaponId+3);
             String weaponType = weaponTypeET.getText().toString();
 
-            EditText traitsET = (EditText)findViewById(weaponId);
+            EditText traitsET = (EditText)findViewById(10*weaponId+4);
             String traits = traitsET.getText().toString();
 
-            EditText propertyET = (EditText)findViewById(weaponId);
+            EditText propertyET = (EditText)findViewById(10*weaponId+5);
             String property = propertyET.getText().toString();
 
 

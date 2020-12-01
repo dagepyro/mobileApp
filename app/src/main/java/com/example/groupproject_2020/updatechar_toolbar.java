@@ -50,7 +50,7 @@ public class updatechar_toolbar extends AppCompatActivity {
             grid.setColumnCount(3);
 
             TextView[] ids = new TextView[pc.size()];
-            EditText[][] test = new EditText[pc.size()][2];
+            EditText[][] test = new EditText[pc.size()][7];
             Button[] buttons = new Button[pc.size()];
             ButtonHandler bh = new ButtonHandler();
 
@@ -68,6 +68,11 @@ public class updatechar_toolbar extends AppCompatActivity {
                 test[i][0] = new EditText(this);
                 test[i][0].setText(ch.getName());
                 test[i][0].setId(10 * ch.getId());
+
+                test[i][1] = new EditText(this);
+                test[i][1].setText(ch.stats.getStrength());
+                test[i][1].setId(10 * ch.getId());
+
 
                 buttons[i] = new Button(this);
                 buttons[i].setText("Update");
