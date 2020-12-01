@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (id == R.id.action_update) {
-            Intent viewIntent = new Intent(this, updatechar_toolbar.class);
+            Intent viewIntent = new Intent(this, updatechar_stats.class);
             this.startActivity(viewIntent);
             return true;
         }

@@ -49,7 +49,7 @@
             android:name=".viewArmor"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".updatechar_toolbar"
+            android:name=".updatechar_stats"
             android:screenOrientation="portrait" />
         <activity
             android:name=".updateWeapon"
