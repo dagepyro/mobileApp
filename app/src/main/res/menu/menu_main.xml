@@ -35,6 +35,13 @@
         android:orderInCategory="100"
         android:title="@string/action_update_weapon"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_update_armor"
+        android:orderInCategory="100"
+        android:title="@string/action_update_armor"
+        app:showAsAction="never" />
+
     <item
         android:id="@+id/action_view_char"
         android:orderInCategory="100"

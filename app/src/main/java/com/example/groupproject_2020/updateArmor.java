@@ -17,16 +17,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-public class updateWeapon extends AppCompatActivity {
-
+public class updateArmor extends AppCompatActivity {
     DatabaseManager db;
-    ArrayList<weapon> weapon;
+    ArrayList<armor> armor;
     private ScrollView scroll;
     private int buttonWidth;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.updateweapon);
+        setContentView(R.layout.updatearmor);
         db = new DatabaseManager(this);
         updateView();
 
@@ -38,17 +37,17 @@ public class updateWeapon extends AppCompatActivity {
     }
 
     public void updateView() {
-        weapon = db.selectAllWeapons();
+        armor = db.selectAllArmor();
 
-        if (weapon.size() > 0) {
+        if (armor.size() > 0) {
             scroll = new ScrollView(this);
             GridLayout grid = new GridLayout(this);
-            grid.setRowCount(weapon.size());
+            grid.setRowCount(armor.size());
             grid.setColumnCount(1);
 
-            TextView[] ids = new TextView[weapon.size()];
-            EditText[][] test = new EditText[weapon.size()][6];
-            Button[] buttons = new Button[weapon.size()];
+            TextView[] ids = new TextView[armor.size()];
+            EditText[][] test = new EditText[armor.size()][6];
+            Button[] buttons = new Button[armor.size()];
             ButtonHandler bh = new ButtonHandler();
 
             Point size = new Point();
@@ -57,7 +56,7 @@ public class updateWeapon extends AppCompatActivity {
 
             int i = 0;
 
-            for (weapon w : weapon) {
+            for (armor w : armor) {
                 ids[i] = new TextView(this);
                 ids[i].setGravity(Gravity.CENTER);
                 ids[i].setText("" + (i + 1));
@@ -69,12 +68,13 @@ public class updateWeapon extends AppCompatActivity {
                 test[i][4] = new EditText(this);
                 test[i][5] = new EditText(this);
                 test[i][0].setText( w.getName());
-                test[i][1].setText( ""+w.getDamage());
+                test[i][1].setText( "" + w.getStrength());
                 test[i][1].setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
-                test[i][2].setText( w.getDamageType());
-                test[i][3].setText( w.getWeaponType());
-                test[i][4].setText( w.getTraits());
-                test[i][5].setText( w.getProperty());
+                test[i][2].setText( w.getArmorClass());
+                test[i][2].setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                test[i][3].setText( w.getTraits());
+                test[i][4].setText( w.getProperty());
+                test[i][5].setText( w.getType());
                 test[i][0].setId(10 * w.getId());
                 test[i][1].setId(10 * w.getId() + 1);
                 test[i][2].setId(10 * w.getId() + 2);
@@ -107,7 +107,7 @@ public class updateWeapon extends AppCompatActivity {
 
             backButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    updateWeapon.this.finish();
+                    updateArmor.this.finish();
                 }
             });
 
@@ -119,43 +119,43 @@ public class updateWeapon extends AppCompatActivity {
     private class ButtonHandler implements View.OnClickListener {
 
         public void onClick(View v) {
-            int weaponId = v.getId();
+            int armorId = v.getId();
 
-            EditText nameET = (EditText) findViewById(10*weaponId);
+            EditText nameET = (EditText) findViewById(10*armorId);
             String name = nameET.getText().toString();
 
-            EditText dmgET = (EditText)findViewById(10*weaponId+1);
-            String damageString = dmgET.getText().toString();
-            int damage = Integer.parseInt(damageString);
+            EditText strET = (EditText)findViewById(10*armorId+1);
+            String strString = strET.getText().toString();
+            int strength = Integer.parseInt(strString);
 
-            EditText dmgTypeET = (EditText)findViewById(10*weaponId+2);
-            String damageType = dmgTypeET.getText().toString();
+            EditText armorClassET = (EditText)findViewById(10*armorId+2);
+            String armorClass = armorClassET.getText().toString();
 
-            EditText weaponTypeET = (EditText)findViewById(10*weaponId+3);
-            String weaponType = weaponTypeET.getText().toString();
-
-            EditText traitsET = (EditText)findViewById(10*weaponId+4);
+            EditText traitsET = (EditText)findViewById(10*armorId+4);
             String traits = traitsET.getText().toString();
 
-            EditText propertyET = (EditText)findViewById(10*weaponId+5);
+            EditText propertyET = (EditText)findViewById(10*armorId+5);
             String property = propertyET.getText().toString();
 
-            weapon.get(weaponId).setName(name);
-            weapon.get(weaponId).setDamage(damage);
-            weapon.get(weaponId).setDamageType(damageType);
-            weapon.get(weaponId).setWeaponType(weaponType);
-            weapon.get(weaponId).setWeaponType(traits);
-            weapon.get(weaponId).setWeaponType(property);
+            EditText armorTypeET = (EditText)findViewById(10*armorId+3);
+            String armorType = armorTypeET.getText().toString();
 
-            db.updateWeapon(weapon.get(weaponId));
+            armor.get(armorId).setName(name);
+            armor.get(armorId).setStrength(strength);
+            armor.get(armorId).setArmorClass(armorClass);
+            armor.get(armorId).setTraits(traits);
+            armor.get(armorId).setProperty(property);
+            armor.get(armorId).setType(armorType);
+
+            db.updateArmor(armor.get(armorId));
 
             try {
-                db.updateWeapon(weapon.get(weaponId));
-                Toast.makeText(updateWeapon.this, "Weapon has been updated", Toast.LENGTH_SHORT).show();
+                db.updateArmor(armor.get(armorId));
+                Toast.makeText(updateArmor.this, "Armor has been updated", Toast.LENGTH_SHORT).show();
 
                 updateView();
             } catch (NumberFormatException exc) {
-                Toast.makeText(updateWeapon.this, "Error found with input", Toast.LENGTH_SHORT).show();
+                Toast.makeText(updateArmor.this, "Error found with input", Toast.LENGTH_SHORT).show();
             }
         }
     }
