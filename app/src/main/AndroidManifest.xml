@@ -45,6 +45,9 @@
         <activity
             android:name=".viewArmor"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".updateChar"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

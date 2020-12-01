@@ -47,7 +47,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     private static final String STRENGTH_REQUIREMENT = "strengthRequirement";
     private static final String IMAGE = "image";
     private static final String IMAGE_NAME = "imageName";
-    private static final String CREATE_CHARACTER_TABLE = "create table " + TABLE_CHARACTER + "( " + ID + " TEXT PRIMARY KEY, " + NAME + " text, " + RACE + " text, " + CLASS + " text, " + ALIGNMENT + " text, " + IMAGE + " blob, " + IMAGE_NAME + " text)";
+    private static final String CREATE_CHARACTER_TABLE = "create table " + TABLE_CHARACTER + "( " + ID + " TEXT PRIMARY KEY, " + NAME + " text, " + ALIGNMENT + " text, " + RACE + " text, " + CLASS + " text, " + IMAGE + " blob, " + IMAGE_NAME + " text)";
     private static final String CREATE_MONSTER_TABLE = "create table " + TABLE_MONSTER + "(" + ID + " TEXT PRIMARY KEY, " + NAME + " TEXT, " + ARMOR_CLASS + " TEXT, " + HIT_POINTS + " TEXT, " + EXPERIENCE + " TEXT," + IMAGE + " blob, " + IMAGE_NAME + " text )";
     private static final String CREATE_STATS_TABLE = "CREATE TABLE " + TABLE_STATS + "(" + ID + " TEXT, " + NAME + " TEXT, " + STRENGTH + " TEXT, " + DEXTERITY + " TEXT, " + CONSTITUTION + " TEXT, " + INTELLIGENCE + " TEXT, " + WISDOM + " TEXT, " + CHARISMA + " TEXT)";
     private static final String CREATE_WEAPONS_TABLE = "CREATE TABLE " + TABLE_WEAPONS + "(" + ID + " TEXT PRIMARY KEY, " + NAME + " TEXT, " + DAMAGE + " TEXT, " + DAMAGE_TYPE + " TEXT," + WEAPON_TYPE + " TEXT, " + TRAITS + " TEXT, " + PROPERTY + " TEXT, " + IMAGE + " blob," + IMAGE_NAME + " text)";
@@ -64,6 +64,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.execSQL(CREATE_STATS_TABLE);
         db.execSQL(CREATE_WEAPONS_TABLE);
         db.execSQL(CREATE_ARMOR_TABLE);
+
     }
 
     @Override
@@ -254,13 +255,23 @@ public class DatabaseManager extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String sqUpdate = "update " + TABLE_CHARACTER
                 + " set " + NAME + " = '" + updateCharacter.getName() + "' , "
-                + ALIGNMENT + " = '" + updateCharacter.getAlignment() + "', "
+                + RACE + " = '" + updateCharacter.getRace() + "', "
                 + CLASS + " = '" + updateCharacter.getCharclass() + "' , "
-                + RACE + " = '" + updateCharacter.getRace()
+                + ALIGNMENT + " = '" + updateCharacter.getAlignment()
                 + "' where " + ID + " = 'C" + updateCharacter.getId() + "'";
         db.execSQL(sqUpdate);
         db.close();
     }
+
+//    public void updateCharacter(character updateCharacter) {
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        String sqUpdate = "update " + TABLE_CHARACTER
+//                + " set " + NAME + " = '" + updateCharacter.getName() + "' , "
+//                + ALIGNMENT + " = ?" + ", " + CLASS + " = ?" +  " , "
+//                + RACE + " = ?" + " where " + ID + " = 'C" + updateCharacter.getId() + "'";
+//        db.execSQL(sqUpdate);
+//        db.close();
+//    }
 
     public void insertMonster(monster newMonster) {
         SQLiteDatabase db = this.getWritableDatabase();
